@@ -1,0 +1,399 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2020年1月15日学习笔记 | 柠檬茶的博客</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="系统识别p0fp0f采用被动式的方法探测目标主机的操作系统类型。这个工具可以识别一下几种主机：
+
+连接到您主机的机器（SYN模式、即默认模式）
+您主机可以访问的机器（SYN+ACK模式）
+您主机不能访问的机器（RST+模式）
+您可以监控到期网络通信的机器
+
+这个程序通过自身发出的TCP数据包分析操作">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2020年1月15日学习笔记">
+  <meta property="og:site_name" content="柠檬茶的博客">
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/8.jpg">
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="柠檬茶的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">柠檬茶的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-15T08:56:12.000Z"><a href="/2020/01/15/20200115/">2020-01-15</a></time>
+      
+      
+  
+    <h1 class="title">2020年1月15日学习笔记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="系统识别"><a href="#系统识别" class="headerlink" title="系统识别"></a>系统识别</h2><h3 id="p0f"><a href="#p0f" class="headerlink" title="p0f"></a>p0f</h3><p>p0f采用被动式的方法探测目标主机的操作系统类型。这个工具可以识别一下几种主机：</p>
+<ul>
+<li>连接到您主机的机器（SYN模式、即默认模式）</li>
+<li>您主机可以访问的机器（SYN+ACK模式）</li>
+<li>您主机不能访问的机器（RST+模式）</li>
+<li>您可以监控到期网络通信的机器</li>
+</ul>
+<p>这个程序通过自身发出的TCP数据包分析操作系统的类型。然后，它会统计在默认情况下不会产生的非标准数据包。例如，Linux内核操作系统默认使用64字节的ping数据包，而Windows操作系统则使用32字节的ping数据包。这两个操作系统在TTL值上同样存在差异。Windows发出的数据包，其TTL值是128；而不同版本的Linux操作系统，其数据包的TTL值各有所不同。p0f程序正是根据这些细微的差别识别远程主机的操作系统。</p>
+<h3 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h3><p>Nmap是一款非常受欢迎的功能强大的端口扫描程序。它还能够识别操作系统的操作系统，能够进行主动式的操作系统指纹识别。如需使用操作系统识别功能，只需要在Namp选项中加入“-O”即可！</p>
+<h3 id="banner抓取"><a href="#banner抓取" class="headerlink" title="banner抓取"></a>banner抓取</h3><p>Banner抓取是最基础，最简单的指纹识别，不需要专门的工具就可以做，操作简单，通常获取的信息也相对准确，banner抓取是应用程序指纹识别而不是操作系统指纹识别。</p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p><strong>常用到的协议对应的端口</strong></p>
+<ul>
+<li><p>TCP 21端口：FTP 文件传输服务</p>
+</li>
+<li><p>TCP 23端口：TELNET 终端仿真服务</p>
+</li>
+<li><p>TCP 25端口：SMTP 简单邮件传输服务</p>
+</li>
+<li><p>UDP 53端口：DNS 域名解析服务</p>
+</li>
+<li><p>TCP 80端口：HTTP 超文本传输服务</p>
+</li>
+<li><p>TCP 110端口：POP3 “邮局协议版本3”使用的端口</p>
+</li>
+<li><p>TCP 443端口：HTTPS 加密的超文本传输服务</p>
+</li>
+<li><p>TCP 1521端口：Oracle数据库服务</p>
+</li>
+<li><p>TCP 1863端口：MSN Messenger的文件传输功能所使用的端口</p>
+</li>
+<li><p>TCP 3306端口：Mysql数据库</p>
+</li>
+<li><p>TCP 3389端口：Microsoft RDP 微软远程桌面使用的端口</p>
+</li>
+<li><p>TCP 5631端口：Symantec pcAnywhere 远程控制数据传输时使用的端口</p>
+</li>
+<li><p>UDP 5632端口：Symantec pcAnywhere 主控端扫描被控端时使用的端口</p>
+</li>
+<li><p>TCP 5000端口：MS SQL Server使用的端口</p>
+</li>
+<li><p>UDP 8000端口：腾讯QQ</p>
+</li>
+</ul>
+<h3 id="Nmap端口扫描"><a href="#Nmap端口扫描" class="headerlink" title="Nmap端口扫描"></a>Nmap端口扫描</h3><p>Nmap是被专业人员广泛使用的一款功能全面的端口扫描工具。</p>
+<p>处理端口扫描外，Nmap还具备以下功能：</p>
+<ul>
+<li>主机探测</li>
+<li>服务/版本识别</li>
+<li>操作系统检测</li>
+<li>网络路由跟踪</li>
+<li>Nmap脚本引擎</li>
+</ul>
+<h2 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h2><h3 id="Amap"><a href="#Amap" class="headerlink" title="Amap"></a>Amap</h3><p>Amap程序可以监测在指定端口上运行的应用程序信息。Amap向目标端口发送检测数据，在收到目标响应之后，将响应信息与数据库中结果进行匹配，并显示出匹配的应用程序。</p>
+<h2 id="收集服务漏洞"><a href="#收集服务漏洞" class="headerlink" title="收集服务漏洞"></a>收集服务漏洞</h2><h3 id="DirBuster-查看目录结构"><a href="#DirBuster-查看目录结构" class="headerlink" title="DirBuster:查看目录结构"></a>DirBuster:查看目录结构</h3><p>目录和文件信息收集工具（Crawling Tool）DirBuster是多线程Java应用程序，它以暴力破解的方式检测出隐藏于网络和应用程序的文件和目录，并以此找出攻击因子（factor）。另外，它还可以设置暴力破解的起始位置，其起始位置可以是顶端目录，也可以是特定目录的子目录。</p>
+<h3 id="Nessus"><a href="#Nessus" class="headerlink" title="Nessus"></a>Nessus</h3><p>Nessus是安全漏洞自动收集工具，它可同时远程或在主机上进行测试，扫描各种开发端口的服务器漏洞，并编写报告，报告中包括了CVE漏洞基准的漏洞说明和应对方案，导出问题时可做参考。</p>
+<h3 id="Openvas"><a href="#Openvas" class="headerlink" title="Openvas"></a>Openvas</h3><p>Openvas是一款封装了多种安全工具和安全服务的软件，是一个强大的漏洞管理平台。它采用了客户端/服务器的框架。其客户端测试目标主机网络漏洞的一系列操作，都是通过服务器端程序实现的。他的设计兼备模块化和稳定性的特点，支持并行安全测试，且兼容多种操作系统。</p>
+<h3 id="Nikto"><a href="#Nikto" class="headerlink" title="Nikto"></a>Nikto</h3><p>Nikto是一款开源网页服务器，能够扫描应用程序漏洞。在应用程序漏洞自动化扫描工具中，这款还是非常不错的。</p>
+<h2 id="诊断CMS服务漏洞"><a href="#诊断CMS服务漏洞" class="headerlink" title="诊断CMS服务漏洞"></a>诊断CMS服务漏洞</h2><h3 id="Joomscan"><a href="#Joomscan" class="headerlink" title="Joomscan"></a>Joomscan</h3><p>jomscan是基于签名的扫描器，它以开源的CMS服务joomal的Sql注入、命令执行、XSS对象，试试joomla目录搜索和漏洞检测。Joomla适合电子商务、网上购物、论坛等各类网站，是使用较为普遍的CMS。网站使用的是众所周知的漏洞——数据库。joomscan具有构成要素、插件、组件、外观等4个基本扩展名。</p>
+<h3 id="WPScan"><a href="#WPScan" class="headerlink" title="WPScan"></a>WPScan</h3><p>WPScan是WordPress Scan的缩写，它是使用php语言开发而成的公开博客服务。最近介绍WordPress的书很多，这已经证明它在韩国国内也是用户群众比较广泛的代表性开源平台。</p>
+<h3 id="WhatWeb"><a href="#WhatWeb" class="headerlink" title="WhatWeb"></a>WhatWeb</h3><p>WhatWeb是Web系统识别工具，它可以识别CMS、博客平台、统计和分析数据包、JavaScript库、网络服务器和嵌入式装备等网络技术。WhatWeb中包含可以识别各种技术的1000多个插件。另外，它还会查看版本编号、邮箱地址、账户ID、网络框架组件、SQL错误等。</p>
+<h2 id="诊断数据库漏洞"><a href="#诊断数据库漏洞" class="headerlink" title="诊断数据库漏洞"></a>诊断数据库漏洞</h2><h3 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h3><p>sqlmap是一款开源的渗透测试工具，它可以自动搜索SQL注入漏洞，并自动化攻击数据库服务器。这款功能超强的搜索检测引擎可以从数据库的Fingerprinting（获取信息）向数据库输出数据、访问文件系统、访问频段外区域以执行OS上的命令等。为实施最理想的渗透测试提供了多种便利功能和诸多选项开关。</p>
+<h3 id="sqlsus"><a href="#sqlsus" class="headerlink" title="sqlsus"></a>sqlsus</h3><p>Sqlsus是基于Perl编写的开源MySQL注入接管（takeover）工具。Sqlsus可通过命令行界面进行数据库结构搜素、数据库复制、sql查询插入、从网络服务器下载文件、网站抓取等等操作。另外sqlsus还提供了MySQL控制台功能，而且能够优质高效、最大限度地发挥MySQL功能。</p>
+<h2 id="诊断认证通信"><a href="#诊断认证通信" class="headerlink" title="诊断认证通信"></a>诊断认证通信</h2><h3 id="SSLScan-查看通信是否已经加密"><a href="#SSLScan-查看通信是否已经加密" class="headerlink" title="SSLScan:查看通信是否已经加密"></a>SSLScan:查看通信是否已经加密</h3><p>SSLScan能查看SSL服务的使用状态，如正在使用，则能便捷地获取相关内容。SSLScan向SSL服务发送查询语句，分析答复后发送给用户。向服务器传递重要数据时，通信必须是加密的，因此，诊断网络应用程序时必须判断是否实际实施SSL通信。</p>
+<h3 id="digicert-查看是否已使用SSL认证证书"><a href="#digicert-查看是否已使用SSL认证证书" class="headerlink" title="digicert:查看是否已使用SSL认证证书"></a>digicert:查看是否已使用SSL认证证书</h3><p>digicert服务并不是安装在Kali linux中的工具，而是提供SSL认证的服务。通过访问网站查看SSL认证书安装状态以及结束日期等信息。其速度快而准确，可在不定期检测时使用。</p>
+<h1 id="深化攻击工具"><a href="#深化攻击工具" class="headerlink" title="深化攻击工具"></a>深化攻击工具</h1><h3 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h3><p>Msf（Metasploit Framework）开源工具是提供攻击代码、有效负载、编码器、侦查工具、安全测试等等的一种平台架构。MSF最初版本不过是攻击代码的集合而已，而当前版本已具有大范围信息收集、攻击等相关安全工具的设计和开发能力。</p>
+<h3 id="Exploit-DB"><a href="#Exploit-DB" class="headerlink" title="Exploit-DB"></a><strong>Exploit-DB</strong></h3><p><strong><a href="https://www.exploit-db.com/" target="_blank" rel="noopener">Exploit-DB</a></strong>其中包含了近期的漏洞信息，是一个庞大的漏洞信息库。这里面包含了远程代码执行、Web 应用程序漏洞、本地提权等漏洞信息.</p>
+<h2 id="服务器端工具"><a href="#服务器端工具" class="headerlink" title="服务器端工具"></a>服务器端工具</h2><h3 id="Metasploit-1"><a href="#Metasploit-1" class="headerlink" title="Metasploit"></a>Metasploit</h3><p>Metasploit框架是进行服务器端攻击时一种最流行的功能工具，它也被认为是对渗透测试人员最有利的工具之一。介绍Metasploit的使用的部分在我的Metasploit系列学习中有详细的介绍，我在此处就不再过多的讲解了。</p>
+<h3 id="W3af"><a href="#W3af" class="headerlink" title="W3af"></a>W3af</h3><p>w3af是Web Application Attack and Audit Framework（Web应用攻击和安全审计框架）的缩写。它是一个开源的Web应用安全扫描器和漏洞利用工具。</p>
+<h3 id="Skipfish"><a href="#Skipfish" class="headerlink" title="Skipfish"></a>Skipfish</h3><p>Skipfish是一款Web应用安全侦查工具。Skipfish会利用递归爬虫和基于字典的探针生成一副交互式网站地图。最终生成的地图会在通过安全检查后输出。</p>
+<h3 id="ProxyStrike"><a href="#ProxyStrike" class="headerlink" title="ProxyStrike"></a>ProxyStrike</h3><p>Proxystrike是一个Web应用代理，用来浏览应用时找出漏洞。它的运行机制跟代理类似，默认监听端口是8008端口，也就是说，你要对浏览器进行设置，使其运行时经过ProxyStrike。这样它才能在你的浏览目标网站时在后台分析所有参数。代理功能非常适合用来识别、拦截和修改请求的内容。</p>
+<h3 id="Vega"><a href="#Vega" class="headerlink" title="Vega"></a>Vega</h3><p>vega是一个安全测试工具，用来爬取一个网站，并分析页面内容来找到链接和表单参数。</p>
+<h3 id="OWASP-ZAP"><a href="#OWASP-ZAP" class="headerlink" title="OWASP ZAP"></a>OWASP ZAP</h3><p>OWASP ZAP也称为Zaproxy，是一个专门为Web应用的安全测试而设计的拦截代理。</p>
+<h3 id="WebSploit"><a href="#WebSploit" class="headerlink" title="WebSploit"></a>WebSploit</h3><p>WebSploit是一个用来扫描和分析远程系统以找到漏洞的开源项目</p>
+<ul>
+<li><p><strong>服务器漏洞利用</strong></p>
+</li>
+<li><p><strong>利用电子邮件系统的漏洞</strong></p>
+</li>
+<li><strong>暴力破解攻击</strong></li>
+<li><strong>破解密码</strong></li>
+<li><strong>中间人攻击</strong></li>
+</ul>
+<h2 id="客户端攻击"><a href="#客户端攻击" class="headerlink" title="客户端攻击"></a>客户端攻击</h2><h3 id="社会工程"><a href="#社会工程" class="headerlink" title="社会工程"></a>社会工程</h3><h3 id="获取和破解用户密码"><a href="#获取和破解用户密码" class="headerlink" title="获取和破解用户密码"></a>获取和破解用户密码</h3><p>黑客破解密码的方式有：</p>
+<ul>
+<li>猜测：通常使用收集到的与目标有关的信息进行人工猜测</li>
+<li>字典攻击：使用自动化攻击，利用字典中所有可能的单词进行尝试</li>
+<li>暴力破解：使用所有可能的字符组合来破解</li>
+<li>混合模式：混合使用字典攻击和暴力破解</li>
+</ul>
+<h2 id="Web攻击"><a href="#Web攻击" class="headerlink" title="Web攻击"></a>Web攻击</h2><h3 id="浏览器漏洞利用框架：BeEF"><a href="#浏览器漏洞利用框架：BeEF" class="headerlink" title="浏览器漏洞利用框架：BeEF"></a>浏览器漏洞利用框架：BeEF</h3><p>Beef是一个基于浏览器的漏洞利用包，它会“勾住”一个或多个浏览器作为发起攻击的滩头堡。攻击者可以通过让用户访问一个定制的URL来勾住用户，用户看到的依然是典型的web页面，而攻击者已经访问了用户的会话Beef绕过了网络安全部署和基于主机系统的反病毒程序，它瞄准的是常见的浏览器中找到的漏洞，比如IE和Firefox浏览器。</p>
+<h3 id="FoxyProxy（fireFox插件）"><a href="#FoxyProxy（fireFox插件）" class="headerlink" title="FoxyProxy（fireFox插件）"></a>FoxyProxy（fireFox插件）</h3><p>FoxyProxy是一款FierFox扩展，它允许你轻松的管理、修改、启用或禁用Firefox上的代理设置。你可以存Fierfox扩展库中下载FoxyProxy。</p>
+<h3 id="Burp代理"><a href="#Burp代理" class="headerlink" title="Burp代理"></a>Burp代理</h3><p>Burp代理是一款拦截HTTP和HTTPS浏览的工具，它允许渗透测试人员检查某一个应用、它的漏洞以及客户端和Web服务器之间的双向数据流。Burp代理非常流行，因为它不止能用来检查数据流，还可以用来篡改数据。</p>
+<h3 id="OWASP-ZAP-1"><a href="#OWASP-ZAP-1" class="headerlink" title="OWASP ZAP"></a>OWASP ZAP</h3><h3 id="Fimap"><a href="#Fimap" class="headerlink" title="Fimap"></a>Fimap</h3><p>Fimap是一款python工具，用于自动查找、准备、审计、利用和用谷歌搜索Web应用中的<strong>本地和远程文件包含Bug</strong></p>
+<h3 id="DNSChef"><a href="#DNSChef" class="headerlink" title="DNSChef"></a>DNSChef</h3><p>DNSChef是一款为渗透测试人员和恶意软件分析人员准备的DNS代理。DNS代理也被称作“伪造DNS”，是一款用于应用网络流量分析以及其他场景的工具。</p>
+<h3 id="Siege"><a href="#Siege" class="headerlink" title="Siege"></a>Siege</h3><p>Siege是一款为Web开发人员设计的HTTP/HTTPS压力测试工具，用来测量高压情况下他们代码的性能。Siege提供了多线程HTTP负载测试和基准测试功能，他会根据可配置的兵法和模范用户的数据来对Web服务器进行测试。Siege有回归、英特网仿真和暴力等工作方式。</p>
+<h2 id="身份认证攻击"><a href="#身份认证攻击" class="headerlink" title="身份认证攻击"></a>身份认证攻击</h2><h3 id="攻击会话管理"><a href="#攻击会话管理" class="headerlink" title="攻击会话管理"></a>攻击会话管理</h3><h3 id="点击劫持"><a href="#点击劫持" class="headerlink" title="点击劫持"></a>点击劫持</h3><h3 id="劫持Web会话的CooKie"><a href="#劫持Web会话的CooKie" class="headerlink" title="劫持Web会话的CooKie"></a>劫持Web会话的CooKie</h3><h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p><strong>dsniff和arpspoof</strong><br>dsniff是一组密码嗅探和网络数据分析工具，用于解析不同的应用协议和提取相关信息。arpspoof用于帮助攻击者向本地网络发送伪造的地址解析协议（ARP）消息。这样做的目的就是要将攻击者的MAC地址和其他主机的IP地址关联起来，从而将发往该IP地址的网络数据都发送给攻击值。</p>
+<p>一个人进行中间人攻击的方法是将Arpspoof和dsniff用在系统间。</p>
+<p>第一步就是找出受害者的IP地址和网络的默认网关。找出IP地址之后，你需要告诉受害者你真的是另一个系统或者默认网关。举个例子，如果受害者A的IP地址是192.168.11.4，默认网关的地址为192.168.11.1，攻击者的地址为192.168.11.145，你应该使用arpspoof命令将你那个145的ip地址设置的看起来像是受害者的和默认网关的。</p>
+<p><strong>Ettercap</strong></p>
+<p>Ettercap是一个用于基于中间人方式的攻击的免费的开源综合工具套件。</p>
+<p>Ettercap可用于计算机网络协议分析和安全审计，它的功能有嗅探活动的链接、内容过滤、以及对多种协议的主动和被动解析的支持。Ettercap通过将攻击者的网卡设置为昏则模式以及对受害者的机器进行ARP污染来工作。</p>
+<h2 id="社会工程学攻击"><a href="#社会工程学攻击" class="headerlink" title="社会工程学攻击"></a>社会工程学攻击</h2><h3 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h3><p>社会工程学工程师通常会采用这些方法来有效获取目标的有关信息和访问权限：</p>
+<p><strong>（1）情报收集：</strong>多种技术都可以用于找到最容易攻破的渗透测试目标。例如，我们可以采用高级搜索工具收集被测试公司员工的Email地址；通过社交网络收集被测单位员工的个人信息；识别被测单位组织使用的第三方软件包；参与他们的经营活动、社交活动和参加会议等等。以这些方提供的情报，能够准确的退测出社会工程学意义上的“线人”。</p>
+<p><strong>（2）识别漏洞：</strong>一旦选定了关键线人，接下来就开始与对方建立信任关系和友谊。这样就可以在不伤害、不惊动目标的情况下，截获被测单位的机密信息。保持行动的隐蔽性和保密性，对于整个过程来说至关重要。另外，也可以调查被侧单位是否使用了旧版软件，继而通过恶意的E-mail或 Web内容，利用软件漏洞感染当事人的计算机。</p>
+<p><strong>（3）规划攻击:</strong>  你可以对目标采取直接了当的攻击方式，也可以利用电子辅助技术被动攻击目标。以这些挖掘出来的情报入口着手，我们恶意轻松的拟定攻击路径和攻击方法。例如：被测单位的客户服务代表Bob和我们的关系很好，他还信任我们；他就恒友可能在计算机上执行我们发送的E-mail附件，这种攻击不需要高级管理人员的任何事前授权。</p>
+<p><strong>（4）执行攻击：</strong>社会工程学攻击的最后一步是执行攻击计划。此时，我们应该保持足够的信心和耐心，主动监控和评估工作的成果。完成这一步之后，社会工程师掌握了充分的信息，甚至可以范围被测单位的内部系统，这些成果足以让他们进一步地渗透被测试的单位。在成功执行攻击计划之后，社会工程学的攻击就可宣告结束。</p>
+<h3 id="攻击方法"><a href="#攻击方法" class="headerlink" title="攻击方法"></a>攻击方法</h3><p><strong>（1）冒名顶替</strong></p>
+<p>攻击人员常常假装成他人以获得对方的信任。例如，在获取目标人员的银行信息方面，只要目标人员是哟E-mail，我们就可以进行钓鱼攻击。这种攻击属于近乎完美的攻击方案。当决定使用钓鱼攻击之后，攻击人员要大量的收集牧宝人员用过的E-mail地址，然后伪造出于原银行解密一样的网页界面，以诱骗目标人员。</p>
+<p>完成了一上准备之后，攻击人员会草拟并发送一份正式行文的E-mail（例如：银行账户更新通知）。这些E-mail看上去就像真正的银行发出来的邮件。要去目标人员访问某网址更新账户信息。不过，邮件提到的网址将把目标人员提交的信息转发给攻击人员。攻击人员事先掌握了特定的Web技术，他们使用多种先进的工具（例如SSLstrip）就可以通过自动化手段轻松的又掉地到达预定的任务。</p>
+<p><strong>（2）投桃报李</strong></p>
+<p>通过利益交换的方式达成双方各自利益的行为，成为投桃报李。这类攻击需要长期业务合作达成的非正式关系。利用公司之间的信任关系，可以轻松的获取特定信息的目标人员。</p>
+<p><strong>（3）狐假虎威</strong></p>
+<p>冒充目标单位业务负责人的身份从而干预正常业务的做法就是狐假虎威。有些人认为，这种攻击方式属于冒名顶替的一种特例。人们会本能的出于下意识的接收权威或者高级管理人员的知识，这个时候他们会无视自己否定性的直觉。这种天性使我们容易在特定的威胁面前毫无抵抗力。</p>
+<p><strong>（4）啖以重利</strong></p>
+<p>人们常常说“机不可失”，他们特别关注所谓机不可失的宝贵机会。这些想法都是人性贪婪的一面写照。啖以重利的方法李永利人们个球谋利机会的贪婪心理。</p>
+<p><strong>（5）社会关系</strong></p>
+<p>作为人，我们需要某种形式的社会关系，以分享思想、感情、想法。社会关系最容易受攻击的部分是“性”。多数情况下，异性总是吸引。由于这种强烈的感情和信任的错觉，人们可能在不经意间向对手透露信息。很多线人的社交门户网站都提供了见面和聊天的服务，以促进用户间的社交交际。</p>
+<h3 id="Social-Engineering-Toolkit-SET"><a href="#Social-Engineering-Toolkit-SET" class="headerlink" title="Social Engineering Toolkit(SET)"></a>Social Engineering Toolkit(SET)</h3><p>SET是一款先进的多功能的社会工程学计算机辅助工具集。可以行之有效的用客户端应用程序的漏洞获取目标的信息（例如E-mail）.SET可以实现多种非常有效且使用的攻击方法。其中，人们最常用的方法有：用恶意附件对目标进行E-mail钓鱼攻击、Java Applet攻击、基于浏览器的漏洞攻击、收集网站认证信息、建立感染的便携媒体、邮件群发等攻击。它是实现这些攻击方法的合成攻击平台。充分利用这个程序的极具说服力的技术，可对人的因素进行深入测试。</p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><ul>
+<li>利用本地漏洞</li>
+<li>利用目标系统上的配置缺陷。例如，如何home目录可被其他用户访问，那么攻击人员就可以使用目录里的SSH私有密钥访问其他主机。</li>
+<li>利用目标系统的弱密码</li>
+<li>嗅探网络流量以捕获他人的用户密码</li>
+<li>伪造网络数据包</li>
+</ul>
+<p><strong>利用本地漏洞</strong></p>
+<p><strong>密码攻击</strong></p>
+<p><strong>社会工程学</strong></p>
+<h2 id="操作系统后门"><a href="#操作系统后门" class="headerlink" title="操作系统后门"></a>操作系统后门</h2><h3 id="Cymothoa"><a href="#Cymothoa" class="headerlink" title="Cymothoa"></a>Cymothoa</h3><p>Cymothoa是一款可以将ShellCode注入到现有进程（插入进程）的后门工具。借助这种注入手段，它能够把ShellCode伪装成常规程序。将ShellCode注入到其他进程，还有另外一个优势就是：即使目标系统的安全防护工具能够讲师可执行程序的完整性，只要它不检查内存，那么它就不能发现后门程序（插入进程）的进程。</p>
+<h3 id="Intersect"><a href="#Intersect" class="headerlink" title="Intersect"></a>Intersect</h3><p>Intersect是一款适合在漏洞利用以后使用的能够自动完成多种后期任务的程序。他能够自动收集密码文件、赋值SSH密钥、收集网络信息，并能识别杀毒软件和防火墙程序。</p>
+<h3 id="Meterpreter"><a href="#Meterpreter" class="headerlink" title="Meterpreter"></a>Meterpreter</h3><p>著名的Metasploit Meterpreter程序自带一个后门程序“metsvc”,它可以让你随时获取Meterpreter的shell</p>
+<h2 id="隧道工具"><a href="#隧道工具" class="headerlink" title="隧道工具"></a>隧道工具</h2><p><strong>隧道</strong></p>
+<p>在计算机领域里，隧道是指使用某个网络协议封装另外一种网络协议的技术手段。在渗透测试中，使用隧道技术主要是为了让目标胸膛呢的防护机制无法发挥作用。多数情况下，目标系统的防火墙会组织内部系统访问外网网络，只放行DNS\HTTP\HTTPS这类常见的网络协议。在这种情况下，如果要在目标系统的内网使用外网的其他网络协议，就需要构建HTTP协议的隧道。这样，防火墙就会放行隧道封装的数据。</p>
+<h3 id="dns2tcp"><a href="#dns2tcp" class="headerlink" title="dns2tcp"></a>dns2tcp</h3><p>dns2tcp是一种把TCP数据包伪装成DNS协议数据包的隧道封装工具。它适用于目标主机只能发送DNS请求的网络环境。当它在特定端口受理链接请求时，它会将数据封装为DNS协议格式，在发送到指定主机的指定端口的dns2tcp服务端程序。</p>
+<h3 id="ncat"><a href="#ncat" class="headerlink" title="ncat"></a>ncat</h3><p>ncat是一款集发送、接收、转发、加密数据等多种功能于一身的网络工具。ncat是著名的Netcat程序的改进版。它的功能有：</p>
+<ul>
+<li>它可以用作Web服务程序和其他TCP/IP服务器端程序简易TCP/UDP/SCTP/SSL客户端；</li>
+<li>它可以用作简单的TCP、UDP、SCTP、SSL服务器端程序。</li>
+<li>它可以转发或代理TCP、UDP、SCTP流量</li>
+<li>它可以用作执行系统指令的网络网关</li>
+<li>它可使用SSL技术加密通信数据</li>
+<li>它可以使用IPv4或IPV6技术进行网络传输</li>
+<li>它可用作连接代理，通过第三个中介服务器使用两个或多个客户端互联代理。</li>
+</ul>
+<h3 id="proxychains"><a href="#proxychains" class="headerlink" title="proxychains"></a>proxychains</h3><p>proxychains程序可以强制TCP客户端程序通过指定的代理服务器（或代理链）发起TCP链接。自从3.1版本开始，它支持SOCKS4代理、SOCKET5代理和基于CONNECT模式的HTTP代理服务器。</p>
+<h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>ptunnel是一款使用ICMP ping（请求和回复）封装TCP链接的隧道工具。即使被测主机无法向Internet发送任何TCP和UDP的数据，只要它可以向取Internet发起ping命令，那么这款工具就可以帮助它穿越防火墙。ptunnel可以脱离TCP和UDP链接访问E-mail、上网或者进行其他网络活动。</p>
+<h2 id="Web后门"><a href="#Web后门" class="headerlink" title="Web后门"></a>Web后门</h2><h3 id="WeBaCoo"><a href="#WeBaCoo" class="headerlink" title="WeBaCoo"></a>WeBaCoo</h3><p>WeBaCoo（Web Backdoor Cookie）是一款隐蔽的脚本类Web后门工具。借助HTTP协议，它可以在客户端和服务器端实现执行代码的网页终端。</p>
+<h3 id="Weevely"><a href="#Weevely" class="headerlink" title="Weevely"></a>Weevely</h3><p>Weevely是一款具有高隐蔽性的针对PHP平台的WEBShell。它实现了SSH风格的终端界面，并有大量自动化的模块。测试人员可用它来执行系统命令、远程管理和渗透后期的自动渗透界面。</p>
+<h3 id="PHP-Meterpreter"><a href="#PHP-Meterpreter" class="headerlink" title="PHP Meterpreter"></a>PHP Meterpreter</h3><p>Metasploit有一个名为PHP Meterpreter的payload。这个模块可以创建具有Meterpreter功能的PHP webShell。利用目标的漏洞（诸如常见的注入、文件上传漏洞）之后，再把它的shell传到目标主机即可。</p>
+<h2 id="以网络为测试目标的渗透测试报告（样文）"><a href="#以网络为测试目标的渗透测试报告（样文）" class="headerlink" title="以网络为测试目标的渗透测试报告（样文）"></a>以网络为测试目标的渗透测试报告（样文）</h2><ul>
+<li>法律声明</li>
+<li>渗透测试协议</li>
+<li>简介</li>
+<li>项目目标</li>
+<li>假定和限制</li>
+<li>漏洞和影响</li>
+<li>执行摘要</li>
+<li>风险矩阵</li>
+<li>测试方法</li>
+<li>安全威胁</li>
+<li>改进建议</li>
+<li>漏洞映射</li>
+<li>利用方法</li>
+<li>合规性评估</li>
+<li>变更管理</li>
+<li>最佳实践</li>
+<li>附录</li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:fakerye.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>3</small></li>
+  
+    <li><a href="/categories/CTF/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/笔记/">笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/安全/笔记/">笔记</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>4</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Web/">Web</a><small>6</small></li>
+  
+    <li><a href="/tags/Writeup/">Writeup</a><small>1</small></li>
+  
+    <li><a href="/tags/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/tags/扩展/">扩展</a><small>1</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/Writeup/" style="font-size: 10px;">Writeup</a> <a href="/tags/安全/" style="font-size: 13.33px;">安全</a> <a href="/tags/扩展/" style="font-size: 10px;">扩展</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="bg"></div>
+</body>
+</html>

